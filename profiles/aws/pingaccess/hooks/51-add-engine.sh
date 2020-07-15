@@ -28,7 +28,7 @@ if [ "${is_sub_cluster}" == true ]; then
       exit 1
   fi
 
-  ADMIN_HOST_PORT="${PA_ENGINE_PUBLIC_HOSTNAME}"
+  ADMIN_HOST_PORT="${PA_ADMIN_PUBLIC_HOSTNAME}"
 
   # Retrieve Engine Cert ID.
   echo "add-engine: retrieving the Engine Cert ID"
@@ -102,7 +102,7 @@ if [ "${is_sub_cluster}" == true ]; then
     echo "add-engine: failed to update admin port"
     exit 1
   fi 
-  if ! sed -i "s/engine.admin.configuration.host.*/engine.admin.configuration.host=${PA_ADMIN_PUBLIC_HOSTNAME}/g" /opt/out/instance/conf/bootstrap.properties; then
+  if ! sed -i "s/engine.admin.configuration.host.*/engine.admin.configuration.host=${PA_CLUSTER_PUBLIC_HOSTNAME}/g" /opt/out/instance/conf/bootstrap.properties; then
     echo "add-engine: failed to update admin host"
     exit 1
   fi 
