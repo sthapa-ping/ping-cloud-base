@@ -1,0 +1,28 @@
+#!/bin/sh
+set +e
+
+
+echo "1 Copying ds_env_vars to .env in STAGING_DIR"
+
+ls -l /opt/staging/
+echo  "0:HERE"
+
+ls -l /opt/staging/ds_env_vars
+
+cat /opt/staging/ds_env_vars
+echo  "1:HERE"
+
+ls -l /opt/staging/.env
+cat /opt/staging/.env
+echo  "2:HERE"
+
+cat /opt/staging/ds_env_vars >> /opt/staging/.env
+
+echo  "3:HERE"
+ls -l /opt/staging/.env
+cat /opt/staging/.env
+echo  "4:HERE"
+
+echo  "Execution completed successfully"
+
+exit 0
