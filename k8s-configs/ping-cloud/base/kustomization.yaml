@@ -13,7 +13,7 @@ configMapGenerator:
 
 - name: server-profile
   files:
-  - scripts/02-get-remote-server-profile.sh.pre
+  - scripts/inject-variables.sh
 
 resources:
 - namespace.yaml

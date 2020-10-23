@@ -137,7 +137,7 @@ spec:
           subPath: ds_env_vars
         - name: server-profile
           mountPath: /opt/staging/hooks/02-get-remote-server-profile.sh.pre
-          subPath: 02-get-remote-server-profile.sh.pre
+          subPath: inject-variables.sh
         - mountPath: /etc/podinfo
           name: podinfo
         readinessProbe:
@@ -377,7 +377,7 @@ spec:
           subPath: ds_env_vars
         - name: server-profile
           mountPath: /opt/staging/hooks/02-get-remote-server-profile.sh.pre
-          subPath: 02-get-remote-server-profile.sh.pre
+          subPath: inject-variables.sh
         - mountPath: /etc/podinfo
           name: podinfo
         readinessProbe:
