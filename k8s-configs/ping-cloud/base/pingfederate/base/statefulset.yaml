@@ -135,6 +135,9 @@ spec:
         - name: data-dir
           mountPath: /opt/staging/ds_env_vars
           subPath: ds_env_vars
+        - name: server-profile
+          mountPath: /opt/staging/hooks/02-get-remote-server-profile.sh.pre
+          subPath: 02-get-remote-server-profile.sh.pre
         - mountPath: /etc/podinfo
           name: podinfo
         readinessProbe:
@@ -177,6 +180,10 @@ spec:
         emptyDir: {}
       - name: data-dir
         emptyDir: {}
+      - name: server-profile
+        configMap:
+          name: server-profile
+          defaultMode: 0644
       - name: pingfederate-init
         configMap:
           name: pingcommon-init
@@ -368,6 +375,9 @@ spec:
         - name: data-dir
           mountPath: /opt/staging/ds_env_vars
           subPath: ds_env_vars
+        - name: server-profile
+          mountPath: /opt/staging/hooks/02-get-remote-server-profile.sh.pre
+          subPath: 02-get-remote-server-profile.sh.pre
         - mountPath: /etc/podinfo
           name: podinfo
         readinessProbe:
@@ -410,6 +420,10 @@ spec:
         emptyDir: {}
       - name: data-dir
         emptyDir: {}
+      - name: server-profile
+        configMap:
+          name: server-profile
+          defaultMode: 0644
       - name: pingfederate-init
         configMap:
           name: pingcommon-init
