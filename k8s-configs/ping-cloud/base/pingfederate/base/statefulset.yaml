@@ -135,7 +135,7 @@ spec:
         - name: data-dir
           mountPath: /opt/staging/ds_env_vars
           subPath: ds_env_vars
-        - name: server-profile
+        - name: inject-variables
           mountPath: /opt/staging/hooks/02-get-remote-server-profile.sh.pre
           subPath: inject-variables.sh
         - mountPath: /etc/podinfo
@@ -180,9 +180,9 @@ spec:
         emptyDir: {}
       - name: data-dir
         emptyDir: {}
-      - name: server-profile
+      - name: inject-variables
         configMap:
-          name: server-profile
+          name: inject-variables
           defaultMode: 0644
       - name: pingfederate-init
         configMap:
@@ -375,7 +375,7 @@ spec:
         - name: data-dir
           mountPath: /opt/staging/ds_env_vars
           subPath: ds_env_vars
-        - name: server-profile
+        - name: inject-variables
           mountPath: /opt/staging/hooks/02-get-remote-server-profile.sh.pre
           subPath: inject-variables.sh
         - mountPath: /etc/podinfo
@@ -420,9 +420,9 @@ spec:
         emptyDir: {}
       - name: data-dir
         emptyDir: {}
-      - name: server-profile
+      - name: inject-variables
         configMap:
-          name: server-profile
+          name: inject-variables
           defaultMode: 0644
       - name: pingfederate-init
         configMap:

@@ -11,7 +11,7 @@ configMapGenerator:
   - scripts/wait-for-services.sh
   - scripts/utils.lib.sh
 
-- name: server-profile
+- name: inject-variables
   files:
   - scripts/inject-variables.sh
 
