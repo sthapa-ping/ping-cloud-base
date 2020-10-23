@@ -90,9 +90,6 @@ spec:
         # FIXME: fix home directory when containers run as non-root user
         - name: ssh-dir
           mountPath: /root/.ssh
-        - name: server-profile
-          mountPath: /opt/staging/hooks/02-get-remote-server-profile.sh.pre
-          subPath: 02-get-remote-server-profile.sh.pre
         - name: topology-descriptor
           mountPath: /opt/staging/topology/descriptor.json
           subPath: descriptor.json
@@ -110,6 +107,9 @@ spec:
         - name: data-dir
           mountPath: /opt/staging/ds_env_vars
           subPath: ds_env_vars
+        - name: server-profile
+          mountPath: /opt/staging/hooks/02-get-remote-server-profile.sh.pre
+          subPath: 02-get-remote-server-profile.sh.pre
         readinessProbe:
           exec:
             command: [ /opt/staging/hooks/85-pa-admin-readiness.sh ]
@@ -335,6 +335,9 @@ spec:
         - name: data-dir
           mountPath: /opt/staging/ds_env_vars
           subPath: ds_env_vars
+        - name: server-profile
+          mountPath: /opt/staging/hooks/02-get-remote-server-profile.sh.pre
+          subPath: 02-get-remote-server-profile.sh.pre
         readinessProbe:
           exec:
             command: [ /opt/staging/hooks/99-pa-was-engine-liveness.sh ]
@@ -375,6 +378,10 @@ spec:
         emptyDir: {}
       - name: data-dir
         emptyDir: {}
+      - name: server-profile
+        configMap:
+          name: server-profile
+          defaultMode: 0644
       - name: pingaccess-was-init
         configMap:
           name: pingcommon-init
