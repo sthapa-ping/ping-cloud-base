@@ -41,12 +41,6 @@ spec:
           mountPath: /.ssh
         - name: data-dir
           mountPath: /data
-        - name: ssh-id-key-secret
-          mountPath: /id_rsa
-          subPath: id_rsa
-        - name: known-hosts-config
-          mountPath: /known_hosts
-          subPath: known_hosts
         - name: pingaccess-init
           mountPath: /copy-dependencies.sh
           subPath: copy-dependencies.sh
@@ -54,6 +48,8 @@ spec:
           mountPath: /utils.lib.sh
           subPath: utils.lib.sh
         envFrom:
+        - secretRef:
+            name: git-auth-cred
         - configMapRef:
             name: pingaccess-environment-variables
       - name: wait-for-services
@@ -145,6 +141,8 @@ spec:
         - secretRef:
             name: devops-secret
             optional: true
+        - secretRef:
+            name: git-auth-cred
       volumes:
       - name: ssh-dir
         emptyDir: {}
@@ -157,16 +155,6 @@ spec:
       - name: topology-descriptor
         configMap:
           name: topology-descriptor
-          optional: true
-          defaultMode: 0644
-      - name: ssh-id-key-secret
-        secret:
-          secretName: ssh-id-key-secret
-          optional: true
-          defaultMode: 0400
-      - name: known-hosts-config
-        configMap:
-          name: known-hosts-config
           optional: true
           defaultMode: 0644
       - name: out-dir
@@ -248,12 +236,6 @@ spec:
           mountPath: /.ssh
         - name: data-dir
           mountPath: /data
-        - name: ssh-id-key-secret
-          mountPath: /id_rsa
-          subPath: id_rsa
-        - name: known-hosts-config
-          mountPath: /known_hosts
-          subPath: known_hosts
         - name: pingaccess-init
           mountPath: /copy-dependencies.sh
           subPath: copy-dependencies.sh
@@ -263,6 +245,8 @@ spec:
         envFrom:
         - configMapRef:
             name: pingaccess-environment-variables
+        - secretRef:
+            name: git-auth-cred
       - name: wait-for-services
         # FIXME: switch to same user as app
         securityContext:
@@ -360,16 +344,6 @@ spec:
       - name: topology-descriptor
         configMap:
           name: topology-descriptor
-          optional: true
-          defaultMode: 0644
-      - name: ssh-id-key-secret
-        secret:
-          secretName: ssh-id-key-secret
-          optional: true
-          defaultMode: 0400
-      - name: known-hosts-config
-        configMap:
-          name: known-hosts-config
           optional: true
           defaultMode: 0644
       - name: pingaccess-license
