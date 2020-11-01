@@ -135,11 +135,6 @@ spec:
         - secretRef:
             name: flux-git-deploy
         volumeMounts:
-        - mountPath: /etc/fluxd/ssh
-          name: git-key
-          readOnly: true
-        - mountPath: /var/fluxd/keygen
-          name: git-keygen
         - name: tools-dir
           mountPath: /usr/local/bin/envsubst
           subPath: envsubst

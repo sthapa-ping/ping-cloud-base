@@ -60,8 +60,6 @@ spec:
         - configMapRef:
             name: pingdirectory-environment-variables
         volumeMounts:
-        - name: ssh-dir
-          mountPath: /.ssh
         - name: data-dir
           mountPath: /data
         - name: pingdirectory-init
@@ -148,8 +146,9 @@ spec:
             optional: true
         volumeMounts:
         # FIXME: fix home directory when containers run as non-root user
-        - name: ssh-dir
-          mountPath: /root/.ssh
+        - name: server-profile
+          mountPath: /opt/staging/hooks/02-get-remote-server-profile.sh.pre
+          subPath: 02-get-remote-server-profile.sh.pre
         - name: topology-descriptor
           mountPath: /opt/staging/topology/descriptor.json
           subPath: descriptor.json
@@ -220,10 +219,12 @@ spec:
             cpu: 100m
             memory: 300Mi
       volumes:
-      - name: ssh-dir
-        emptyDir: {}
       - name: data-dir
         emptyDir: {}
+      - name: server-profile
+        configMap:
+          name: server-profile
+          defaultMode: 0644
       - name: pingdirectory-init
         configMap:
           name: pingcommon-init

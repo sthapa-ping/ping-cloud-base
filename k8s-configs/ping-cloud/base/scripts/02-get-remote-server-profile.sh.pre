@@ -1,0 +1,13 @@
+#!/usr/bin/env sh
+set -x
+
+# Environment file used by docker build hook scripts.
+DOCKER_BUILD_ENV_FILE='/opt/staging/.env'
+
+# Check CLUSTER_STATE_REPO_URL variable value, expand GIT_AUTH_CRED and inject SERVER_PROFILE_URL to environment file.
+case "${CLUSTER_STATE_REPO_URL}" in
+  *GIT_AUTH_CRED*)
+      export SERVER_PROFILE_URL=$(eval echo "${CLUSTER_STATE_REPO_URL}" | tr -d " \t\n\r")
+      echo "SERVER_PROFILE_URL='${SERVER_PROFILE_URL}'" >> ${DOCKER_BUILD_ENV_FILE}
+    ;;
+esac
