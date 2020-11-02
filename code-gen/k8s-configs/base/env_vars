@@ -1,0 +1,133 @@
+############################################################
+# Multi-region parameters
+############################################################
+IS_MULTI_CLUSTER=false
+
+# Primary region name - must be a valid AWS region name
+# Primary region should have the same value for REGION and PRIMARY_REGION
+PRIMARY_REGION=us-east-2
+
+# Tenant domain suffix for customer for region
+# Primary region should have the same value for TENANT_DOMAIN and PRIMARY_TENANT_DOMAIN
+PRIMARY_TENANT_DOMAIN=mulloway1.us1.ping-preview.cloud.
+
+# Region-independent URL used for DNS failover/routing
+GLOBAL_TENANT_DOMAIN=global.mulloway1.ping-preview.cloud.
+
+############################################################
+# S3 buckets
+############################################################
+# Customer-specific artifacts URL for region
+ARTIFACT_REPO_URL=s3://bootstrap-customer-hub-mulloway1-pingbinarybucket-zel2gu5i1l9x
+
+# Ping-hosted common artifacts URL
+PING_ARTIFACT_REPO_URL=https://ping-artifacts.s3-us-west-2.amazonaws.com
+
+# Customer-specific log and backup URLs for region
+LOG_ARCHIVE_URL=ssm://pcpt/service/storage/logs/uri
+BACKUP_URL=ssm://pcpt/service/storage/backup/uri
+
+############################################################
+# Miscellaneous ping-cloud-base variables
+############################################################
+# Namespace where Ping apps are deployed
+PING_CLOUD_NAMESPACE=ping-cloud
+
+# The ping-cloud-base git URL and branch for base Kubernetes manifests
+K8S_GIT_URL=https://github.com/sura8257/ping-cloud-base.git
+K8S_GIT_BRANCH=mini-test-pdo-1531
+
+# The name of the Docker image registry
+REGISTRY_NAME=docker.io
+
+############################################################
+# Cluster state repo details
+############################################################
+CLUSTER_STATE_REPO_URL=https://${GIT_AUTH_CRED}@git-codecommit.us-east-2.amazonaws.com/v1/repos/cluster-state-repo
+CLUSTER_STATE_REPO_PATH=${REGION_NICK_NAME}
+CLUSTER_STATE_REPO_BRANCH=dev
+
+############################################################
+# Environment-specific variables
+############################################################
+# Used by server profile hooks
+ENVIRONMENT_TYPE=dev
+
+# Used by Kubernetes manifests
+ENV=dev
+KUSTOMIZE_BASE=test
+
+############################################################
+# Lets Encrypt server
+############################################################
+LETS_ENCRYPT_SERVER=https://acme-staging-v02.api.letsencrypt.org/directory
+
+############################################################
+# PingFederate variables for environment
+############################################################
+PF_PD_BIND_PORT=1389
+PF_PD_BIND_PROTOCOL=ldap
+PF_PD_BIND_USESSL=false
+
+PF_MIN_HEAP=1536m
+PF_MAX_HEAP=1536m
+PF_MIN_YGEN=768m
+PF_MAX_YGEN=768m
+
+############################################################
+# PingAccess variables for environment
+############################################################
+PA_WAS_MIN_HEAP=2048m
+PA_WAS_MAX_HEAP=2048m
+PA_WAS_MIN_YGEN=1024m
+PA_WAS_MAX_YGEN=1024m
+PA_WAS_GCOPTION=-XX:+UseParallelGC
+
+PA_MIN_HEAP=512m
+PA_MAX_HEAP=512m
+PA_MIN_YGEN=256m
+PA_MAX_YGEN=256m
+PA_GCOPTION=-XX:+UseParallelGC
+
+############################################################
+# Cluster name variables
+############################################################
+CLUSTER_NAME=dev
+CLUSTER_NAME_LC=dev
+
+############################################################
+# DNS zones
+############################################################
+DNS_ZONE=${ENV}-${TENANT_DOMAIN}
+PRIMARY_DNS_ZONE=${ENV}-${PRIMARY_TENANT_DOMAIN}
+
+############################################################
+# Server profile variables
+############################################################
+SERVER_PROFILE_URL_REDACT=true
+SERVER_PROFILE_URL=${CLUSTER_STATE_REPO_URL}
+SERVER_PROFILE_BRANCH=${CLUSTER_STATE_REPO_BRANCH}
+
+############################################################
+# Public hostnames
+############################################################
+# Ping admin configuration required for admin access and clustering
+PD_PRIMARY_PUBLIC_HOSTNAME=pingdirectory-admin.${PRIMARY_DNS_ZONE}
+PF_ADMIN_PUBLIC_HOSTNAME=pingfederate-admin.${PRIMARY_DNS_ZONE}
+PA_ADMIN_PUBLIC_HOSTNAME=pingaccess-admin.${PRIMARY_DNS_ZONE}
+PA_WAS_ADMIN_PUBLIC_HOSTNAME=pingaccess-was-admin.${PRIMARY_DNS_ZONE}
+
+PD_CLUSTER_PUBLIC_HOSTNAME=pingdirectory-cluster.${PRIMARY_DNS_ZONE}
+PF_CLUSTER_PUBLIC_HOSTNAME=pingfederate-cluster.${PRIMARY_DNS_ZONE}
+PA_CLUSTER_PUBLIC_HOSTNAME=pingaccess-cluster.${PRIMARY_DNS_ZONE}
+PA_WAS_CLUSTER_PUBLIC_HOSTNAME=pingaccess-was-cluster.${PRIMARY_DNS_ZONE}
+
+# Ping engine hostname variables
+PD_PUBLIC_HOSTNAME=pingdirectory-admin.${DNS_ZONE}
+PF_ENGINE_PUBLIC_HOSTNAME=pingfederate.${DNS_ZONE}
+PA_ENGINE_PUBLIC_HOSTNAME=pingaccess.${DNS_ZONE}
+PA_WAS_ENGINE_PUBLIC_HOSTNAME=pingaccess-was.${DNS_ZONE}
+
+PROMETHEUS_PUBLIC_HOSTNAME=prometheus.${DNS_ZONE}
+GRAFANA_PUBLIC_HOSTNAME=monitoring.${DNS_ZONE}
+KIBANA_PUBLIC_HOSTNAME=logs.${DNS_ZONE}

@@ -1,0 +1,13 @@
+############################################################
+# Region-specific parameters
+############################################################
+# Region name and nick name. REGION must be valid AWS region name.
+REGION=us-east-2
+REGION_NICK_NAME=us-east-2
+
+# Tenant domain for customer for region
+TENANT_DOMAIN=mulloway1.us1.ping-preview.cloud.
+
+# S3 bucket name for PingFederate adaptive clustering
+# Only required in multi-cluster environments
+CLUSTER_BUCKET_NAME=ssm://pcpt/service/storage/ping-federate-cluster-bucket/name
