@@ -57,3 +57,15 @@ patchesJson6902:
           sshPrivateKeySecret:
             name: argo-git-deploy
             key: identity
+
+### Deploy key to the cluster state repo ###
+- |-
+  apiVersion: v1
+  kind: Secret
+  type: Opaque
+  metadata:
+    name: argo-git-deploy
+    namespace: argocd
+  data:
+    identity: |
+      ${SSH_ID_KEY_BASE64}
