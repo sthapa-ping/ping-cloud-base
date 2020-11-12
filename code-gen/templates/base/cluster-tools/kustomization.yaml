@@ -90,6 +90,7 @@ patchesStrategicMerge:
         }
       }
 
+### Known hosts file for cloning the cluster state repo over SSH ###
 - |-
   apiVersion: v1
   kind: ConfigMap
