@@ -69,12 +69,12 @@ if ! "${QUIET}"; then
   echo "---------------------------------------------------------------------------------------------------------------"
 fi
 
-# Run flux-command.sh with an OUT_DIR so each k8s resource is written to a separate file. Also, give it a fake
+# Run git-ops-command.sh with an OUT_DIR so each k8s resource is written to a separate file. Also, give it a fake
 # REGION_NICK_NAME and TENANT_DOMAIN because all secrets exist in base, and without these variables, "kustomize build"
-# will fail when invoked from within flux-command.sh.
+# will fail when invoked from within git-ops-command.sh.
 OUT_DIR=$(mktemp -d)
 OUT_DIR="${OUT_DIR}" REGION_NICK_NAME=base TENANT_DOMAIN=base.ping-cloud.com \
-    "${SCRIPT_DIR}"/flux-command.sh "${BUILD_DIR}"
+    "${SCRIPT_DIR}"/git-ops-command.sh "${BUILD_DIR}"
 
 YAML_FILES=$(find "${OUT_DIR}" -type f | xargs grep -rl 'kind: Secret')
 if test -z "${YAML_FILES}"; then
@@ -109,8 +109,8 @@ SECRETS_FILE=/tmp/ping-secrets.yaml
 rm -f "${SECRETS_FILE}"
 
 for FILE in ${YAML_FILES}; do
-  NAME=$(grep 'name:' "${FILE}" | cut -d: -f2 | tr -d '[:space:]')
-  NAMESPACE=$(grep 'namespace:' "${FILE}" | cut -d: -f2 | tr -d '[:space:]')
+  NAME=$(grep '^  name:' "${FILE}" | cut -d: -f2 | tr -d '[:space:]')
+  NAMESPACE=$(grep '^  namespace:' "${FILE}" | cut -d: -f2 | tr -d '[:space:]')
 
   cat >> "${SECRETS_FILE}" <<EOF
 apiVersion: v1
@@ -129,9 +129,9 @@ EOF
     echo "Creating sealed secret for \"${NAMESPACE}:${NAME}\""
 
     # Append the sealed secret to the sealed secrets file.
-    ! test -f "${SEALED_SECRETS_FILE}" && printf "\n\n" > "${SEALED_SECRETS_FILE}"
-    kubeseal --cert "${CERT_FILE}" -o yaml < "${FILE}" >> "${SEALED_SECRETS_FILE}"
+    kubeseal --cert "${CERT_FILE}" -o yaml --allow-empty-data < "${FILE}" >> "${SEALED_SECRETS_FILE}"
     echo --- >> "${SEALED_SECRETS_FILE}"
+    echo >> "${SEALED_SECRETS_FILE}"
 
     # Replace ping-cloud-* namespace to just ping-cloud because it is the default in the kustomization base.
     echo -n "${NAMESPACE}" | grep '^ping-cloud' &> /dev/null && NAMESPACE=ping-cloud
@@ -152,7 +152,7 @@ else
   echo "      cd k8s-configs"
   echo "      test -f ${SECRETS_FILE} && cp ${SECRETS_FILE} ${BUILD_DIR}/secrets.yaml"
   echo "      test -f ${SEALED_SECRETS_FILE} && cp ${SEALED_SECRETS_FILE} ${BUILD_DIR}/sealed-secrets.yaml"
-  echo "      ./flux-command.sh \${REGION_DIR} > /tmp/deploy.yaml"
+  echo "      ./git-ops-command.sh \${REGION_DIR} > /tmp/deploy.yaml"
   echo "      grep 'kind: Secret' /tmp/deploy.yaml # should not have any hits"
   echo "      grep 'kind: SealedSecret' /tmp/deploy.yaml # should have hits"
   echo "- Push all modified files into the cluster state repo"
