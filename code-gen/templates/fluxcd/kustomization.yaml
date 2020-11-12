@@ -12,6 +12,9 @@ resources:
 # Deploy sealed-secrets controller so it's up and ready before ping-cloud namespace is created
 - ${K8S_GIT_URL}/k8s-configs/cluster-tools/security?ref=${K8S_GIT_BRANCH}
 
+# The minimal bootstrap required for the ping-cloud stack
+- ping-cloud.yaml
+
 # Deploy the CD application
 - argo-application.yaml
 
@@ -51,17 +54,6 @@ patchesStrategicMerge:
     namespace: argocd
   data:
     identity: |
-      ${SSH_ID_KEY_BASE64}
-
-### Bootstrap the SSH key required for Ping apps to avoid crash loop ###
-- |-
-  apiVersion: v1
-  kind: Secret
-  type: Opaque
-  metadata:
-    name: ssh-id-key-secret
-  data:
-    id_rsa: |
       ${SSH_ID_KEY_BASE64}
 
 patchesJson6902:
