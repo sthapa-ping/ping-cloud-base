@@ -2746,8 +2746,6 @@ spec:
           mountPath: /tools
       containers:
       - command:
-        - pip3 install git-remote-codecommit --no-warn-script-location
-        - export PATH="${PATH}:~/.local/bin"
         - uid_entrypoint.sh
         - argocd-repo-server
         - --redis
