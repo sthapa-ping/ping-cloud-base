@@ -7,6 +7,7 @@
 #   - Set the ArgoCD UI password to "admin"
 #   - Added git-ops-command.sh as the config management tool to build the uber Kubernetes YAML
 #   - Added an init container to install envsubst into the ArgoCD repo server
+#   - Added an init container to install AWS git-remote-codecommit into the ArgoCD repo server
 
 apiVersion: v1
 kind: Namespace
@@ -2735,6 +2736,7 @@ spec:
     spec:
       automountServiceAccountToken: false
       initContainers:
+      # Installs envsubst
       - name: add-envsubst
         image: pingcloud-docker.jfrog.io/pingidentity/ubuntu-envsubst:20.04
         command:
@@ -2744,6 +2746,24 @@ spec:
         volumeMounts:
         - name: tools-dir
           mountPath: /tools
+
+      # Installs AWS git-remote-codecommit
+      - name: add-aws-grc
+        image: python:3.7.3-slim
+        command:
+        - sh
+        - -c
+        - pip install --upgrade pip
+        - pip3 install git-remote-codecommit
+        - cp /usr/local/lib/python3.7/site-packages/git_remote_codecommit/__init__.py /tools
+        - cp /usr/local/bin/git-remote-codecommit /tools
+        - sed -i 's|/usr/local/bin/python|/usr/bin/python3|' /tools/git-remote-codecommit
+        - chmod a+x /tools/git-remote-codecommit
+        volumeMounts:
+        - name: tools-dir
+          mountPath: /tools
+
+      # Argo CD repo server
       containers:
       - command:
         - uid_entrypoint.sh
@@ -2776,6 +2796,12 @@ spec:
         - name: tools-dir
           mountPath: /usr/local/bin/envsubst
           subPath: envsubst
+        - name: tools-dir
+          mountPath: /usr/local/bin/git-remote-codecommit
+          subPath: git-remote-codecommit
+        - name: tools-dir
+          mountPath: /home/argocd/.local/lib/python3.7/site-packages/git_remote_codecommit/__init__.py
+          subPath: __init__.py
       volumes:
       - configMap:
           name: argocd-ssh-known-hosts-cm
