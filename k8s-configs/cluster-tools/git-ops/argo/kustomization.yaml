@@ -5,3 +5,11 @@ namespace: argocd
 
 resources:
 - argo.yaml
+
+generatorOptions:
+  disableNameSuffixHash: true
+
+configMapGenerator:
+- name: install-git-remote-codecommit
+  files:
+  - install-git-remote-codecommit.sh

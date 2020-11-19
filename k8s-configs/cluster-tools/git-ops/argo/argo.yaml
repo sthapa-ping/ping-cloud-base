@@ -2750,18 +2750,13 @@ spec:
       # Installs AWS git-remote-codecommit
       - name: add-aws-grc
         image: python:3.7.3-slim
-        command:
-        - sh
-        - -c
-        - pip install --upgrade pip
-        - pip3 install git-remote-codecommit
-        - cp /usr/local/lib/python3.7/site-packages/git_remote_codecommit/__init__.py /tools
-        - cp /usr/local/bin/git-remote-codecommit /tools
-        - sed -i 's|/usr/local/bin/python|/usr/bin/python3|' /tools/git-remote-codecommit
-        - chmod a+x /tools/git-remote-codecommit
+        command: [ "install-git-remote-codecommit.sh" ]
         volumeMounts:
         - name: tools-dir
           mountPath: /tools
+        - name: install-git-remote-codecommit
+          mountPath: /usr/local/bin/install-git-remote-codecommit.sh
+          subPath: install-git-remote-codecommit.sh
 
       # Argo CD repo server
       containers:
@@ -2819,6 +2814,10 @@ spec:
       - name: git-ops-command
         configMap:
           name: git-ops-command
+          defaultMode: 0555
+      - name: install-git-remote-codecommit
+        configMap:
+          name: install-git-remote-codecommit
           defaultMode: 0555
 ---
 apiVersion: apps/v1
