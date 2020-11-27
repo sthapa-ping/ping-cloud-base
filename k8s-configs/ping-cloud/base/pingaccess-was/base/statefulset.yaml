@@ -107,6 +107,8 @@ spec:
         - name: data-dir
           mountPath: /opt/staging/ds_env_vars
           subPath: ds_env_vars
+        - name: persistent-storage
+          mountPath: /repo
         readinessProbe:
           exec:
             command: [ /opt/staging/hooks/85-pa-admin-readiness.sh ]
@@ -161,6 +163,9 @@ spec:
             name: devops-secret
             optional: true
       volumes:
+      - name: persistent-storage
+        persistentVolumeClaim:
+          claimName: efs-claim
       - name: ssh-dir
         emptyDir: {}
       - name: data-dir
