@@ -1,0 +1,23 @@
+# This defines the ingress for the version service
+
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: version-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    kubernetes.io/ingress.class: nginx-public
+    nginx.ingress.kubernetes.io/service-upstream: "true"
+spec:
+  tls:
+  - hosts:
+    - version.ping-demo.com
+  rules:
+  - host: version.ping-demo.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: version
+          servicePort: 5000
