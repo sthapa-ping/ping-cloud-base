@@ -483,5 +483,5 @@ build_dev_deploy_file() {
   rm -rf "${build_dir}"
 
   test ! -z "${NAMESPACE}" && test "${NAMESPACE}" != 'ping-cloud' &&
-      sed -i.bak -E "s/((namespace|name|value): )ping-cloud$/\1${NAMESPACE}/g" "${deploy_file}"
+      sed -i.bak -E "s/((namespace|name): )ping-cloud$/\1${NAMESPACE}/g" "${deploy_file}"
 }

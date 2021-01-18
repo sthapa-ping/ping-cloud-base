@@ -1,9 +1,9 @@
-# This defines the ingress for the version service
+# This defines the ingress for the metadata service
 
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: version-ingress
+  name: metadata-ingress
   annotations:
     nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
@@ -12,12 +12,12 @@ metadata:
 spec:
   tls:
   - hosts:
-    - version.ping-demo.com
+    - metadata.ping-demo.com
   rules:
-  - host: version.ping-demo.com
+  - host: metadata.ping-demo.com
     http:
       paths:
       - path: /
         backend:
-          serviceName: version
+          serviceName: metadata
           servicePort: 5000

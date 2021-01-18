@@ -12,8 +12,6 @@ resources:
 - ../../../base/pingdirectory/aws
 - ../../../base/pingfederate/aws
 - ../../../base/pingaccess/aws
-- ../../../base/pingaccess-was/aws
-- ../../../base/pingcloud-metadata
 
 generatorOptions:
   disableNameSuffixHash: true

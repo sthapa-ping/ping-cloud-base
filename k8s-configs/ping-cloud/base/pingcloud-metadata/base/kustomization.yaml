@@ -8,8 +8,3 @@ resources:
 
 generatorOptions:
   disableNameSuffixHash: true
-
-configMapGenerator:
-- name: pingcloud-metadata-environment-variables
-  envs:
-  - env_vars
