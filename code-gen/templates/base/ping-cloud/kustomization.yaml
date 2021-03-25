@@ -48,6 +48,16 @@ patchesStrategicMerge:
       purpose: service-account-for-ping-cloud-stack
       ${IRSA_PING_ANNOTATION_KEY_VALUE}
 
+### Assign Elastic IP addresses to the pingdirectory-admin Network Load Balancer by adding the annotation ###
+- |-
+  apiVersion: v1
+  kind: Service
+  metadata:
+    name: pingdirectory-admin
+    namespace: ${PING_CLOUD_NAMESPACE}
+    annotations:
+      ${NLB_PD_ADMIN_ANNOTATION_KEY_VALUE}
+
 patchesJson6902:
 
 # pingcloud-metadata ingress

@@ -117,6 +117,27 @@ patchesStrategicMerge:
     ssh_known_hosts: |-
       ${KNOWN_HOSTS_CLUSTER_STATE_REPO}
 
+### Assign Elastic IP addresses to the ingress-nginx-public Network Load Balancer by adding the annotation ###
+- |-
+  apiVersion: v1
+  kind: Service
+  metadata:
+    name: ingress-nginx
+    namespace: ingress-nginx-public
+    annotations:
+      ${NLB_NGX_PUBLIC_ANNOTATION_KEY_VALUE}
+
+### Assign Elastic IP addresses to the ingress-nginx-private Network Load Balancer by adding the annotation ###
+- |-
+  apiVersion: v1
+  kind: Service
+  metadata:
+    name: ingress-nginx
+    namespace: ingress-nginx-private
+    annotations:
+      ${NLB_NGX_PRIVATE_ANNOTATION_KEY_VALUE}
+
+
 patchesJson6902:
 
 ### Cluster state repo URL and auth configuration for the CD tool ###
