@@ -301,8 +301,6 @@ ${PINGDIRECTORY_IMAGE_TAG}
 ${PINGDELEGATOR_IMAGE_TAG}
 ${LAST_UPDATE_REASON}
 ${IRSA_PING_ANNOTATION_KEY_VALUE}
-${NLB_PD_ADMIN_ANNOTATION_KEY_VALUE}
-${NLB_NGX_PRIVATE_ANNOTATION_KEY_VALUE}
 ${NLB_NGX_PUBLIC_ANNOTATION_KEY_VALUE}'
 
 # Variables to replace within the generated cluster state code
@@ -379,26 +377,6 @@ add_nlb_variables() {
   local ssm_path_prefix="$1"
   local env="$2"
 
-  if test "${NLB_PD_ADMIN_ANNOTATION_KEY_VALUE}"; then
-    export NLB_PD_ADMIN_ANNOTATION_KEY_VALUE="${NLB_PD_ADMIN_ANNOTATION_KEY_VALUE}"
-  else
-    # Default empty string
-    NLB_PD_ADMIN_ANNOTATION_KEY_VALUE=''
-
-    if [ "${ssm_path_prefix}" != "unused" ]; then
-
-      # Getting value from ssm parameter store.
-      if ! ssm_value=$(get_ssm_value "${ssm_path_prefix}/${env}/elastic-ips/nlb/pingdirectory-admin"); then
-        echo "Error: ${ssm_value}"
-        exit 1
-      fi
-
-      NLB_PD_ADMIN_ANNOTATION_KEY_VALUE="service.beta.kubernetes.io/aws-load-balancer-eip-allocations: ${ssm_value}"
-    fi
-
-    export NLB_PD_ADMIN_ANNOTATION_KEY_VALUE="${NLB_PD_ADMIN_ANNOTATION_KEY_VALUE}"
-  fi
-
   if test "${NLB_NGX_PUBLIC_ANNOTATION_KEY_VALUE}"; then
     export NLB_NGX_PUBLIC_ANNOTATION_KEY_VALUE="${NLB_NGX_PUBLIC_ANNOTATION_KEY_VALUE}"
   else
@@ -417,26 +395,6 @@ add_nlb_variables() {
     fi
 
     export NLB_NGX_PUBLIC_ANNOTATION_KEY_VALUE="${NLB_NGX_PUBLIC_ANNOTATION_KEY_VALUE}"
-  fi
-
-  if test "${NLB_NGX_PRIVATE_ANNOTATION_KEY_VALUE}"; then
-    export NLB_NGX_PRIVATE_ANNOTATION_KEY_VALUE="${NLB_NGX_PRIVATE_ANNOTATION_KEY_VALUE}"
-  else
-    # Default empty string
-    NLB_NGX_PRIVATE_ANNOTATION_KEY_VALUE=''
-
-    if [ "${ssm_path_prefix}" != "unused" ]; then
-
-      # Getting value from ssm parameter store.
-      if ! ssm_value=$(get_ssm_value "${ssm_path_prefix}/${env}/elastic-ips/nlb/nginx-private"); then
-        echo "Error: ${ssm_value}"
-        exit 1
-      fi
-
-      NLB_NGX_PRIVATE_ANNOTATION_KEY_VALUE="service.beta.kubernetes.io/aws-load-balancer-eip-allocations: ${ssm_value}"
-    fi
-
-    export NLB_NGX_PRIVATE_ANNOTATION_KEY_VALUE="${NLB_NGX_PRIVATE_ANNOTATION_KEY_VALUE}"
   fi
 }
 
