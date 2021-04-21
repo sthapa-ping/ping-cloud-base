@@ -149,6 +149,13 @@ PINGDIRECTORY_IMAGE_TAG=2006.1-8.1.0.2
 PINGDELEGATOR_IMAGE_TAG=2101-4.2.1
 
 ############################################################
+# Ping solution image tags
+############################################################
+METADATA_IMAGE_TAG=v1.0.2
+P14C_BOOTSTRAP_IMAGE_TAG=v1.0.7
+P14C_INTEGRATION_IMAGE_TAG=v1.0.12
+
+############################################################
 # Cluster name variables
 ############################################################
 CLUSTER_NAME=${CLUSTER_NAME}
