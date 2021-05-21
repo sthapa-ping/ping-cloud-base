@@ -337,12 +337,13 @@ spec:
           args:
             - /nginx-ingress-controller
             - --publish-service=$(POD_NAMESPACE)/ingress-nginx-controller
+            - --tcp-services-configmap=$(POD_NAMESPACE)/tcp-services
+            - --udp-services-configmap=$(POD_NAMESPACE)/udp-services
             - --election-id=ingress-controller-leader
-            - --ingress-class=nginx
+            - --ingress-class=nginx-public
             - --configmap=$(POD_NAMESPACE)/ingress-nginx-controller
             - --validating-webhook=:8443
-            - --validating-webhook-certificate=/usr/local/certificates/cert
-            - --validating-webhook-key=/usr/local/certificates/key
+            - --default-ssl-certificate=ping-cloud/acme-tls-cert
           securityContext:
             capabilities:
               drop:
