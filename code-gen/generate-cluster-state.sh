@@ -878,6 +878,10 @@ done
 
 cp -p push-cluster-state.sh "${TARGET_DIR}"
 
+echo "DEBUG1"
+echo $BOOTSTRAP_DIR
+ls -lart ${BOOTSTRAP_DIR}
+echo "DEBUG2:"
 # Go back to previous working directory, if different
 popd >/dev/null 2>&1
 
