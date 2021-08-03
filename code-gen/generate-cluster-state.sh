@@ -680,6 +680,9 @@ export CLUSTER_STATE_REPO_URL="${CLUSTER_STATE_REPO_URL}"
 # The ENVIRONMENTS variable can either be the CDE names (e.g. dev, test, stage, prod) or the CHUB name "customer-hub",
 # or the corresponding branch names (e.g. v1.8.0-dev, v1.8.0-test, v1.8.0-stage, v1.8.0-master, v1.8.0-customer-hub).
 # We must handle both cases. Note that the 'prod' environment will have a branch name suffix of 'master'.
+echo "DEBUG500"
+echo "$ENVIRONMENTS"
+echo "DEBUG500"
 for ENV_OR_BRANCH in ${ENVIRONMENTS}; do
 # Run in a sub-shell so the current shell is not polluted with environment variables.
 (
@@ -704,6 +707,11 @@ for ENV_OR_BRANCH in ${ENVIRONMENTS}; do
     export CLUSTER_STATE_REPO_BRANCH="${GIT_BRANCH##*-}"
   fi
 
+echo "DEBUG300"
+echo "CLUSTER_STATE_REPO_BRANCH: $CLUSTER_STATE_REPO_BRANCH"
+echo "GIT_BRANCH: $GIT_BRANCH"
+echo "ENV: $ENV"
+echo "DEBUG300"
   # Export all the environment variables required for envsubst
   export ENV="${ENV}"
   export ENVIRONMENT_TYPE="${ENV}"
