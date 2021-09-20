@@ -1,0 +1,132 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: ext-pingdelegator-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    kubernetes.io/ingress.class: nginx-private
+spec:
+  tls:
+  - hosts:
+    - ext-pingdelegator-${DNS_ZONE}
+  rules:
+  - host: ext-pingdelegator-${DNS_ZONE}
+    http:
+      paths:
+      # This rule gives external access to the pingdelegator
+      - path: /
+        backend:
+          serviceName: pingdelegator
+          servicePort: 1443
+
+---
+
+# This defines the ingress for the pingaccess-was admin service
+
+# NOTE: it will only work if an ingress controller (e.g. nginx) is running on
+# your cluster.
+
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: ext-pingaccess-was-admin-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    kubernetes.io/ingress.class: nginx-private
+spec:
+  tls:
+  - hosts:
+    - ext-pingaccess-was-admin-${DNS_ZONE}
+  rules:
+  - host: ext-pingaccess-was-admin-${DNS_ZONE}
+    http:
+      paths:
+      # This rule gives access to the pingaccess-was admin services.
+      - path: /
+        backend:
+          serviceName: ext-pingaccess-was-admin
+          servicePort: 9000
+
+---
+# This defines the private ingress for the pingaccess admin service
+
+# NOTE: it will only work if an ingress controller (e.g. nginx) is running on
+# your cluster.
+
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: ext-pingaccess-admin-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    kubernetes.io/ingress.class: nginx-private
+spec:
+  tls:
+    - hosts:
+        - ext-pingaccess-admin-api-${DNS_ZONE}
+  rules:
+    - host: ext-pingaccess-admin-api-${DNS_ZONE}
+      http:
+        paths:
+          # This rule gives internal access to the pingaccess admin services.
+          - path: /
+            backend:
+              serviceName: pingaccess-admin
+              servicePort: 9000
+
+---
+# This defines the private ingress for the pingfederate admin services.
+
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: ext-pingfederate-admin-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    kubernetes.io/ingress.class: nginx-private
+spec:
+  tls:
+    - hosts:
+        - ext-pingfederate-admin-api-${DNS_ZONE}
+  rules:
+    - host: ext-pingfederate-admin-api-${DNS_ZONE}
+      http:
+        paths:
+          # This rule gives internal access to the pingfederate admin services.
+          - path: /
+            backend:
+              serviceName: pingfederate-admin
+              servicePort: pf-admin
+
+---
+# This defines the ingress for the pingdirectory REST API and SCIM service
+
+# NOTE: it will only work if an ingress controller (e.g. nginx) is running on
+# your cluster.
+
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: ext-pingdirectory-http-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    kubernetes.io/ingress.class: nginx-private
+spec:
+  tls:
+  - hosts:
+    - ext-pingdirectory-${DNS_ZONE}
+  rules:
+  - host: ext-pingdirectory-${DNS_ZONE}
+    http:
+      paths:
+      # This rule gives external access to the pingdirectory REST API and SCIM service
+      - path: /
+        backend:
+          serviceName: pingdirectory-http
+          servicePort: 1443
+
