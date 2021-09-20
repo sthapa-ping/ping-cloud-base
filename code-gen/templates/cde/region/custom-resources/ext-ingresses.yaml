@@ -1,7 +1,18 @@
+# NOTES: 
+# - This custom patch is not applied to the cluster by default, 
+#   adding this patch will expose all the private services to the public. 
+#
+# - Make sure WAF is enabled for all the public endpoints before applying 
+#   this patch.
+#
+
+# This defines the ext ingress for the pingdelegator service
+
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: ext-pingdelegator-ingress
+  namespace: ${PING_CLOUD_NAMESPACE}
   annotations:
     nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
@@ -9,27 +20,23 @@ metadata:
 spec:
   tls:
   - hosts:
-    - ext-pingdelegator-${DNS_ZONE}
+    - ext-pingdelegator.${DNS_ZONE}
   rules:
-  - host: ext-pingdelegator-${DNS_ZONE}
+  - host: ext-pingdelegator.${DNS_ZONE}
     http:
       paths:
-      # This rule gives external access to the pingdelegator
       - path: /
         backend:
           serviceName: pingdelegator
           servicePort: 1443
 ---
-
 # This defines the ingress for the pingaccess-was admin service
-
-# NOTE: it will only work if an ingress controller (e.g. nginx) is running on
-# your cluster.
 
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: ext-pingaccess-was-admin-ingress
+  namespace: ${PING_CLOUD_NAMESPACE}
   annotations:
     nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
@@ -37,12 +44,11 @@ metadata:
 spec:
   tls:
   - hosts:
-    - ext-pingaccess-was-admin-${DNS_ZONE}
+    - ext-pingaccess-was-admin.${DNS_ZONE}
   rules:
-  - host: ext-pingaccess-was-admin-${DNS_ZONE}
+  - host: ext-pingaccess-was-admin.${DNS_ZONE}
     http:
       paths:
-      # This rule gives access to the pingaccess-was admin services.
       - path: /
         backend:
           serviceName: ext-pingaccess-was-admin
@@ -50,13 +56,11 @@ spec:
 ---
 # This defines the private ingress for the pingaccess admin service
 
-# NOTE: it will only work if an ingress controller (e.g. nginx) is running on
-# your cluster.
-
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: ext-pingaccess-admin-ingress
+  namespace: ${PING_CLOUD_NAMESPACE}
   annotations:
     nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
@@ -64,12 +68,11 @@ metadata:
 spec:
   tls:
     - hosts:
-        - ext-pingaccess-admin-api-${DNS_ZONE}
+        - ext-pingaccess-admin-api.${DNS_ZONE}
   rules:
-    - host: ext-pingaccess-admin-api-${DNS_ZONE}
+    - host: ext-pingaccess-admin-api.${DNS_ZONE}
       http:
         paths:
-          # This rule gives internal access to the pingaccess admin services.
           - path: /
             backend:
               serviceName: pingaccess-admin
@@ -81,6 +84,7 @@ apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: ext-pingfederate-admin-ingress
+  namespace: ${PING_CLOUD_NAMESPACE}
   annotations:
     nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
@@ -88,12 +92,11 @@ metadata:
 spec:
   tls:
     - hosts:
-        - ext-pingfederate-admin-api-${DNS_ZONE}
+        - ext-pingfederate-admin-api.${DNS_ZONE}
   rules:
-    - host: ext-pingfederate-admin-api-${DNS_ZONE}
+    - host: ext-pingfederate-admin-api.${DNS_ZONE}
       http:
         paths:
-          # This rule gives internal access to the pingfederate admin services.
           - path: /
             backend:
               serviceName: pingfederate-admin
@@ -101,13 +104,11 @@ spec:
 ---
 # This defines the ingress for the pingdirectory REST API and SCIM service
 
-# NOTE: it will only work if an ingress controller (e.g. nginx) is running on
-# your cluster.
-
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: ext-pingdirectory-http-ingress
+  namespace: ${PING_CLOUD_NAMESPACE}
   annotations:
     nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
@@ -115,12 +116,11 @@ metadata:
 spec:
   tls:
   - hosts:
-    - ext-pingdirectory-${DNS_ZONE}
+    - ext-pingdirectory.${DNS_ZONE}
   rules:
-  - host: ext-pingdirectory-${DNS_ZONE}
+  - host: ext-pingdirectory.${DNS_ZONE}
     http:
       paths:
-      # This rule gives external access to the pingdirectory REST API and SCIM service
       - path: /
         backend:
           serviceName: pingdirectory-http
