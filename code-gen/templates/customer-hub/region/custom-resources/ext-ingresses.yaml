@@ -10,7 +10,7 @@
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
-  name: pingcentral-ingress
+  name: ext-pingcentral-ingress
   namespace: ${PING_CLOUD_NAMESPACE}
   annotations:
     nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
@@ -19,9 +19,9 @@ metadata:
 spec:
   tls:
   - hosts:
-    - pingcentral.${DNS_ZONE}
+    - ext-pingcentral.${DNS_ZONE}
   rules:
-  - host: pingcentral.${DNS_ZONE}
+  - host: ext-pingcentral.${DNS_ZONE}
     http:
       paths:
       - path: /
