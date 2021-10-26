@@ -2852,6 +2852,7 @@ metadata:
     app.kubernetes.io/name: argocd-cmd-params-cm
     app.kubernetes.io/part-of: argocd
   name: argocd-cmd-params-cm
+data:
   # Set the logging level. One of: debug|info|warn|error (default "info")
   controller.log.level: "warn"
   # Set the logging level. One of: debug|info|warn|error (default "info")
