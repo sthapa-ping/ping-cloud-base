@@ -94,6 +94,7 @@ ENVIRONMENT_TYPE=${ENVIRONMENT_TYPE}
 
 # Used by Kubernetes manifests
 ENV=${ENV}
+SIZE=${SIZE}
 KUSTOMIZE_BASE=${KUSTOMIZE_BASE}
 
 ############################################################

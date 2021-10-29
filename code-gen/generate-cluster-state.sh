@@ -331,7 +331,8 @@ ${PINGFEDERATE_IMAGE_TAG}
 ${PINGDIRECTORY_IMAGE_TAG}
 ${PINGDELEGATOR_IMAGE_TAG}
 ${IRSA_PING_ANNOTATION_KEY_VALUE}
-${NLB_NGX_PUBLIC_ANNOTATION_KEY_VALUE}'
+${NLB_NGX_PUBLIC_ANNOTATION_KEY_VALUE}
+${SIZE}'
 
 # Variables to replace within the generated cluster state code
 REPO_VARS="${REPO_VARS:-${DEFAULT_VARS}}"
@@ -780,6 +781,7 @@ for ENV_OR_BRANCH in ${ENVIRONMENTS}; do
   # Export all the environment variables required for envsubst
   export ENV="${ENV}"
   export ENVIRONMENT_TYPE="\${ENV}"
+  export SIZE="${SIZE}"
 
   # The base URL for kustomization files and environment will be different for each CDE.
   # On migrated customers, we must preserve the size of the customers.
@@ -879,6 +881,7 @@ for ENV_OR_BRANCH in ${ENVIRONMENTS}; do
   echo "For environment ${ENV}, using variable values:"
   echo "CLUSTER_STATE_REPO_BRANCH: ${CLUSTER_STATE_REPO_BRANCH}"
   echo "ENVIRONMENT_TYPE: ${ENVIRONMENT_TYPE}"
+  echo "SIZE: ${SIZE}"
   echo "KUSTOMIZE_BASE: ${KUSTOMIZE_BASE}"
   echo "LETS_ENCRYPT_SERVER: ${LETS_ENCRYPT_SERVER}"
   echo "USER_BASE_DN: ${USER_BASE_DN}"
