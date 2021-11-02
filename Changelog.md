@@ -7,7 +7,6 @@
 - Added regional custom-patches.yaml as an extension point to customize configuration for a specific region 
 - Updated ingress to v1.0.0 and added the SigSci agent sidecar container to the public Nginx-ingress-controller pod
 - Add multiline log support for PA-WAS
-- Updated SigSci sidecar resource limits and the public ingress hpa for the prod environment
 
 _Changes:_
 
