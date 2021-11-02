@@ -7,6 +7,7 @@
 - Added regional custom-patches.yaml as an extension point to customize configuration for a specific region 
 - Updated ingress to v1.0.0 and added the SigSci agent sidecar container to the public Nginx-ingress-controller pod
 - Add multiline log support for PA-WAS
+- Updated SigSci sidecar resource limits and the public ingress hpa for the prod environment
 
 _Changes:_
 
@@ -16,6 +17,7 @@ _Changes:_
 - [X] PDO-2928 Add support for enabling rate limiting in PA and PA-WAS
 - [X] PDO-2938 Added regional custom-patches.yaml as an extension point to customize configuration for a specific region
 - [X] PDO-2988 Increased metadata pod timeoutSeconds probe to 3 seconds for liveness & readiness
+- [X] PDO-2991 SigSci WAF: Update SigSci sidecar resource limit & requests
 
 ### 1.11.0
 
