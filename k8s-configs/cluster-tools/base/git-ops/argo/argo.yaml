@@ -9,7 +9,6 @@
 #   - Added git-ops-command.sh as the config management tool to build the uber Kubernetes YAML
 #   - Added an init container to install a few custom tools into the ArgoCD repo server
 #   - Changed the docker image repo to Amazon ECR repo in CSG AWS account
-#   - Set the "timeout.reconciliation" to 60 seconds in argocd-cm configMap
 #   - Set the "server.log.level" to "warn" in argocd-cmd-params-cm configMap
 #   - Set the "controller.log.level" to "warn" in argocd-cmd-params-cm configMap
 #   - Set the "reposerver.log.level" to "warn" in argocd-cmd-params-cm configMap
@@ -2845,10 +2844,6 @@ data:
     - name: git-ops-command
       generate:
         command: [ "git-ops-command.sh" ]
-  # Application reconciliation timeout is the max amount of time required to discover if a new manifests version got
-  # published to the repository. Reconciliation by timeout is disabled if timeout is set to 0.
-  # > Note: argocd-repo-server deployment must be manually restarted after changing the setting.
-  timeout.reconciliation: 60s
 ---
 apiVersion: v1
 kind: ConfigMap
