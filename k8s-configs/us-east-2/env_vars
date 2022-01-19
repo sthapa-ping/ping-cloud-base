@@ -1,0 +1,21 @@
+############################################################
+# Region-specific parameters
+############################################################
+# Region name and nick name. REGION must be valid AWS region name.
+REGION=us-east-2
+REGION_NICK_NAME=us-east-2
+
+# Tenant domain suffix for customer for region
+TENANT_DOMAIN=mulloway1.us1.ping-preview.cloud
+
+# Customer-specific artifacts URL for region
+ARTIFACT_REPO_URL=s3://bootstrap-customer-hub-mulloway1-pingbinarybucket-zel2gu5i1l9x
+
+############################################################
+# IRSA - IAM role for service accounts
+############################################################
+# Used by ping product pods
+IRSA_PING_ANNOTATION_KEY_VALUE="eks.amazonaws.com/role-arn: arn:aws:iam::567489334023:role/pcpt/irsa-roles/irsa-ping"
+
+# Annotation used by ingress-nginx service in ingress-nginx-public namespace
+NLB_NGX_PUBLIC_ANNOTATION_KEY_VALUE="service.beta.kubernetes.io/aws-load-balancer-eip-allocations: eipalloc-021f4dd78a24012dd,eipalloc-06a5e09b388e51ab0,eipalloc-0bb73e6975104c836"

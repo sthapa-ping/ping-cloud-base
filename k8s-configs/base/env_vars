@@ -1,0 +1,213 @@
+############################################################
+# Multi-region parameters
+############################################################
+IS_MULTI_CLUSTER=false
+
+# Primary region name - must be a valid AWS region name
+# Primary region should have the same value for REGION and PRIMARY_REGION
+PRIMARY_REGION=us-east-2
+
+# Tenant domain suffix for customer for region
+# Primary region should have the same value for TENANT_DOMAIN and PRIMARY_TENANT_DOMAIN
+PRIMARY_TENANT_DOMAIN=mulloway1.us1.ping-preview.cloud
+
+# Optional comma-separated list of the tenant domain suffixes of secondary regions used for
+# PingFederate adaptive clustering using the JGroups DNS_PING discovery protocol:
+#
+#   - Do NOT include the primary tenant domain in the list
+#   - Do NOT include the CDE prefix in the domain name
+#
+# For example, if the primary domain is "tuna.us1.ping-preview.cloud", then set it
+# to "tuna.eu1.ping-preview.cloud,tuna.au1.ping-preview.cloud" to specify secondary
+# domains in regions eu1 and au1.
+#
+# NOTES:
+#   - Only used in multi-cluster environments. If provided, PF will be configured with DNS_PING.
+#   - It is recommended that SECONDARY_TENANT_DOMAINS be set apriori, even before the
+#     secondary regions are created to avoid pod rollouts. DNS_PING will simply ignore
+#     unreachable domains. If it is not set beforehand, then all servers in the PF
+#     cluster (admin and engines) must be re-rolled to pick up the change.
+SECONDARY_TENANT_DOMAINS=""
+
+# Region-independent URL used for DNS failover/routing
+GLOBAL_TENANT_DOMAIN=global.mulloway1.ping-preview.cloud
+
+############################################################
+# S3 buckets
+############################################################
+# Ping-hosted common artifacts URL
+PING_ARTIFACT_REPO_URL=https://ping-artifacts.s3-us-west-2.amazonaws.com
+
+# Customer-specific log and backup URLs for region
+LOG_ARCHIVE_URL=ssm://pcpt/service/storage/logs/uri
+BACKUP_URL=ssm://pcpt/service/storage/backup/uri
+
+############################################################
+# Platform event queue and SSM variables
+############################################################
+PLATFORM_EVENT_QUEUE_NAME=platform_event_queue.fifo
+PLATFORM_EVENT_QUEUE_POLL_BATCH_SIZE=1
+PLATFORM_EVENT_QUEUE_POLL_INTERVAL_SECONDS=2
+ORCH_API_SSM_PATH_PREFIX=/pcpt/orch-api
+
+############################################################
+# Miscellaneous ping-cloud-base variables
+############################################################
+# Namespace where Ping apps are deployed
+PING_CLOUD_NAMESPACE=ping-cloud
+
+# The ping-cloud-base git URL and branch for base Kubernetes manifests
+K8S_GIT_URL=https://github.com/pingidentity/ping-cloud-base
+K8S_GIT_BRANCH=v1.11-release-branch
+
+# The name of the Docker image registry
+ECR_REGISTRY_NAME=public.ecr.aws/r2h3l6e4
+
+# The tenant or customer name
+TENANT_NAME=mulloway1
+
+# This variable's value will be used as the prefix to distinguish between worker apps for different CDEs for a
+# single P14C customer. All of these apps will be created within the "Administrators" environment in the tenant.
+ENVIRONMENT_PREFIX=${TENANT_NAME}-${CLUSTER_STATE_REPO_BRANCH}-${REGION_NICK_NAME}
+
+############################################################
+# Cluster state repo details
+############################################################
+# The known-hosts file to trust the cluster state repo server for git/ssh cloning
+KNOWN_HOSTS_CLUSTER_STATE_REPO="|1|jdigV1dqpdayX1I7Z1dbr7GY49s=|1acUGQHUFxLztfMVH4u9avPqGK8= ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCNbmnXfe621xtVMkrwOqf6QNIlnOKkQ01KoM6gKC4nv5T08hbGcGp6iYplGLKMLlki+auO1J3JTA3qAKDobZR1wDqtW9LC2k46GHV4YigUpd6D+YdranJqbxpGOuNd6c1EP50vQnlW9MxZYExyrZKT0UfOJAydQLoWPuSioyHk3zAltSIrCxczP3jxAhuoq++eUrdC5uF6UMNJC10eBA9XglAe2oRLzApoStyCAiKVnoBndU2NpJWqNw0K5qfEUx2vyQFfHNRAwNNRDFtkdE9ho255YECTO07Zg37QCZ+hV5VAoFRu5CHSXqVZc5YN1YXkZ8SVHyBX7krO80QaaDor"
+
+CLUSTER_STATE_REPO_URL=ssh://APKA4DN2MCAYRVELBLUF@git-codecommit.us-east-2.amazonaws.com/v1/repos/cluster-state-repo
+CLUSTER_STATE_REPO_PATH=${REGION_NICK_NAME}
+CLUSTER_STATE_REPO_BRANCH=stage
+
+############################################################
+# Server profile variables
+############################################################
+SERVER_PROFILE_URL=ssh://APKA4DN2MCAYRVELBLUF@git-codecommit.us-east-2.amazonaws.com/v1/repos/profile-repo
+SERVER_PROFILE_BRANCH=${CLUSTER_STATE_REPO_BRANCH}
+
+############################################################
+# Environment-specific variables
+############################################################
+# Used by server profile hooks
+ENVIRONMENT_TYPE=${ENV}
+
+# Used by Kubernetes manifests
+ENV=stage
+KUSTOMIZE_BASE=prod/small
+
+############################################################
+# Lets Encrypt server
+############################################################
+LETS_ENCRYPT_SERVER=https://acme-staging-v02.api.letsencrypt.org/directory
+
+############################################################
+# PingCommon environment variables
+############################################################
+USER_BASE_DN=dc=example,dc=com
+
+############################################################
+# PingFederate variables for environment
+############################################################
+PF_PD_BIND_PORT=1389
+PF_PD_BIND_PROTOCOL=ldap
+PF_PD_BIND_USESSL=false
+
+PF_MIN_HEAP=3072m
+PF_MAX_HEAP=3072m
+PF_MIN_YGEN=1536m
+PF_MAX_YGEN=1536m
+
+# This variable's value will make it onto the branding for the PF admin console and
+# will include the name of the environment and the region where it's deployed.
+PF_ADMIN_CONSOLE_ENVIRONMENT=${ENV}-${REGION}
+
+############################################################
+# PingAccess variables for environment
+############################################################
+PA_WAS_MIN_HEAP=2048m
+PA_WAS_MAX_HEAP=2048m
+PA_WAS_MIN_YGEN=1024m
+PA_WAS_MAX_YGEN=1024m
+PA_WAS_GCOPTION=-XX:+UseParallelGC
+
+PA_MIN_HEAP=1024m
+PA_MAX_HEAP=1024m
+PA_MIN_YGEN=512m
+PA_MAX_YGEN=512m
+PA_GCOPTION=-XX:+UseParallelGC
+
+###################################
+# PingCentral environment variables
+###################################
+MYSQL_SERVICE_HOST=pingcentraldb.${PRIMARY_TENANT_DOMAIN}
+MYSQL_USER=ssm://pcpt/ping-central/rds/username
+MYSQL_PASSWORD=ssm://pcpt/ping-central/rds/password
+MYSQL_DATABASE=pingcentral
+
+############################################################
+# DevOps License environment variables
+############################################################
+PING_IDENTITY_DEVOPS_USER=ssm://pcpt/devops-license/user
+PING_IDENTITY_DEVOPS_KEY=ssm://pcpt/devops-license/key
+
+############################################################
+# Ping application image tags
+############################################################
+PINGACCESS_IMAGE_TAG=6.3.1-v1.0.15-log4j2-patch
+PINGACCESS_WAS_IMAGE_TAG=6.3.1-v1.0.15-log4j2-patch
+PINGFEDERATE_IMAGE_TAG=10.3.3-v1.0.20-log4j2-patch-no-IKs
+PINGDIRECTORY_IMAGE_TAG=8.3.0.0-v1.0.18
+PINGDELEGATOR_IMAGE_TAG=4.4.1-v1.0.8
+PINGCENTRAL_IMAGE_TAG=1.8.1-v1.0.20-log4j2-patch-alpine-3.14.3
+
+############################################################
+# Ping solution image tags
+############################################################
+METADATA_IMAGE_TAG=v1.0.4
+P14C_BOOTSTRAP_IMAGE_TAG=v1.0.11
+P14C_INTEGRATION_IMAGE_TAG=v1.0.38
+
+############################################################
+# Cluster name variables
+############################################################
+CLUSTER_NAME=stage
+CLUSTER_NAME_LC=stage
+
+############################################################
+# DNS zones
+############################################################
+DNS_ZONE=${ENV}-${TENANT_DOMAIN}
+PRIMARY_DNS_ZONE=${ENV}-${PRIMARY_TENANT_DOMAIN}
+
+############################################################
+# Public hostnames
+############################################################
+# Ping admin configuration required for admin access and clustering
+PD_PRIMARY_PUBLIC_HOSTNAME=pingdirectory-admin.${PRIMARY_DNS_ZONE}
+PF_ADMIN_PUBLIC_HOSTNAME=pingfederate-admin.${PRIMARY_DNS_ZONE}
+PF_ADMIN_API_PUBLIC_HOSTNAME=pingfederate-admin-api.${PRIMARY_DNS_ZONE}
+PA_ADMIN_PUBLIC_HOSTNAME=pingaccess-admin.${PRIMARY_DNS_ZONE}
+PA_ADMIN_API_PUBLIC_HOSTNAME=pingaccess-admin-api.${PRIMARY_DNS_ZONE}
+PA_WAS_ADMIN_PUBLIC_HOSTNAME=pingaccess-was-admin.${PRIMARY_DNS_ZONE}
+PC_ADMIN_PUBLIC_HOSTNAME=pingcentral-admin.${PRIMARY_DNS_ZONE}
+PC_ADMIN_PRIVATE_SITE_HOSTNAME=pingcentral.${PRIMARY_TENANT_DOMAIN}
+
+PD_CLUSTER_PUBLIC_HOSTNAME=pingdirectory-cluster.${PRIMARY_DNS_ZONE}
+PF_CLUSTER_PUBLIC_HOSTNAME=pingfederate-cluster.${PRIMARY_DNS_ZONE}
+PA_CLUSTER_PUBLIC_HOSTNAME=pingaccess-cluster.${PRIMARY_DNS_ZONE}
+PA_WAS_CLUSTER_PUBLIC_HOSTNAME=pingaccess-was-cluster.${PRIMARY_DNS_ZONE}
+
+# Ping engine hostname variables
+PD_PUBLIC_HOSTNAME=pingdirectory-admin.${DNS_ZONE}
+PD_HTTP_PUBLIC_HOSTNAME=pingdirectory.${DNS_ZONE}
+PD_DELEGATOR_PUBLIC_HOSTNAME=pingdelegator.${DNS_ZONE}
+PD_DELEGATOR_PUBLIC_PORT=443
+PF_ENGINE_PUBLIC_HOSTNAME=pingfederate.${DNS_ZONE}
+PA_ENGINE_PUBLIC_HOSTNAME=pingaccess.${DNS_ZONE}
+PA_WAS_ENGINE_PUBLIC_HOSTNAME=pingaccess-was.${DNS_ZONE}
+
+PROMETHEUS_PUBLIC_HOSTNAME=prometheus.${DNS_ZONE}
+GRAFANA_PUBLIC_HOSTNAME=monitoring.${DNS_ZONE}
+KIBANA_PUBLIC_HOSTNAME=logs.${DNS_ZONE}
+ARGOCD_PUBLIC_HOSTNAME=argocd.${DNS_ZONE}
