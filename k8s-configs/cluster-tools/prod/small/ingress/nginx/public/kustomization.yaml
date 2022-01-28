@@ -14,7 +14,7 @@ patchesStrategicMerge:
     minReplicas: 4
     maxReplicas: 6
     targetCPUUtilizationPercentage: 50
-
+---
   apiVersion: v1
   kind: ConfigMap
   metadata:
