@@ -57,8 +57,8 @@ ORCH_API_SSM_PATH_PREFIX=/pcpt/orch-api
 PING_CLOUD_NAMESPACE=ping-cloud
 
 # The ping-cloud-base git URL and branch for base Kubernetes manifests
-K8S_GIT_URL=https://github.com/pingidentity/ping-cloud-base
-K8S_GIT_BRANCH=v1.11-release-branch
+K8S_GIT_URL=https://github.com/sthapa-ping/ping-cloud-base
+K8S_GIT_BRANCH=pdo-2092-radius
 
 # The name of the Docker image registry
 ECR_REGISTRY_NAME=public.ecr.aws/r2h3l6e4
