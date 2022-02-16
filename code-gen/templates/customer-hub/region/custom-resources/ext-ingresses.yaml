@@ -28,6 +28,8 @@ spec:
       paths:
       - path: /
         backend:
-          serviceName: pingcentral
-          servicePort: 9022
+          service:
+            name: pingcentral
+            port:
+              number: 9022
 

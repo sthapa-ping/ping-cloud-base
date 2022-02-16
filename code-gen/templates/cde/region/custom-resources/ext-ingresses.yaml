@@ -39,7 +39,6 @@ spec:
 
 # This defines the external ingress for the pingaccess-was admin service
 
-# FIXME: PDO-2918 - ingress >=v1.0.0 dropped support for v1beta1 so should use v1
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -69,7 +68,6 @@ spec:
 
 # This defines the external ingress for the pingaccess admin service
 
-# FIXME: PDO-2918 - ingress >=v1.0.0 dropped support for v1beta1 so should use v1
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -99,7 +97,6 @@ spec:
 
 # This defines the external ingress for the pingfederate admin services.
 
-# FIXME: PDO-2918 - ingress >=v1.0.0 dropped support for v1beta1 so should use v1
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -129,7 +126,6 @@ spec:
 
 # This defines the external ingress for the pingdirectory REST API and SCIM service
 
-# FIXME: PDO-2918 - ingress >=v1.0.0 dropped support for v1beta1 so should use v1
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
