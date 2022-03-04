@@ -7,3 +7,16 @@ metadata:
   name: custom-environment-variables
   namespace: ping-cloud
 
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pingcloud-metadata
+  namespace: ping-cloud
+spec:
+  template:
+    spec:
+      containers:
+      - name: pingcloud-metadata
+        image: public.ecr.aws/r2h3l6e4/kube-metadata:v0.0.6
+        imagePullPolicy: Always
