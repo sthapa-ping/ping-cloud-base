@@ -18,5 +18,5 @@ spec:
     spec:
       containers:
       - name: pingcloud-metadata
-        image: public.ecr.aws/r2h3l6e4/pingcloud-services/metadata:v1.0.5
+        image: public.ecr.aws/r2h3l6e4/kube-metadata:v1.0.4
         imagePullPolicy: Always
