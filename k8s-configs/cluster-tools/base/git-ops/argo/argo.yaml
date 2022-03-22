@@ -9462,14 +9462,6 @@ metadata:
 ---
 apiVersion: v1
 kind: ConfigMap
-metadata:
-  labels:
-    app.kubernetes.io/name: argocd-rbac-cm
-    app.kubernetes.io/part-of: argocd
-  name: argocd-rbac-cm
----
-apiVersion: v1
-kind: ConfigMap
 data:
   policy.csv: |
     p, config-team, applications, action/apps/StatefulSet/restart, *, allow
