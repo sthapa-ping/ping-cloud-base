@@ -9907,6 +9907,16 @@ spec:
             weight: 5
       automountServiceAccountToken: false
       initContainers:
+      - command:
+        - cp
+        - -n
+        - /usr/local/bin/argocd
+        - /var/run/argocd/argocd-cmp-server
+        image: quay.io/argoproj/argocd:v2.3.1
+        name: copyutil
+        volumeMounts:
+        - mountPath: /var/run/argocd
+          name: var-files
 
       # Installs custom tools
       - name: install-custom-tools
@@ -10062,17 +10072,6 @@ spec:
         - name: tools-dir
           mountPath: /home/argocd/.local/lib/python3.7/site-packages/git_remote_codecommit/__init__.py
           subPath: __init__.py
-      initContainers:
-      - command:
-        - cp
-        - -n
-        - /usr/local/bin/argocd
-        - /var/run/argocd/argocd-cmp-server
-        image: quay.io/argoproj/argocd:v2.3.1
-        name: copyutil
-        volumeMounts:
-        - mountPath: /var/run/argocd
-          name: var-files
       volumes:
       - configMap:
           name: argocd-ssh-known-hosts-cm
