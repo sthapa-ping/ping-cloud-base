@@ -9654,7 +9654,6 @@ spec:
   selector:
     app.kubernetes.io/name: argocd-server
 ---
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -9709,6 +9708,7 @@ spec:
         name: gpg-keys
       - emptyDir: {}
         name: gpg-keyring
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -9775,6 +9775,79 @@ spec:
         name: static-files
       - emptyDir: {}
         name: dexconfig
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/name: argocd-notifications-controller-metrics
+  name: argocd-notifications-controller-metrics
+spec:
+  ports:
+  - name: metrics
+    port: 9001
+    protocol: TCP
+    targetPort: 9001
+  selector:
+    app.kubernetes.io/name: argocd-notifications-controller
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: argocd-notifications-controller
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: argocd-notifications-controller
+subjects:
+- kind: ServiceAccount
+  name: argocd-notifications-controller
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: argocd-notifications-controller
+rules:
+- apiGroups:
+  - argoproj.io
+  resources:
+  - applications
+  - appprojects
+  verbs:
+  - get
+  - list
+  - watch
+  - update
+  - patch
+- apiGroups:
+  - ""
+  resources:
+  - configmaps
+  - secrets
+  verbs:
+  - list
+  - watch
+- apiGroups:
+  - ""
+  resourceNames:
+  - argocd-notifications-cm
+  resources:
+  - configmaps
+  verbs:
+  - get
+- apiGroups:
+  - ""
+  resourceNames:
+  - argocd-notifications-secret
+  resources:
+  - secrets
+  verbs:
+  - get
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: argocd-notifications-controller
 ---
 apiVersion: apps/v1
 kind: Deployment
