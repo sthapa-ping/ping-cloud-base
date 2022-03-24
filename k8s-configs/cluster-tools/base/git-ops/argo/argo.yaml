@@ -1,5 +1,5 @@
 # The base yaml was obtained from:
-# https://raw.githubusercontent.com/argoproj/argo-cd/v2.1.6/manifests/install.yaml
+# https://raw.githubusercontent.com/argoproj/argo-cd/v2.3.1/manifests/install.yaml
 
 # The following modifications have been made to it:
 #   - Added an "argocd" Namespace for all namespace-scoped resources
@@ -9912,7 +9912,7 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: metadata.namespace
-        image: quay.io/argoproj/argocd-applicationset:v0.4.1
+        image: public.ecr.aws/r2h3l6e4/argoproj/argocd-applicationset:v0.4.1
         imagePullPolicy: Always
         name: argocd-applicationset-controller
         ports:
@@ -9971,7 +9971,7 @@ spec:
       - command:
         - /shared/argocd-dex
         - rundex
-        image: ghcr.io/dexidp/dex:v2.30.2
+        image: public.ecr.aws/r2h3l6e4/dexidp/dex:v2.30.2
         imagePullPolicy: Always
         name: dex
         ports:
@@ -9993,7 +9993,7 @@ spec:
         - -n
         - /usr/local/bin/argocd
         - /shared/argocd-dex
-        image: quay.io/argoproj/argocd:v2.3.1
+        image: public.ecr.aws/r2h3l6e4/argoproj/argocd:v2.3.1
         imagePullPolicy: Always
         name: copyutil
         volumeMounts:
@@ -10026,7 +10026,7 @@ spec:
       containers:
       - command:
         - argocd-notifications
-        image: quay.io/argoproj/argocd:v2.3.1
+        image: public.ecr.aws/r2h3l6e4/argoproj/argocd:v2.3.1
         imagePullPolicy: Always
         livenessProbe:
           tcpSocket:
@@ -10095,7 +10095,7 @@ spec:
         - ""
         - --appendonly
         - "no"
-        image: redis:6.2.6-alpine
+        image: public.ecr.aws/r2h3l6e4/redis:6.2.6-alpine
         imagePullPolicy: Always
         name: redis
         ports:
@@ -10144,7 +10144,7 @@ spec:
         - -n
         - /usr/local/bin/argocd
         - /var/run/argocd/argocd-cmp-server
-        image: quay.io/argoproj/argocd:v2.3.1
+        image: public.ecr.aws/r2h3l6e4/argoproj/argocd:v2.3.1
         name: copyutil
         volumeMounts:
         - mountPath: /var/run/argocd
@@ -10246,7 +10246,7 @@ spec:
           value: /helm-working-dir
         - name: HELM_DATA_HOME
           value: /helm-working-dir
-        image: quay.io/argoproj/argocd:v2.3.1
+        image: public.ecr.aws/r2h3l6e4/argoproj/argocd:v2.3.1
         imagePullPolicy: Always
         livenessProbe:
           failureThreshold: 3
@@ -10532,7 +10532,7 @@ spec:
               key: server.http.cookie.maxnumber
               name: argocd-cmd-params-cm
               optional: true
-        image: quay.io/argoproj/argocd:v2.3.1
+        image: public.ecr.aws/r2h3l6e4/argoproj/argocd:v2.3.1
         imagePullPolicy: Always
         livenessProbe:
           httpGet:
@@ -10722,7 +10722,7 @@ spec:
               key: controller.default.cache.expiration
               name: argocd-cmd-params-cm
               optional: true
-        image: quay.io/argoproj/argocd:v2.3.1
+        image: public.ecr.aws/r2h3l6e4/argoproj/argocd:v2.3.1
         imagePullPolicy: Always
         livenessProbe:
           httpGet:
