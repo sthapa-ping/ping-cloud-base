@@ -7,3 +7,22 @@ metadata:
   name: custom-environment-variables
   namespace: ping-cloud
 
+---
+---
+allowVolumeExpansion: true
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  labels:
+    app: ping-cloud
+    role: pingdirectory
+  name: pingdirectory-gp2
+mountOptions:
+- discard
+parameters:
+  fsType: ext4
+  type: gp2
+  encrypted: true
+provisioner: kubernetes.io/aws-ebs
+volumeBindingMode: WaitForFirstConsumer
+---
