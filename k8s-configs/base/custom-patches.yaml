@@ -8,20 +8,22 @@ metadata:
   namespace: ping-cloud
 
 ---
-allowVolumeExpansion: true
-apiVersion: storage.k8s.io/v1
-kind: StorageClass
+apiVersion: apps/v1
+kind: StatefulSet
 metadata:
-  labels:
-    app: ping-cloud
-    role: pingdirectory
-  name: pingdirectory-gp2
-mountOptions:
-- discard
-parameters:
-  fsType: ext4
-  type: gp2
-  encrypted: "true"
-provisioner: kubernetes.io/aws-ebs
-volumeBindingMode: WaitForFirstConsumer
+  name: pingdirectory
+  namespace: ping-cloud
+spec:
+  volumeClaimTemplates:
+    - metadata:
+        name: out-dir
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        storageClassName: pingdirectory-enc-gp2
+        resources:
+          requests:
+            storage: 50Gi
+
 ---
+
