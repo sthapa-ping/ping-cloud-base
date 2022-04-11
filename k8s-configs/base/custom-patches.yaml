@@ -8,7 +8,6 @@ metadata:
   namespace: ping-cloud
 
 ---
----
 allowVolumeExpansion: true
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -22,7 +21,7 @@ mountOptions:
 parameters:
   fsType: ext4
   type: gp2
-  encrypted: true
+  encrypted: "true"
 provisioner: kubernetes.io/aws-ebs
 volumeBindingMode: WaitForFirstConsumer
 ---
