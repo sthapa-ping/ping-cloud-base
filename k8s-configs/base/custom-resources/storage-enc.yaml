@@ -1,0 +1,16 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: pingdirectory-enc-gp2
+provisioner: kubernetes.io/aws-ebs
+volumeBindingMode: WaitForFirstConsumer
+parameters:
+  type: gp2
+  fsType: ext4
+  encrypted: "true"
+mountOptions:
+  - discard
+allowVolumeExpansion: true
+
+---
+
