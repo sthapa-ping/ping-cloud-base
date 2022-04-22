@@ -7,23 +7,3 @@ metadata:
   name: custom-environment-variables
   namespace: ping-cloud
 
----
-apiVersion: apps/v1
-kind: StatefulSet
-metadata:
-  name: pingdirectory
-  namespace: ping-cloud
-spec:
-  volumeClaimTemplates:
-    - metadata:
-        name: out-dir
-      spec:
-        accessModes:
-        - ReadWriteOnce
-        storageClassName: pingdirectory-enc-gp2
-        resources:
-          requests:
-            storage: 50Gi
-
----
-
