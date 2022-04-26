@@ -10,7 +10,7 @@ metadata:
 ---
 apiVersion: v1
 data:
-  admin.password: JDJhJDEwJEhRaEhlREZCMFZST2hsNXlnbW9ZeWVJeU1WVm0zVWdqTGk0WEJaVW9LSFVnZ1h4S1JaUi4uCg==
+  admin.password: MTIzYWRtaW4K
 kind: Secret
 metadata:
   annotations:
