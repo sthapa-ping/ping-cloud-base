@@ -7,3 +7,18 @@ metadata:
   name: custom-environment-variables
   namespace: ping-cloud
 
+---
+apiVersion: v1
+data:
+  admin.password: JDJhJDEwJEhRaEhlREZCMFZST2hsNXlnbW9ZeWVJeU1WVm0zVWdqTGk0WEJaVW9LSFVnZ1h4S1JaUi4uCg==
+kind: Secret
+metadata:
+  annotations:
+    sealedsecrets.bitnami.com/managed: "true"
+  labels:
+    app.kubernetes.io/name: argocd-secret
+    app.kubernetes.io/part-of: argocd
+  name: argocd-secret
+  namespace: argocd
+type: Opaque
+---
