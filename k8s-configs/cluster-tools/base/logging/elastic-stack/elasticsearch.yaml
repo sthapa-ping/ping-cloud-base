@@ -341,7 +341,7 @@ metadata:
   name: elasticsearch-sc1
   labels:
     app: elasticsearch
-provisioner: kubernetes.io/aws-ebs
+provisioner: ebs.csi.aws.com
 parameters:
   encrypted: "true"
   type: sc1
@@ -357,7 +357,7 @@ metadata:
   name: elasticsearch-gp2
   labels:
     app: elasticsearch
-provisioner: kubernetes.io/aws-ebs
+provisioner: ebs.csi.aws.com
 volumeBindingMode: WaitForFirstConsumer
 parameters:
   encrypted: "true"

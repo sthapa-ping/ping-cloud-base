@@ -4,7 +4,7 @@ apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
   name: pingdirectory-io1
-provisioner: kubernetes.io/aws-ebs
+provisioner: ebs.csi.aws.com
 parameters:
   encrypted: "true"
   type: io1
@@ -20,7 +20,7 @@ apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
   name: pingdirectory-gp2
-provisioner: kubernetes.io/aws-ebs
+provisioner: ebs.csi.aws.com
 volumeBindingMode: WaitForFirstConsumer
 parameters:
   type: gp2
@@ -35,7 +35,7 @@ apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
   name: pingdirectory-enc-gp2
-provisioner: kubernetes.io/aws-ebs
+provisioner: ebs.csi.aws.com
 volumeBindingMode: WaitForFirstConsumer
 parameters:
   encrypted: "true"
