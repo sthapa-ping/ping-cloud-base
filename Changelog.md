@@ -4,10 +4,12 @@
 
 - Augment ArgoCD's application name with customer name
 - Add fix to application name for ArgoCD
+- Updated cluster tool sealed-secrets-controller from v0.73.3 to v0.18.0
 
 _Changes:_
 
 - [X] PDO-2635 Augment ArgoCD's application name with customer name
+- [X] PDO-3273 Update cluster tool to latest version: sealed-secrets-controller v.0.18.0
 - [X] PDO-3575 Cluster tool: force pingcloud-monitoring/newrelic-tags-exporter initContainer to run with allowPrivilegeEscalation: false
 - [X] PDO-3940 Add timeouts for screen updates in PingOne integration tests
 
