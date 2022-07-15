@@ -71,8 +71,8 @@ PING_CLOUD_NAMESPACE=ping-cloud
 
 # The ping-cloud-base git URL and branch for base Kubernetes manifests
 K8S_GIT_URL=https://github.com/sura8257/ping-cloud-base
-#K8S_GIT_BRANCH=pdo-3271-argoV2.4.6
-K8S_GIT_BRANCH=PDO-3273-upg-secrets-controller
+K8S_GIT_BRANCH=pdo-3271-argoV2.4.6
+#K8S_GIT_BRANCH=PDO-3273-upg-secrets-controller
 
 # The name of the Docker image registry
 ECR_REGISTRY_NAME=public.ecr.aws/r2h3l6e4
