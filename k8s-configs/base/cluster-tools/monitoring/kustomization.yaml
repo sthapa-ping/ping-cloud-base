@@ -43,32 +43,6 @@ patchesStrategicMerge:
         }
       }
 
-# NewRelic resources
-- |-
-  apiVersion: v1
-  kind: ConfigMap
-  metadata:
-    name: nri-bundle-nri-prometheus-config
-    namespace: newrelic
-  data:
-    config.yaml: |
-      cluster_name: ${NEW_RELIC_ENVIRONMENT_NAME}
-      require_scrape_enabled_label_for_nodes: true
-
-- |-
-  apiVersion: v1
-  kind: ConfigMap
-  metadata:
-    name: nri-bundle-nri-kube-events-config
-    namespace: newrelic
-  data:
-    config.yaml: |-
-      sinks:
-      - name: newRelicInfra
-        config:
-          agentEndpoint: http://localhost:8001/v1/data
-          clusterName: ${NEW_RELIC_ENVIRONMENT_NAME}
-          agentHTTPTimeout: 30s
 
 patchesJson6902:
 
