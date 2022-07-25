@@ -5,6 +5,7 @@ resources:
 - cluster-tools
 - ping-cloud
 - sealed-secrets.yaml
+- nginx.yaml
 
 ### PSO/GSO teams should only add new custom resources in this directory. Otherwise, CSR auto-updates will break. ###
 - custom-resources
