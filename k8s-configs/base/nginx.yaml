@@ -1,6 +1,5 @@
 apiVersion: apps/v1
 kind: Deployment
-namespace: ping-cloud
 metadata:
   name: nginx
   labels:
