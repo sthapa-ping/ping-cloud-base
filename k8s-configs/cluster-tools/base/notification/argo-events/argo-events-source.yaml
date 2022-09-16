@@ -25,10 +25,6 @@ spec:
                     eventbus-name: default
                 topologyKey: kubernetes.io/hostname
               weight: 100
-      persistence:
-        storageClassName: standard
-        accessMode: ReadWriteOnce
-        volumeSize: 2Gi
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: EventSource
