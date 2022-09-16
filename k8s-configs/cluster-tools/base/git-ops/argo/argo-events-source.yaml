@@ -2,6 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: EventBus
 metadata:
   name: default
+  namespace: argo-events
 spec:
   nats:
     native:
@@ -15,16 +16,16 @@ spec:
         resources:
           requests:
             cpu: "10m"
-      antiAffinity:
-          podAntiAffinity:
-    preferredDuringSchedulingIgnoredDuringExecution:
-      - podAffinityTerm:
-          labelSelector:
-            matchLabels:
-              controller: eventbus-controller
-              eventbus-name: default
-          topologyKey: kubernetes.io/hostname
-        weight: 100
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    controller: eventbus-controller
+                    eventbus-name: default
+                topologyKey: kubernetes.io/hostname
+              weight: 100
       persistence:
         storageClassName: standard
         accessMode: ReadWriteOnce
@@ -34,6 +35,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: EventSource
 metadata:
   name: webhook
+  namespace: argo-events
 spec:
   service:
     ports:
@@ -49,6 +51,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Sensor
 metadata:
   name: webhook
+  namespace: argo-events
 spec:
   template:
     serviceAccountName: argo-events-sa
