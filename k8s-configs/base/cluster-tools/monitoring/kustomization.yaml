@@ -4,19 +4,15 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 resources:
 - ${K8S_GIT_URL}/k8s-configs/cluster-tools/base/monitoring?ref=${K8S_GIT_BRANCH}
 
+configMapGenerator:
+- name: prometheus-environment-variables
+  behavior: merge
+  envs:
+  - ../../env_vars
+
 patchesStrategicMerge:
 
 ### Cloud-watch logging and monitoring ###
-#- |-
-#  apiVersion: v1
-#  kind: ConfigMap
-#  metadata:
-#    name: cluster-info
-#    namespace: amazon-cloudwatch
-#  data:
-#    legacy_logging: "${LEGACY_LOGGING}"
-#    cluster.name: ${CLUSTER_NAME}
-#    logs.region: ${REGION}
 
 - |-
   apiVersion: v1
@@ -43,4 +39,150 @@ patchesStrategicMerge:
         }
       }
 
+# NewRelic resources
+- |-
+  apiVersion: v1
+  kind: ConfigMap
+  metadata:
+    name: nri-bundle-nri-prometheus-config
+    namespace: newrelic
+  data:
+    config.yaml: |
+      cluster_name: ${NEW_RELIC_ENVIRONMENT_NAME}
+      audit: false
+      insecure_skip_verify: false
+      require_scrape_enabled_label_for_nodes: true
+      scrape_enabled_label: prometheus.io/scrape
+      scrape_endpoints: false
+      scrape_services: true
+      transformations:
+      - description: Low data mode defaults
+        ignore_metrics:
+        - prefixes:
+          - kube_
+          - container_
+          - machine_
+          - cadvisor_
+      verbose: false
 
+- |-
+  apiVersion: v1
+  kind: ConfigMap
+  metadata:
+    name: nri-bundle-nri-kube-events-config
+    namespace: newrelic
+  data:
+    config.yaml: |-
+      sinks:
+      - name: newRelicInfra
+        config:
+          agentEndpoint: http://localhost:8001/v1/data
+          clusterName: ${NEW_RELIC_ENVIRONMENT_NAME}
+          agentHTTPTimeout: 30s
+
+- |-
+  apiVersion: v1
+  kind: ConfigMap
+  metadata:
+    namespace: newrelic
+    name: nri-bundle-nrk8s-agent-controlplane
+  data:
+    newrelic-infra.yml: |-
+      # This is the configuration file for the infrastructure agent. See:
+      # https://docs.newrelic.com/docs/infrastructure/install-infrastructure-agent/configuration/infrastructure-agent-configuration-settings/
+      custom_attributes:
+        clusterName: ${NEW_RELIC_ENVIRONMENT_NAME}
+      http_server_enabled: true
+      http_server_port: 8001
+      is_forward_only: true
+
+- |-
+  apiVersion: v1
+  kind: ConfigMap
+  metadata:
+    namespace: newrelic
+    name: nri-bundle-nrk8s-agent-ksm
+  data:
+    newrelic-infra.yml: |-
+      # This is the configuration file for the infrastructure agent. See:
+      # https://docs.newrelic.com/docs/infrastructure/install-infrastructure-agent/configuration/infrastructure-agent-configuration-settings/
+      custom_attributes:
+        clusterName: ${NEW_RELIC_ENVIRONMENT_NAME}
+      http_server_enabled: true
+      http_server_port: 8002
+      is_forward_only: true
+
+- |-
+  apiVersion: v1
+  kind: ConfigMap
+  metadata:
+    namespace: newrelic
+    name: nri-bundle-nrk8s-agent-kubelet
+  data:
+    newrelic-infra.yml: |-
+      # This is the configuration file for the infrastructure agent. See:
+      # https://docs.newrelic.com/docs/infrastructure/install-infrastructure-agent/configuration/infrastructure-agent-configuration-settings/
+      custom_attributes:
+        clusterName: ${NEW_RELIC_ENVIRONMENT_NAME}
+      features:
+        docker_enabled: false
+      http_server_enabled: true
+      http_server_port: 8003
+
+patchesJson6902:
+
+# Newrelic resources
+- target:
+    group: apps
+    version: v1
+    kind: Deployment
+    name: nri-bundle-nri-metadata-injection
+    namespace: newrelic
+  patch: |-
+    - op: replace
+      path: /spec/template/metadata/annotations/clusterName
+      value: ${NEW_RELIC_ENVIRONMENT_NAME}
+
+- target:
+    group: apps
+    version: v1
+    kind: Deployment
+    name: nri-bundle-nrk8s-ksm
+    namespace: newrelic
+  patch: |-
+    - op: replace
+      path: /spec/template/metadata/annotations/clusterName
+      value: ${NEW_RELIC_ENVIRONMENT_NAME}
+
+- target:
+    group: apps
+    version: v1
+    kind: DaemonSet
+    name: nri-bundle-nrk8s-kubelet
+    namespace: newrelic
+  patch: |-
+    - op: replace
+      path: /spec/template/metadata/annotations/CLUSTER_NAME
+      value: ${NEW_RELIC_ENVIRONMENT_NAME}
+
+- target:
+    group: apps
+    version: v1
+    kind: DaemonSet
+    name: nri-bundle-nrk8s-controlplane
+    namespace: newrelic
+  patch: |-
+    - op: replace
+      path: /spec/template/metadata/annotations/CLUSTER_NAME
+      value: ${NEW_RELIC_ENVIRONMENT_NAME}
+
+- target:
+    group: batch
+    version: v1
+    kind: Job
+    name: newrelic-license-secret-exporter
+    namespace: newrelic
+  patch: |-
+    - op: replace
+      path: /spec/template/metadata/annotations/SECRET_NAMESPACE
+      value: ${PING_CLOUD_NAMESPACE}

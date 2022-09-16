@@ -148,6 +148,14 @@ configMapGenerator:
   - ../base/env_vars
   - env_vars
 
+# Pingcloud-healthcheck
+- name: pingcloud-healthcheck-environment-variables
+  namespace: ${PING_CLOUD_NAMESPACE}
+  behavior: merge
+  envs:
+  - ../base/env_vars
+  - env_vars
+
 # PingCloud-oauth
 - name: p14c-oauth-service-environment-variables
   behavior: merge
@@ -168,6 +176,18 @@ configMapGenerator:
   envs:
   - ../base/env_vars
   - env_vars
+
+# Region for logging-bootstrap
+- name: logging-bootstrap-environment-variables
+  behavior: merge
+  literals:
+    - SERVICE_SSM_PATH_PREFIX=${SERVICE_SSM_PATH_PREFIX}
+    - REGION=${REGION}
+
+- name: elk-environment-variables
+  behavior: merge
+  envs:
+    - logging/env_vars
 
 patchesStrategicMerge:
 

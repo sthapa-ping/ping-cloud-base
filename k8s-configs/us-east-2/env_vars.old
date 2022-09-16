@@ -8,8 +8,22 @@ REGION_NICK_NAME=us-east-2
 # Tenant domain suffix for customer for region
 TENANT_DOMAIN=mulloway1.us1.ping-preview.cloud
 
+# This variable's value will be used as the prefix to distinguish between worker apps for different CDEs for a
+# single P14C customer. All of these apps will be created within the "Administrators" environment in the tenant.
+# This variable name is also used in forming the Signal Science Agent name as displayed in SigSci Dashboard.
+ENVIRONMENT_PREFIX=mulloway1-stage-us-east-2
+
 # Customer-specific artifacts URL for region
 ARTIFACT_REPO_URL=s3://bootstrap-customer-hub-mulloway1-pingbinarybucket-zel2gu5i1l9x
+
+# Customer-specific region name
+CLUSTER_STATE_REPO_PATH=us-east-2
+
+# TODO: we can only substitute env vars region->base PDO-3957 to fix
+REGION_ENV=stage
+
+# Customer-specific region DNS zone
+DNS_ZONE=${REGION_ENV}-mulloway1.us1.ping-preview.cloud
 
 ############################################################
 # IRSA - IAM role for service accounts
