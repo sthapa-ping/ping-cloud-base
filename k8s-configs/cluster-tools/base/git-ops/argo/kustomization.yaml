@@ -5,6 +5,8 @@ namespace: argocd
 
 resources:
 - argo.yaml
+- argo-events.yaml
+- argo-events-source.yaml
 
 generatorOptions:
   disableNameSuffixHash: true
