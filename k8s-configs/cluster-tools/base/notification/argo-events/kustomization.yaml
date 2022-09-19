@@ -5,5 +5,4 @@ namespace: argo-events
 
 resources:
 - argo-events.yaml
-- argo-events-source.yaml
 

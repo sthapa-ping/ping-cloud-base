@@ -1,3 +1,10 @@
+# The base yaml was obtained from:
+# https://raw.githubusercontent.com/argoproj/argo-events/v1.7.2/manifests/install.yaml
+
+# The following modifications have been made to it:
+#   - Added an "argocd" Namespace for all namespace-scoped resources
+#   - Updated docker image source
+
 apiVersion: v1
 kind: Namespace
 metadata:
@@ -372,12 +379,12 @@ spec:
         - controller
         env:
         - name: ARGO_EVENTS_IMAGE
-          value: quay.io/argoproj/argo-events:v1.7.2
+          value: public.ecr.aws/r2h3l6e4/argoproj/argo-events:v1.7.2
         - name: NAMESPACE
           valueFrom:
             fieldRef:
               fieldPath: metadata.namespace
-        image: quay.io/argoproj/argo-events:v1.7.2
+        image: public.ecr.aws/r2h3l6e4/argoproj/argo-events:v1.7.2
         imagePullPolicy: Always
         livenessProbe:
           httpGet:
