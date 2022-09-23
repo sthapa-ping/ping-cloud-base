@@ -48,5 +48,5 @@ kind: Secret
 metadata:
   name: slack-secret
 data:
-  token: BASE64-ENCODED-OAUTH-TOKEN
+  token: QkFTRTY0LUVOQ09ERUQtT0FVVEgtVE9LRU4=
 
