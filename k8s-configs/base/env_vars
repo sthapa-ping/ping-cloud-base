@@ -233,3 +233,6 @@ PROMETHEUS_PING_NAMESPACE=ping-cloud
 PF_PROVISIONING_ENABLED=
 
 ########################################################################################################################
+#
+
+ARGOCD_SLACK_TOKEN="eG94Yi0zMzAyOTQ0MTg4MTctNDA4NTc5NDExNTUyNC0wT2VhbUo4SUk1MUM3b0FnQ1FVTlkxZ0w="
