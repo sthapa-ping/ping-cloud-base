@@ -1,0 +1,52 @@
+apiVersion: argoproj.io/v1alpha1
+kind: EventSource
+metadata:
+  name: webhook
+spec:
+  service:
+    ports:
+      - port: 12999
+        targetPort: 12999
+  webhook:
+    devops-toolkit:
+      port: "12999"
+      endpoint: /trigger-slack
+      method: POST
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Sensor
+metadata:
+  name: webhook
+spec:
+  template:
+    serviceAccountName: argo-events-sa
+  dependencies:
+  - name: payload
+    eventSourceName: webhook
+    eventName: devops-toolkit
+  triggers:
+    - template:
+        name: slack-trigger
+        slack:
+          channel: general
+          message: hello world
+          slackToken:
+            key: token
+            name: slack-secret
+      parameters:
+        - src:
+            dependencyName: test-dep
+            dataKey: body.channel
+          dest: slack.channel
+        - src:
+            dependencyName: test-dep
+            dataKey: body.message
+          dest: slack.message
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: slack-secret
+data:
+  token: BASE64-ENCODED-OAUTH-TOKEN
+
