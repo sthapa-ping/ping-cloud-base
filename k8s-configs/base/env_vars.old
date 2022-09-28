@@ -71,8 +71,8 @@ APP_RESYNC_SECONDS=60
 PING_CLOUD_NAMESPACE=ping-cloud
 
 # The ping-cloud-base git URL and branch for base Kubernetes manifests
-K8S_GIT_URL=https://github.com/pingidentity/ping-cloud-base
-K8S_GIT_BRANCH=v1.16-release-branch
+K8S_GIT_URL=https://github.com/sthapa-ping/ping-cloud-base
+K8S_GIT_BRANCH=pdo-4391-backup
 
 # The name of the Docker image registry
 ECR_REGISTRY_NAME=public.ecr.aws/r2h3l6e4
@@ -108,7 +108,7 @@ LETS_ENCRYPT_SERVER=https://acme-staging-v02.api.letsencrypt.org/directory
 # PingCommon environment variables
 ############################################################
 USER_BASE_DN=dc=example,dc=com
-ECR_ENV=
+ECR_ENV=/dev
 
 ############################################################
 # PingFederate variables for environment
@@ -150,22 +150,22 @@ PING_IDENTITY_DEVOPS_KEY=ssm://pcpt/devops-license/key
 ############################################################
 # Ping application image tags
 ############################################################
-PINGACCESS_IMAGE_TAG=v1.15.0.0
-PINGACCESS_WAS_IMAGE_TAG=v1.15.0.0
-PINGFEDERATE_IMAGE_TAG=v1.15.0.0
-PINGDIRECTORY_IMAGE_TAG=v1.15.0.0
-PINGDELEGATOR_IMAGE_TAG=v1.15.0.0
-PINGCENTRAL_IMAGE_TAG=v1.15.0.0
-PINGDATASYNC_IMAGE_TAG=v1.15.0.0
+PINGACCESS_IMAGE_TAG=v1.16-release-branch-latest
+PINGACCESS_WAS_IMAGE_TAG=v1.16-release-branch-latest
+PINGFEDERATE_IMAGE_TAG=v1.16-release-branch-latest
+PINGDIRECTORY_IMAGE_TAG=v1.16-release-branch-latest
+PINGDELEGATOR_IMAGE_TAG=v1.16-release-branch-latest
+PINGCENTRAL_IMAGE_TAG=v1.16-release-branch-latest
+PINGDATASYNC_IMAGE_TAG=v1.16-release-branch-latest
 
 ############################################################
 # Ping solution image tags
 ############################################################
-METADATA_IMAGE_TAG=v1.15.0.0
-BOOTSTRAP_IMAGE_TAG=v1.15.0.0
-HEALTHCHECK_IMAGE_TAG=v1.15.0.0
-P14C_INTEGRATION_IMAGE_TAG=v1.15.0.0
-ANSIBLE_BELUGA_IMAGE_TAG=v1.15.0.0
+METADATA_IMAGE_TAG=v1.16-release-branch-latest
+BOOTSTRAP_IMAGE_TAG=v1.16-release-branch-latest
+HEALTHCHECK_IMAGE_TAG=v1.16-release-branch-latest
+P14C_INTEGRATION_IMAGE_TAG=v1.16-release-branch-latest
+ANSIBLE_BELUGA_IMAGE_TAG=v1.16-release-branch-latest
 
 ############################################################
 # Cluster name variables
@@ -225,3 +225,17 @@ PROMETHEUS_USER_COUNT_4_SCHEDULE='* * * * *'
 
 # Variable to have ping-cloud namespace in prometheus-job-exporter
 PROMETHEUS_PING_NAMESPACE=ping-cloud
+
+#### FEATURE FLAGS #####################################################################################################
+# Set to true to enable, most are disabled by default
+# NOTE: You must re-run update-cluster-state.sh after flipping a feature flag
+
+PF_PROVISIONING_ENABLED=
+
+########################################################################################################################
+#
+
+ARGOCD_SLACK_TOKEN="eG94Yi0zMzAyOTQ0MTg4MTctNDA4NTc5NDExNTUyNC0wT2VhbUo4SUk1MUM3b0FnQ1FVTlkxZ0w="
+NOTIFICATION_ENDPOINT=http://webhook-eventsource-svc.argo-events:12999/notification
+NOTIFICATON_ENABLED=true
+SLACK_CHANNEL=testing
