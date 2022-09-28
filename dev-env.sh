@@ -319,6 +319,10 @@ export PF_PROVISIONING_ENABLED=${PF_PROVISIONING_ENABLED:-false}
 
 ########################################################################################################################
 
+# Notification configuration for the argo-event webhook
+export NOTIFICATON_ENABLED=${NOTIFICATON_ENABLED:-false}
+export SLACK_CHANNEL=${SLACK_CHANNEL:-nowhere}
+
 # MySQL database names cannot have dashes. So transform dashes into underscores.
 ENV_NAME_NO_DASHES=$(echo ${BELUGA_ENV_NAME} | tr '-' '_')
 export MYSQL_DATABASE="pingcentral_${ENV_NAME_NO_DASHES}"
