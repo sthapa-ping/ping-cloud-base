@@ -28,8 +28,8 @@ spec:
     - template:
         name: trigger-slack
         slack:
-          channel: general
-          message: hello world
+          channel: p1as-application-oncal
+          message: this is default message from argo-events
           slackToken:
             key: token
             name: slack-secret
