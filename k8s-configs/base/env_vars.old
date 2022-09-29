@@ -71,7 +71,7 @@ APP_RESYNC_SECONDS=60
 PING_CLOUD_NAMESPACE=ping-cloud
 
 # The ping-cloud-base git URL and branch for base Kubernetes manifests
-K8S_GIT_URL=https://github.com/sthapa-ping/ping-cloud-base
+K8S_GIT_URL=https://github.com/pingidentity/ping-cloud-base
 K8S_GIT_BRANCH=pdo-4391-backup
 
 # The name of the Docker image registry
@@ -230,12 +230,6 @@ PROMETHEUS_PING_NAMESPACE=ping-cloud
 # Set to true to enable, most are disabled by default
 # NOTE: You must re-run update-cluster-state.sh after flipping a feature flag
 
-PF_PROVISIONING_ENABLED=
+PF_PROVISIONING_ENABLED=false
 
 ########################################################################################################################
-#
-
-ARGOCD_SLACK_TOKEN="eG94Yi0zMzAyOTQ0MTg4MTctNDA4NTc5NDExNTUyNC0wT2VhbUo4SUk1MUM3b0FnQ1FVTlkxZ0w="
-NOTIFICATION_ENDPOINT=http://webhook-eventsource-svc.argo-events:12999/notification
-NOTIFICATON_ENABLED=true
-SLACK_CHANNEL=testing

@@ -41,6 +41,7 @@ PING_ARTIFACT_REPO_URL=https://ping-artifacts.s3-us-west-2.amazonaws.com
 # Customer-specific log and backup URLs for region
 LOG_ARCHIVE_URL=ssm://pcpt/service/storage/logs/uri
 BACKUP_URL=ssm://pcpt/service/storage/backup/uri
+BACKUP_BUCKET_NAME=bootstrap-customer-hub-mulloway1-4-s3backupbucket-1erdaychcdx60
 
 ############################################################
 # Platform event queue and SSM variables
@@ -72,7 +73,7 @@ PING_CLOUD_NAMESPACE=ping-cloud
 
 # The ping-cloud-base git URL and branch for base Kubernetes manifests
 K8S_GIT_URL=https://github.com/pingidentity/ping-cloud-base
-K8S_GIT_BRANCH=pdo-4391-backup
+K8S_GIT_BRANCH=v1.16-release-branch
 
 # The name of the Docker image registry
 ECR_REGISTRY_NAME=public.ecr.aws/r2h3l6e4
@@ -230,6 +231,12 @@ PROMETHEUS_PING_NAMESPACE=ping-cloud
 # Set to true to enable, most are disabled by default
 # NOTE: You must re-run update-cluster-state.sh after flipping a feature flag
 
+# !!! Provisioning for PingFederate is not yet available for multi-region customers !!!
 PF_PROVISIONING_ENABLED=false
 
 ########################################################################################################################
+
+# Default argo-events notification configuration
+NOTIFICATON_ENABLED=false
+SLACK_CHANNEL=p1as-application-oncall
+NOTIFICATION_ENDPOINT=http://webhook-eventsource-svc.argo-events:12999/notification
