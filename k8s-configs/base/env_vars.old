@@ -72,7 +72,7 @@ APP_RESYNC_SECONDS=60
 PING_CLOUD_NAMESPACE=ping-cloud
 
 # The ping-cloud-base git URL and branch for base Kubernetes manifests
-K8S_GIT_URL=https://github.com/pingidentity/ping-cloud-base
+K8S_GIT_URL=https://github.com/sthapa-ping/ping-cloud-base
 K8S_GIT_BRANCH=v1.16-release-branch
 
 # The name of the Docker image registry
@@ -162,7 +162,7 @@ PINGDATASYNC_IMAGE_TAG=v1.16-release-branch-latest
 ############################################################
 # Ping solution image tags
 ############################################################
-METADATA_IMAGE_TAG=v1.16-release-branch-latest
+METADATA_IMAGE_TAG=v1.15-release-branch-latest
 BOOTSTRAP_IMAGE_TAG=v1.16-release-branch-latest
 HEALTHCHECK_IMAGE_TAG=v1.16-release-branch-latest
 P14C_INTEGRATION_IMAGE_TAG=v1.16-release-branch-latest
@@ -237,6 +237,6 @@ PF_PROVISIONING_ENABLED=false
 ########################################################################################################################
 
 # Default argo-events notification configuration
-NOTIFICATION_ENABLED=false
-SLACK_CHANNEL=p1as-application-oncall
+NOTIFICATION_ENABLED=true
+SLACK_CHANNEL=tesing
 NOTIFICATION_ENDPOINT=http://webhook-eventsource-svc.argo-events:12999/notification
