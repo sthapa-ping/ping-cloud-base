@@ -240,3 +240,8 @@ PF_PROVISIONING_ENABLED=${PF_PROVISIONING_ENABLED}
 NOTIFICATION_ENABLED=false
 SLACK_CHANNEL=p1as-application-oncall
 NOTIFICATION_ENDPOINT=http://webhook-eventsource-svc.argo-events:12999/notification
+
+# Variables for argocd-image-updater to scan image tag matching the prefix
+IMAGE_TAG_PREFIX=${IMAGE_TAG_PREFIX}
+IMAGE_LIST=${ECR_REGISTRY_NAME}/pingcloud-services/metadata/dev
+

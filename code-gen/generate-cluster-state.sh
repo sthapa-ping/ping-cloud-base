@@ -356,6 +356,7 @@ ${NOTIFICATION_ENABLED}
 ${SLACK_CHANNEL}
 ${NOTIFICATION_ENDPOINT}
 ${PF_PROVISIONING_ENABLED}
+${IMAGE_TAG_PREFIX}
 ${ARGOCD_SLACK_TOKEN_BASE64}'
 
 # Variables to replace within the generated cluster state code
@@ -676,10 +677,14 @@ export SERVER_PROFILE_URL="${SERVER_PROFILE_URL:-${SERVER_PROFILE_URL_DERIVED}}"
 export K8S_GIT_URL="${K8S_GIT_URL:-https://github.com/pingidentity/ping-cloud-base}"
 export K8S_GIT_BRANCH="${K8S_GIT_BRANCH:-${CURRENT_GIT_BRANCH}}"
 
+
 export SSH_ID_PUB_FILE="${SSH_ID_PUB_FILE}"
 export SSH_ID_KEY_FILE="${SSH_ID_KEY_FILE}"
 
 export TARGET_DIR="${TARGET_DIR:-/tmp/sandbox}"
+
+### Variable for argocd-image-updater to scan image tag matching the prefix.
+export IMAGE_TAG_PREFIX="${K8S_GIT_BRANCH%.*}"
 
 ### FEATURE FLAG DEFAULTS ###
 PF_PROVISIONING_ENABLED="${PF_PROVISIONING_ENABLED:-false}"
