@@ -81,6 +81,14 @@ metadata:
     app.kubernetes.io/part-of: argocd-image-updater
   name: argocd-image-updater-secret
 ---
+apiVersion: v1
+kind: Secret
+metadata:
+  labels:
+    app.kubernetes.io/name: argocd-image-updater-ssh-key
+    app.kubernetes.io/part-of: argocd-image-updater
+  name: argocd-image-updater-ssh-key
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
