@@ -7,9 +7,9 @@ resources:
 
 images:
 
-- name: public.ecr.aws/r2h3l6e4/pingcloud-apps/pingaccess-was/dev:v1.16-release-branch-latest
-  newName: public.ecr.aws/r2h3l6e4/pingcloud-apps/pingaccess
-  newTag: v1.16.0.0_RC1
+- name: public.ecr.aws/r2h3l6e4/pingcloud-test/pingaccess-was/dev:v1.16-release-branch-latest
+  newName: public.ecr.aws/r2h3l6e4/pingcloud-test/pingaccess
+  newTag: v1.16.0.1
 
 - name: ${ECR_REGISTRY_NAME}/pingcloud-services/p14c-integration
   newName: ${ECR_REGISTRY_NAME}/pingcloud-services/p14c-integration${ECR_ENV}
