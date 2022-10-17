@@ -151,9 +151,9 @@ PING_IDENTITY_DEVOPS_KEY=ssm://pcpt/devops-license/key
 ############################################################
 # Ping application image tags
 ############################################################
-PINGACCESS_IMAGE_TAG=v1.16.0.0_RC1
-PINGACCESS_WAS_IMAGE_TAG=v1.16.0.0_RC1
-PINGFEDERATE_IMAGE_TAG=v1.16.0.0_RC1
+PINGACCESS_IMAGE_TAG=v1.16.0.1
+PINGACCESS_WAS_IMAGE_TAG=v1.16.0.1
+PINGFEDERATE_IMAGE_TAG=v1.16.0.1
 PINGDIRECTORY_IMAGE_TAG=v1.16-release-branch-latest-eb140400
 PINGDELEGATOR_IMAGE_TAG=v1.16-release-branch-latest
 PINGCENTRAL_IMAGE_TAG=v1.16-release-branch-latest
