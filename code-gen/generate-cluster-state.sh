@@ -683,7 +683,7 @@ export SSH_ID_KEY_FILE="${SSH_ID_KEY_FILE}"
 
 export TARGET_DIR="${TARGET_DIR:-/tmp/sandbox}"
 
-### Variable for argocd-image-updater to scan image tag matching the prefix.
+### Variable used by argocd-image-updater to scan container image tags matching the prefix.
 export IMAGE_TAG_PREFIX="${K8S_GIT_BRANCH%.*}"
 
 ### FEATURE FLAG DEFAULTS ###
