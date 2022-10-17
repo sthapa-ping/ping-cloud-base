@@ -8,7 +8,7 @@ metadata:
     argocd-image-updater.argoproj.io/image-list: ${IMAGE_LIST}
     argocd-image-updater.argoproj.io/my-image.update-strategy: latest
     argocd-image-updater.argoproj.io/yourtool.allow-tags: regexp:^${IMAGE_TAG_PREFIX}.[0-9]+$
-    argocd-image-updater.argoproj.io/write-back-method: git:secret:argocd/argocd-image-updater-ssh-config
+    argocd-image-updater.argoproj.io/write-back-method: git:secret:argocd/argocd-image-updater-ssh-key
     argocd-image-updater.argoproj.io/write-back-target: kustomization
 spec:
   ignoreDifferences:
