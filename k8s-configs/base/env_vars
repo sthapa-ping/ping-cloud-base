@@ -72,8 +72,8 @@ APP_RESYNC_SECONDS=60
 PING_CLOUD_NAMESPACE=ping-cloud
 
 # The ping-cloud-base git URL and branch for base Kubernetes manifests
-K8S_GIT_URL=https://github.com/sura8257/ping-cloud-base
-K8S_GIT_BRANCH=pdo-3599-autoupdate
+K8S_GIT_URL=https://github.com/pingidentity/ping-cloud-base
+K8S_GIT_BRANCH=v1.16-release-branch
 
 # The name of the Docker image registry
 ECR_REGISTRY_NAME=public.ecr.aws/r2h3l6e4
@@ -154,7 +154,7 @@ PING_IDENTITY_DEVOPS_KEY=ssm://pcpt/devops-license/key
 PINGACCESS_IMAGE_TAG=v1.16-release-branch-latest
 PINGACCESS_WAS_IMAGE_TAG=v1.16-release-branch-latest
 PINGFEDERATE_IMAGE_TAG=v1.16-release-branch-latest
-PINGDIRECTORY_IMAGE_TAG=v1.16-release-branch-latest-eb140400
+PINGDIRECTORY_IMAGE_TAG=v1.16-release-branch-latest
 PINGDELEGATOR_IMAGE_TAG=v1.16-release-branch-latest
 PINGCENTRAL_IMAGE_TAG=v1.16-release-branch-latest
 PINGDATASYNC_IMAGE_TAG=v1.16-release-branch-latest
