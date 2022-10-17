@@ -72,7 +72,7 @@ APP_RESYNC_SECONDS=60
 PING_CLOUD_NAMESPACE=ping-cloud
 
 # The ping-cloud-base git URL and branch for base Kubernetes manifests
-K8S_GIT_URL=https://github.com/pingidentity/ping-cloud-base
+K8S_GIT_URL=https://github.com/sura8257/ping-cloud-base
 K8S_GIT_BRANCH=pdo-3599-autoupdate
 
 # The name of the Docker image registry
