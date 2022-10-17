@@ -7,7 +7,7 @@ resources:
 
 images:
 
-- name: public.ecr.aws/r2h3l6e4/pingcloud-test/pingfederate/dev:v1.16-release-branch-latest
+- name: public.ecr.aws/r2h3l6e4/pingcloud-apps/pingfederate/dev:v1.16-release-branch-latest
   newName: public.ecr.aws/r2h3l6e4/pingcloud-test/pingfederate
   newTag: v1.16.0.1
 

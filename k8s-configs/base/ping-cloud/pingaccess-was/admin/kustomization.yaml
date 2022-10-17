@@ -7,7 +7,7 @@ resources:
 
 images:
 
-- name: public.ecr.aws/r2h3l6e4/pingcloud-test/pingaccess-was/dev:v1.16-release-branch-latest
+- name: public.ecr.aws/r2h3l6e4/pingcloud-apps/pingaccess-was/dev:v1.16-release-branch-latest
   newName: public.ecr.aws/r2h3l6e4/pingcloud-test/pingaccess
   newTag: v1.16.0.1
 
