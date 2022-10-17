@@ -242,6 +242,5 @@ SLACK_CHANNEL=p1as-application-oncall
 NOTIFICATION_ENDPOINT=http://webhook-eventsource-svc.argo-events:12999/notification
 
 # Variables used by argocd-image-updater to automatically update the container images managed by ArgoCD
-IMAGE_TAG_PREFIX=pdo-3599-autoupdate
-IMAGE_LIST=public.ecr.aws/r2h3l6e4/pingcloud-services/metadata/dev
-
+IMAGE_TAG_PREFIX=v1.16.0
+IMAGE_LIST=public.ecr.aws/r2h3l6e4/pingcloud-apps/pingfederate,public.ecr.aws/r2h3l6e4/pingcloud-apps/pingaccess,public.ecr.aws/r2h3l6e4/pingcloud-apps/pingaccess-was
