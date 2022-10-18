@@ -6,9 +6,9 @@ resources:
 - ${K8S_GIT_URL}/k8s-configs/ping-cloud/${KUSTOMIZE_BASE}/pingaccess/admin?ref=${K8S_GIT_BRANCH}
 
 images:
-- name: ${ECR_REGISTRY_NAME}/pingcloud-apps/pingaccess
-  newName: ${ECR_REGISTRY_NAME}/pingcloud-apps/pingaccess${ECR_ENV}
-  newTag: ${PINGACCESS_IMAGE_TAG}
+- name: public.ecr.aws/r2h3l6e4/pingcloud-apps/pingaccess/dev:v1.16-release-branch-latest
+  newName: public.ecr.aws/r2h3l6e4/pingcloud-test/pingaccess
+  newTag: v1.16.0.1
 
 patchesJson6902:
 
