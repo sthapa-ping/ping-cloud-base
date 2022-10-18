@@ -165,6 +165,13 @@ configMapGenerator:
 patchesStrategicMerge:
 ### PS/GSO customizations to OOTB resources should only go into this file. Otherwise, CSR auto-updates will break. ###
 - custom-patches.yaml
+images:
+- name: public.ecr.aws/r2h3l6e4/pingcloud-test/pingfederate
+  newTag: v1.16.0.3
+- name: public.ecr.aws/r2h3l6e4/pingcloud-test/pingaccess
+  newTag: v1.16.0.3
+- name: public.ecr.aws/r2h3l6e4/pingcloud-test/pingaccess-was
+  newTag: v1.16.0.3
 
 ### Regional enablement - remove admins, backups, etc. from secondary ###
 ### These patches should be commented out on the primary region ###
