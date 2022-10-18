@@ -72,7 +72,7 @@ APP_RESYNC_SECONDS=60
 PING_CLOUD_NAMESPACE=ping-cloud
 
 # The ping-cloud-base git URL and branch for base Kubernetes manifests
-K8S_GIT_URL=https://github.com/sura8257/ping-cloud-base
+K8S_GIT_URL=https://github.com/pingidentity/ping-cloud-base
 K8S_GIT_BRANCH=pdo-3599-autoupdate
 
 # The name of the Docker image registry
@@ -151,9 +151,9 @@ PING_IDENTITY_DEVOPS_KEY=ssm://pcpt/devops-license/key
 ############################################################
 # Ping application image tags
 ############################################################
-PINGACCESS_IMAGE_TAG=v1.16.0.1
-PINGACCESS_WAS_IMAGE_TAG=v1.16.0.1
-PINGFEDERATE_IMAGE_TAG=v1.16.0.1
+PINGACCESS_IMAGE_TAG=v1.16-release-branch-latest
+PINGACCESS_WAS_IMAGE_TAG=v1.16-release-branch-latest
+PINGFEDERATE_IMAGE_TAG=v1.16-release-branch-latest
 PINGDIRECTORY_IMAGE_TAG=v1.16-release-branch-latest-eb140400
 PINGDELEGATOR_IMAGE_TAG=v1.16-release-branch-latest
 PINGCENTRAL_IMAGE_TAG=v1.16-release-branch-latest
@@ -242,5 +242,6 @@ SLACK_CHANNEL=p1as-application-oncall
 NOTIFICATION_ENDPOINT=http://webhook-eventsource-svc.argo-events:12999/notification
 
 # Variables used by argocd-image-updater to automatically update the container images managed by ArgoCD
-IMAGE_TAG_PREFIX=v1.16.0
-IMAGE_LIST=public.ecr.aws/r2h3l6e4/pingcloud-apps/pingfederate,public.ecr.aws/r2h3l6e4/pingcloud-apps/pingaccess,public.ecr.aws/r2h3l6e4/pingcloud-apps/pingaccess-was
+IMAGE_TAG_PREFIX=pdo-3599-autoupdate
+IMAGE_LIST="apps=public.ecr.aws/r2h3l6e4/pingcloud-apps/pingfederate,apps=public.ecr.aws/r2h3l6e4/pingcloud-apps/pingaccess,apps=public.ecr.aws/r2h3l6e4/pingcloud-apps/pingaccess-was"
+
