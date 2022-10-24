@@ -39,3 +39,9 @@ patchesJson6902:
     version: v1
     kind: ConfigMap
     name: nginx-configuration
+- path: add-tcp-services-configmap.yaml
+  target:
+    group: ""
+    version: v1
+    kind: ConfigMap
+    name: tcp-services
