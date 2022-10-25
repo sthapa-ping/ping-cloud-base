@@ -45,3 +45,9 @@ patchesJson6902:
     version: v1
     kind: ConfigMap
     name: tcp-services
+- path: add-tcp-protocol-service.yaml
+  target:
+    group: ""
+    version: v1
+    kind: Service
+    name: ingress-nginx
