@@ -41,7 +41,7 @@ PING_ARTIFACT_REPO_URL=https://ping-artifacts.s3-us-west-2.amazonaws.com
 # Customer-specific log and backup URLs for region
 LOG_ARCHIVE_URL=ssm://pcpt/service/storage/logs/uri
 BACKUP_URL=ssm://pcpt/service/storage/backup/uri
-BACKUP_BUCKET_NAME=bootstrap-customer-hub-mulloway1-4-s3backupbucket-1erdaychcdx60
+PGO_BACKUP_BUCKET_NAME=surajthapa-primary-backup-archives-bucket
 
 ############################################################
 # Platform event queue and SSM variables
@@ -72,8 +72,8 @@ APP_RESYNC_SECONDS=60
 PING_CLOUD_NAMESPACE=ping-cloud
 
 # The ping-cloud-base git URL and branch for base Kubernetes manifests
-K8S_GIT_URL=https://github.com/sura8257/ping-cloud-base
-K8S_GIT_BRANCH=pdo-3599-autoupdate
+K8S_GIT_URL=https://github.com/pingidentity/ping-cloud-base
+K8S_GIT_BRANCH=pdo-4555-radius-tcp
 
 # The name of the Docker image registry
 ECR_REGISTRY_NAME=public.ecr.aws/r2h3l6e4
@@ -154,7 +154,7 @@ PING_IDENTITY_DEVOPS_KEY=ssm://pcpt/devops-license/key
 PINGACCESS_IMAGE_TAG=v1.16-release-branch-latest
 PINGACCESS_WAS_IMAGE_TAG=v1.16-release-branch-latest
 PINGFEDERATE_IMAGE_TAG=v1.16-release-branch-latest
-PINGDIRECTORY_IMAGE_TAG=v1.16-release-branch-latest-eb140400
+PINGDIRECTORY_IMAGE_TAG=v1.16-release-branch-latest
 PINGDELEGATOR_IMAGE_TAG=v1.16-release-branch-latest
 PINGCENTRAL_IMAGE_TAG=v1.16-release-branch-latest
 PINGDATASYNC_IMAGE_TAG=v1.16-release-branch-latest
@@ -171,45 +171,45 @@ ANSIBLE_BELUGA_IMAGE_TAG=v1.16-release-branch-latest
 ############################################################
 # Cluster name variables
 ############################################################
-CLUSTER_NAME=stage
-CLUSTER_NAME_LC=stage
+CLUSTER_NAME=mulloway1
+CLUSTER_NAME_LC=mulloway1
 
 ############################################################
 # Primary DNS zone
 ############################################################
-PRIMARY_DNS_ZONE=stage-mulloway1.us1.ping-preview.cloud
+PRIMARY_DNS_ZONE=mulloway1.us1.ping-preview.cloud
 
 ############################################################
 # Public hostnames
 ############################################################
 # Ping admin configuration required for admin access and clustering
-PD_PRIMARY_PUBLIC_HOSTNAME=pingdirectory-admin.${ENV}-${PRIMARY_TENANT_DOMAIN}
-PF_ADMIN_PUBLIC_HOSTNAME=pingfederate-admin.${ENV}-${PRIMARY_TENANT_DOMAIN}
-PF_ADMIN_API_PUBLIC_HOSTNAME=pingfederate-admin-api.${ENV}-${PRIMARY_TENANT_DOMAIN}
-PA_ADMIN_PUBLIC_HOSTNAME=pingaccess-admin.${ENV}-${PRIMARY_TENANT_DOMAIN}
-PA_ADMIN_API_PUBLIC_HOSTNAME=pingaccess-admin-api.${ENV}-${PRIMARY_TENANT_DOMAIN}
-PA_WAS_ADMIN_PUBLIC_HOSTNAME=pingaccess-was-admin.${ENV}-${PRIMARY_TENANT_DOMAIN}
-PC_ADMIN_PUBLIC_HOSTNAME=pingcentral-admin.${ENV}-${PRIMARY_TENANT_DOMAIN}
+PD_PRIMARY_PUBLIC_HOSTNAME=pingdirectory-admin.${PRIMARY_TENANT_DOMAIN}
+PF_ADMIN_PUBLIC_HOSTNAME=pingfederate-admin.${PRIMARY_TENANT_DOMAIN}
+PF_ADMIN_API_PUBLIC_HOSTNAME=pingfederate-admin-api.${PRIMARY_TENANT_DOMAIN}
+PA_ADMIN_PUBLIC_HOSTNAME=pingaccess-admin.${PRIMARY_TENANT_DOMAIN}
+PA_ADMIN_API_PUBLIC_HOSTNAME=pingaccess-admin-api.${PRIMARY_TENANT_DOMAIN}
+PA_WAS_ADMIN_PUBLIC_HOSTNAME=pingaccess-was-admin.${PRIMARY_TENANT_DOMAIN}
+PC_ADMIN_PUBLIC_HOSTNAME=pingcentral-admin.${PRIMARY_TENANT_DOMAIN}
 PC_ADMIN_PRIVATE_SITE_HOSTNAME=pingcentral.mulloway1.us1.ping-preview.cloud
 
-PD_CLUSTER_PUBLIC_HOSTNAME=pingdirectory-cluster.${ENV}-${PRIMARY_TENANT_DOMAIN}
-PF_CLUSTER_PUBLIC_HOSTNAME=pingfederate-cluster.${ENV}-${PRIMARY_TENANT_DOMAIN}
-PA_CLUSTER_PUBLIC_HOSTNAME=pingaccess-cluster.${ENV}-${PRIMARY_TENANT_DOMAIN}
-PA_WAS_CLUSTER_PUBLIC_HOSTNAME=pingaccess-was-cluster.${ENV}-${PRIMARY_TENANT_DOMAIN}
+PD_CLUSTER_PUBLIC_HOSTNAME=pingdirectory-cluster.${PRIMARY_TENANT_DOMAIN}
+PF_CLUSTER_PUBLIC_HOSTNAME=pingfederate-cluster.${PRIMARY_TENANT_DOMAIN}
+PA_CLUSTER_PUBLIC_HOSTNAME=pingaccess-cluster.${PRIMARY_TENANT_DOMAIN}
+PA_WAS_CLUSTER_PUBLIC_HOSTNAME=pingaccess-was-cluster.${PRIMARY_TENANT_DOMAIN}
 
 # Ping engine hostname variables
-PD_PUBLIC_HOSTNAME=pingdirectory-admin.${REGION_ENV}-${TENANT_DOMAIN}
-PD_HTTP_PUBLIC_HOSTNAME=pingdirectory.${REGION_ENV}-${TENANT_DOMAIN}
-PD_DELEGATOR_PUBLIC_HOSTNAME=pingdelegator.${REGION_ENV}-${TENANT_DOMAIN}
+PD_PUBLIC_HOSTNAME=pingdirectory-admin.${TENANT_DOMAIN}
+PD_HTTP_PUBLIC_HOSTNAME=pingdirectory.${TENANT_DOMAIN}
+PD_DELEGATOR_PUBLIC_HOSTNAME=pingdelegator.${TENANT_DOMAIN}
 PD_DELEGATOR_PUBLIC_PORT=443
-PF_ENGINE_PUBLIC_HOSTNAME=pingfederate.${REGION_ENV}-${TENANT_DOMAIN}
-PA_ENGINE_PUBLIC_HOSTNAME=pingaccess.${REGION_ENV}-${TENANT_DOMAIN}
-PA_WAS_ENGINE_PUBLIC_HOSTNAME=pingaccess-was.${REGION_ENV}-${TENANT_DOMAIN}
+PF_ENGINE_PUBLIC_HOSTNAME=pingfederate.${TENANT_DOMAIN}
+PA_ENGINE_PUBLIC_HOSTNAME=pingaccess.${TENANT_DOMAIN}
+PA_WAS_ENGINE_PUBLIC_HOSTNAME=pingaccess-was.${TENANT_DOMAIN}
 
-PROMETHEUS_PUBLIC_HOSTNAME=prometheus.${REGION_ENV}-${TENANT_DOMAIN}
-GRAFANA_PUBLIC_HOSTNAME=monitoring.${REGION_ENV}-${TENANT_DOMAIN}
-KIBANA_PUBLIC_HOSTNAME=logs.${REGION_ENV}-${TENANT_DOMAIN}
-ARGOCD_PUBLIC_HOSTNAME=argocd.${REGION_ENV}-${TENANT_DOMAIN}
+PROMETHEUS_PUBLIC_HOSTNAME=prometheus.${TENANT_DOMAIN}
+GRAFANA_PUBLIC_HOSTNAME=monitoring.${TENANT_DOMAIN}
+KIBANA_PUBLIC_HOSTNAME=logs.${TENANT_DOMAIN}
+ARGOCD_PUBLIC_HOSTNAME=argocd.${TENANT_DOMAIN}
 
 # Retention time for Prometheus. Could be set in years(y), weeks(w), days(d), hours(h), minutes(m) or seconds(s)
 PROMETHEUS_RETENTION_TIME=15d
@@ -229,9 +229,10 @@ PROMETHEUS_PING_NAMESPACE=ping-cloud
 
 #### FEATURE FLAGS #####################################################################################################
 # Set to true to enable, most are disabled by default
-# NOTE: You must re-run update-cluster-state.sh after flipping a feature flag
+# Please follow runbook instructions for the given feature flag to enable/disable
 
 # !!! Provisioning for PingFederate is not yet available for multi-region customers !!!
+# Runbook: https://confluence.pingidentity.com/display/PingCloud/How+to+Enable+and+Configure+PingFederate+Provisioning
 PF_PROVISIONING_ENABLED=false
 
 ########################################################################################################################
@@ -241,7 +242,12 @@ NOTIFICATION_ENABLED=false
 SLACK_CHANNEL=p1as-application-oncall
 NOTIFICATION_ENDPOINT=http://webhook-eventsource-svc.argo-events:12999/notification
 
+# Prometheus argo-events notification configuration
+PROM_NOTIFICATION_ENABLED=true
+PROM_SLACK_CHANNEL=p1as-application-oncall
+
 # Variables used by argocd-image-updater to automatically update the container images managed by ArgoCD
-IMAGE_TAG_PREFIX=pdo-3599-autoupdate
+IMAGE_TAG_PREFIX=pdo-4555-radius-tcp
 IMAGE_LIST="apps=public.ecr.aws/r2h3l6e4/pingcloud-apps/pingfederate,apps=public.ecr.aws/r2h3l6e4/pingcloud-apps/pingaccess,apps=public.ecr.aws/r2h3l6e4/pingcloud-apps/pingaccess-was"
 
+IS_BELUGA_ENV=true

@@ -7,13 +7,17 @@ resources:
 
 images:
 
-- name: public.ecr.aws/r2h3l6e4/pingcloud-apps/pingfederate/dev:v1.16-release-branch-latest
-  newName: public.ecr.aws/r2h3l6e4/pingcloud-test/pingfederate
-  newTag: v1.16.0.1
+- name: ${ECR_REGISTRY_NAME}/pingcloud-apps/pingfederate
+  newName: ${ECR_REGISTRY_NAME}/pingcloud-apps/pingfederate${ECR_ENV}
+  newTag: ${PINGFEDERATE_IMAGE_TAG}
 
 - name: ${ECR_REGISTRY_NAME}/pingcloud-services/p14c-integration
   newName: ${ECR_REGISTRY_NAME}/pingcloud-services/p14c-integration${ECR_ENV}
   newTag: ${P14C_INTEGRATION_IMAGE_TAG}
+
+patchesStrategicMerge:
+### Comment this out to deploy the Radius Proxy
+- disable-radsec.yaml
 
 patchesJson6902:
 
