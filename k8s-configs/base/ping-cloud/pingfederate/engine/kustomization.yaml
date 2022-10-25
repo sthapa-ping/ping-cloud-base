@@ -17,7 +17,7 @@ images:
 
 patchesStrategicMerge:
 ### Comment this out to deploy the Radius Proxy
-- disable-radsec.yaml
+#- disable-radsec.yaml
 
 patchesJson6902:
 
