@@ -19,6 +19,7 @@
 - NewRelic Java Agent upgraded to 7.11.1
 - Refactor elastic-stack manifests
 - Remove outdated CW logs test methods
+- Created k8s serviceAccount for PA, PD & PF
 
 _Changes:_
 
@@ -31,6 +32,7 @@ _Changes:_
 - [X] PDO-4439 PF Health Check Tests - object creation, authentication
 - [X] PDO-4565 Prometheus: Configure It to Take Metrics from Second Region
 - [X] PDO-4496 Create new global repo for dashboards
+- [X] PDO-4543 Create K8s serviceAccount for PA, PD and PF
 - [X] PDO-4566 Logstash: Configure It to Send Logs from Second Region to Primary Region
 - [X] PDO-4568 Kibana: Modify Dashboards to Show Second Region Logs and Metrics
 - [X] PDO-4569 Remove ES, Kibana and Grafana from second region
