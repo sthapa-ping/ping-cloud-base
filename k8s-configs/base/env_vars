@@ -59,7 +59,7 @@ SERVICE_SSM_PATH_PREFIX=/pcpt/service
 KNOWN_HOSTS_CLUSTER_STATE_REPO="|1|jdigV1dqpdayX1I7Z1dbr7GY49s=|1acUGQHUFxLztfMVH4u9avPqGK8= ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCNbmnXfe621xtVMkrwOqf6QNIlnOKkQ01KoM6gKC4nv5T08hbGcGp6iYplGLKMLlki+auO1J3JTA3qAKDobZR1wDqtW9LC2k46GHV4YigUpd6D+YdranJqbxpGOuNd6c1EP50vQnlW9MxZYExyrZKT0UfOJAydQLoWPuSioyHk3zAltSIrCxczP3jxAhuoq++eUrdC5uF6UMNJC10eBA9XglAe2oRLzApoStyCAiKVnoBndU2NpJWqNw0K5qfEUx2vyQFfHNRAwNNRDFtkdE9ho255YECTO07Zg37QCZ+hV5VAoFRu5CHSXqVZc5YN1YXkZ8SVHyBX7krO80QaaDor"
 
 CLUSTER_STATE_REPO_URL=https://github.com/sura8257/ping-cloud-base
-CLUSTER_STATE_REPO_BRANCH=pdo-4543-irsa
+CLUSTER_STATE_REPO_BRANCH=stage
 
 # The application reconciliation timeout in seconds for ArgoCD, i.e. how frequently ArgoCD should poll the
 # cluster-state-repo for changes. To disable reconciliation set it to 0.
@@ -72,7 +72,7 @@ APP_RESYNC_SECONDS=60
 PING_CLOUD_NAMESPACE=ping-cloud
 
 # The ping-cloud-base git URL and branch for base Kubernetes manifests
-K8S_GIT_URL=https://github.com/sura8257/ping-cloud-base
+K8S_GIT_URL=https://github.com/pingidentity/ping-cloud-base
 K8S_GIT_BRANCH=pdo-4543-irsa
 
 # The name of the Docker image registry
@@ -84,8 +84,8 @@ TENANT_NAME=mulloway1
 ############################################################
 # Server profile variables
 ############################################################
-SERVER_PROFILE_URL=ssh://APKA4DN2MCAYRVELBLUF@git-codecommit.us-east-2.amazonaws.com/v1/repos/profile-repo
-SERVER_PROFILE_BRANCH=stage
+SERVER_PROFILE_URL=https://github.com/sura8257/profile-repo
+SERVER_PROFILE_BRANCH=pdo-4543-irsa
 
 ############################################################
 # Environment-specific variables
@@ -151,22 +151,22 @@ PING_IDENTITY_DEVOPS_KEY=ssm://pcpt/devops-license/key
 ############################################################
 # Ping application image tags
 ############################################################
-PINGACCESS_IMAGE_TAG=v1.16-release-branch-latest
-PINGACCESS_WAS_IMAGE_TAG=v1.16-release-branch-latest
-PINGFEDERATE_IMAGE_TAG=v1.16-release-branch-latest
-PINGDIRECTORY_IMAGE_TAG=v1.16-release-branch-latest
-PINGDELEGATOR_IMAGE_TAG=v1.16-release-branch-latest
-PINGCENTRAL_IMAGE_TAG=v1.16-release-branch-latest
-PINGDATASYNC_IMAGE_TAG=v1.16-release-branch-latest
+PINGACCESS_IMAGE_TAG=v1.17-release-branch-latest
+PINGACCESS_WAS_IMAGE_TAG=v1.17-release-branch-latest
+PINGFEDERATE_IMAGE_TAG=v1.17-release-branch-latest
+PINGDIRECTORY_IMAGE_TAG=v1.17-release-branch-latest
+PINGDELEGATOR_IMAGE_TAG=v1.17-release-branch-latest
+PINGCENTRAL_IMAGE_TAG=v1.17-release-branch-latest
+PINGDATASYNC_IMAGE_TAG=v1.17-release-branch-latest
 
 ############################################################
 # Ping solution image tags
 ############################################################
-METADATA_IMAGE_TAG=v1.16-release-branch-latest
-BOOTSTRAP_IMAGE_TAG=v1.16-release-branch-latest
-HEALTHCHECK_IMAGE_TAG=v1.16-release-branch-latest
-P14C_INTEGRATION_IMAGE_TAG=v1.16-release-branch-latest
-ANSIBLE_BELUGA_IMAGE_TAG=v1.16-release-branch-latest
+METADATA_IMAGE_TAG=v1.17-release-branch-latest
+BOOTSTRAP_IMAGE_TAG=v1.17-release-branch-latest
+HEALTHCHECK_IMAGE_TAG=v1.17-release-branch-latest
+P14C_INTEGRATION_IMAGE_TAG=v1.17-release-branch-latest
+ANSIBLE_BELUGA_IMAGE_TAG=v1.17-release-branch-latest
 
 ############################################################
 # Cluster name variables
@@ -211,6 +211,8 @@ GRAFANA_PUBLIC_HOSTNAME=monitoring.${TENANT_DOMAIN}
 KIBANA_PUBLIC_HOSTNAME=logs.${TENANT_DOMAIN}
 ARGOCD_PUBLIC_HOSTNAME=argocd.${TENANT_DOMAIN}
 
+HEALTHCHECK_HTTPBIN_PA_WAS_PUBLIC_HOSTNAME=healthcheck-httpbin-pa-was.${TENANT_DOMAIN}
+
 # Retention time for Prometheus. Could be set in years(y), weeks(w), days(d), hours(h), minutes(m) or seconds(s)
 PROMETHEUS_RETENTION_TIME=15d
 
@@ -235,19 +237,23 @@ PROMETHEUS_PING_NAMESPACE=ping-cloud
 # Runbook: https://confluence.pingidentity.com/display/PingCloud/How+to+Enable+and+Configure+PingFederate+Provisioning
 PF_PROVISIONING_ENABLED=false
 
+RADIUS_PROXY_ENABLED=false
 ########################################################################################################################
 
 # Default argo-events notification configuration
 NOTIFICATION_ENABLED=false
-SLACK_CHANNEL=p1as-application-oncall
+SLACK_CHANNEL=nowhere
 NOTIFICATION_ENDPOINT=http://webhook-eventsource-svc.argo-events:12999/notification
 
 # Prometheus argo-events notification configuration
 PROM_NOTIFICATION_ENABLED=true
-PROM_SLACK_CHANNEL=p1as-application-oncall
+PROM_SLACK_CHANNEL=nowhere
 
 # Variables used by argocd-image-updater to automatically update the container images managed by ArgoCD
-IMAGE_TAG_PREFIX=pdo-4555-radius-tcp
+IMAGE_TAG_PREFIX=pdo-4543-irsa
 IMAGE_LIST="apps=public.ecr.aws/r2h3l6e4/pingcloud-apps/pingfederate,apps=public.ecr.aws/r2h3l6e4/pingcloud-apps/pingaccess,apps=public.ecr.aws/r2h3l6e4/pingcloud-apps/pingaccess-was"
 
+# Dashboards repo variables
+DASH_REPO_URL=https://github.com/pingidentity/ping-cloud-dashboards
+DASH_REPO_BRANCH=v1.17-dev-branch
 IS_BELUGA_ENV=true

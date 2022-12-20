@@ -26,7 +26,7 @@ CLUSTER_STATE_REPO_PATH=us-east-2
 REGION_ENV=stage
 
 # Customer-specific region DNS zone
-DNS_ZONE=${REGION_ENV}-mulloway1.us1.ping-preview.cloud
+DNS_ZONE=mulloway1.us1.ping-preview.cloud
 
 ############################################################
 # IRSA - IAM role for service accounts

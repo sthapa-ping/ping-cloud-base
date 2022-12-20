@@ -11,7 +11,7 @@ TENANT_DOMAIN=mulloway1.us1.ping-preview.cloud
 # This variable's value will be used as the prefix to distinguish between worker apps for different CDEs for a
 # single P14C customer. All of these apps will be created within the "Administrators" environment in the tenant.
 # This variable name is also used in forming the Signal Science Agent name as displayed in SigSci Dashboard.
-ENVIRONMENT_PREFIX=mulloway1-stage-us-east-2
+ENVIRONMENT_PREFIX=mulloway1-pdo-4543-irsa-us-east-2
 
 # The name of the environment as it will appear on the NewRelic console.
 NEW_RELIC_ENVIRONMENT_NAME=mulloway1_stage_us-east-2_k8s-cluster
@@ -33,6 +33,9 @@ DNS_ZONE=mulloway1.us1.ping-preview.cloud
 ############################################################
 # Used by ping product pods
 IRSA_PING_ANNOTATION_KEY_VALUE="eks.amazonaws.com/role-arn: arn:aws:iam::567489334023:role/pcpt/irsa-roles/irsa-ping"
+IRSA_PA_ANNOTATION_KEY_VALUE=""
+IRSA_PD_ANNOTATION_KEY_VALUE=""
+IRSA_PF_ANNOTATION_KEY_VALUE=""
 
 # Annotation used by ingress-nginx service in ingress-nginx-public namespace
 NLB_NGX_PUBLIC_ANNOTATION_KEY_VALUE="service.beta.kubernetes.io/aws-load-balancer-eip-allocations: eipalloc-021f4dd78a24012dd,eipalloc-06a5e09b388e51ab0,eipalloc-0bb73e6975104c836"
