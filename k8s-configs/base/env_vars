@@ -58,8 +58,8 @@ SERVICE_SSM_PATH_PREFIX=/pcpt/service
 # The known-hosts file to trust the cluster state repo server for git/ssh cloning
 KNOWN_HOSTS_CLUSTER_STATE_REPO="|1|jdigV1dqpdayX1I7Z1dbr7GY49s=|1acUGQHUFxLztfMVH4u9avPqGK8= ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCNbmnXfe621xtVMkrwOqf6QNIlnOKkQ01KoM6gKC4nv5T08hbGcGp6iYplGLKMLlki+auO1J3JTA3qAKDobZR1wDqtW9LC2k46GHV4YigUpd6D+YdranJqbxpGOuNd6c1EP50vQnlW9MxZYExyrZKT0UfOJAydQLoWPuSioyHk3zAltSIrCxczP3jxAhuoq++eUrdC5uF6UMNJC10eBA9XglAe2oRLzApoStyCAiKVnoBndU2NpJWqNw0K5qfEUx2vyQFfHNRAwNNRDFtkdE9ho255YECTO07Zg37QCZ+hV5VAoFRu5CHSXqVZc5YN1YXkZ8SVHyBX7krO80QaaDor"
 
-CLUSTER_STATE_REPO_URL=ssh://APKA4DN2MCAYRVELBLUF@git-codecommit.us-east-2.amazonaws.com/v1/repos/cluster-state-repo
-CLUSTER_STATE_REPO_BRANCH=stage
+CLUSTER_STATE_REPO_URL=https://github.com/sura8257/ping-cloud-base
+CLUSTER_STATE_REPO_BRANCH=pdo-4543-irsa
 
 # The application reconciliation timeout in seconds for ArgoCD, i.e. how frequently ArgoCD should poll the
 # cluster-state-repo for changes. To disable reconciliation set it to 0.
@@ -73,7 +73,7 @@ PING_CLOUD_NAMESPACE=ping-cloud
 
 # The ping-cloud-base git URL and branch for base Kubernetes manifests
 K8S_GIT_URL=https://github.com/sura8257/ping-cloud-base
-K8S_GIT_BRANCH=pdo-4555-radius-tcp
+K8S_GIT_BRANCH=pdo-4543-irsa
 
 # The name of the Docker image registry
 ECR_REGISTRY_NAME=public.ecr.aws/r2h3l6e4
