@@ -6,6 +6,7 @@ resources:
 - ../base
 - rbac.yaml
 - hpa.yaml
+- dhparam-secret.yaml
 
 namespace: ingress-nginx-public
 
@@ -34,6 +35,12 @@ patchesJson6902:
     kind: Deployment
     name: nginx-ingress-controller
 - path: add-sigsci-configmap.yaml
+  target:
+    group: ""
+    version: v1
+    kind: ConfigMap
+    name: nginx-configuration
+- path: add-dhparam-configmap.yaml
   target:
     group: ""
     version: v1
