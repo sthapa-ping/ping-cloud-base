@@ -1,8 +1,8 @@
 kind: Kustomization
 apiVersion: kustomize.config.k8s.io/v1beta1
 
+namespace: ingress-nginx-private
 resources:
-- namespace.yaml
 - ../base
 - rbac.yaml
 - hpa.yaml

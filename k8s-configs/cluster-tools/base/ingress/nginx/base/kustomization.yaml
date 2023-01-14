@@ -2,7 +2,5 @@ kind: Kustomization
 apiVersion: kustomize.config.k8s.io/v1beta1
 
 resources:
-- rbac.yaml
-- configmap.yaml
-- deployment.yaml
-- service.yaml
+- install.yaml
+- custom-resource.yaml
