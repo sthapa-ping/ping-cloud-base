@@ -23,3 +23,6 @@ metadata:
     app.kubernetes.io/part-of: ingress-nginx
     app.kubernetes.io/version: 1.5.1
   name: udp-services
+
+---
+

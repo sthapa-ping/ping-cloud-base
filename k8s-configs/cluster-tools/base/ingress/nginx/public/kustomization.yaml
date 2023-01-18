@@ -5,8 +5,10 @@ namespace: ingress-nginx-public
 
 resources:
 - ../base
-- rbac.yaml
 - hpa.yaml
+- cluster-role-binding.yaml
+- validating-webhook-configuration.yaml
+
 
 namespace: ingress-nginx-public
 
@@ -52,3 +54,66 @@ patchesJson6902:
     version: v1
     kind: Service
     name: ingress-nginx
+- target:
+    kind: ClusterRole
+    name: ingress-nginx
+  options:
+    allowNameChange: true
+  patch: |-
+    - op: replace
+      path: /metadata/name
+      value: ingress-nginx-public
+- target:
+    kind: ClusterRole
+    name: ingress-nginx-admission
+  options:
+    allowNameChange: true
+  patch: |-
+    - op: replace
+      path: /metadata/name
+      value: ingress-nginx-admission-public
+- target:
+    kind: ServiceAccount
+    name: ingress-nginx
+  options:
+    allowNameChange: true
+  patch: |-
+    - op: replace
+      path: /metadata/name
+      value: ingress-nginx-public
+- target:
+    kind: IngressClass
+    name: nginx
+  options:
+    allowNameChange: true
+  patch: |-
+    - op: replace
+      path: /metadata/name
+      value: nginx-public
+- target:
+    kind: IngressClass
+    name: nginx
+  options:
+    allowNameChange: true
+  patch: |-
+    - op: replace
+      path: /metadata/name
+      value: nginx-public
+- target:
+    kind: ClusterRoleBinding
+    name: ingress-nginx
+  options:
+    allowNameChange: true
+  patch: |-
+    - op: replace
+      path: /metadata/name
+      value: ingress-nginx-public
+- target:
+    kind: ClusterRoleBinding
+    name: ingress-nginx-admission
+  options:
+    allowNameChange: true
+  patch: |-
+    - op: replace
+      path: /metadata/name
+      value: ingress-nginx-admission-public
