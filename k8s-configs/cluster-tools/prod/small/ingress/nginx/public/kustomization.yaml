@@ -19,7 +19,7 @@ patchesStrategicMerge:
   apiVersion: v1
   kind: ConfigMap
   metadata:
-    name: nginx-configuration
+    name: ingress-nginx-controller
     namespace: ingress-nginx-public
   data:
     main-snippet: load_module /usr/lib/nginx/modules/ngx_http_sigsci_module.so;
