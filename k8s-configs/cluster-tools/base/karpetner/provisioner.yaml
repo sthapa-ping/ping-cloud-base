@@ -1,0 +1,38 @@
+apiVersion: karpenter.sh/v1alpha5
+kind: Provisioner
+metadata:
+  name: default
+spec:
+  # Resource limits constrain the total size of the cluster.
+  # Limits prevent Karpenter from creating new instances once the limit is exceeded.
+  limits:
+    resources:
+      cpu: "1000"
+      memory: 1000Gi
+
+  # If omitted, the feature is disabled, nodes will never scale down due to low utilization
+  ttlSecondsAfterEmpty: 30
+
+  # If omitted, the feature is disabled and nodes will never expire.  If set to less time than it requires for a node
+  # to become ready, the node may expire before any pods successfully start.
+  ttlSecondsUntilExpired: 604800 # 7 Days = 60 * 60 * 24 * 7 Seconds
+
+  requirements:
+    - key: "kubernetes.io/arch"
+      operator: In
+      values: ["amd64"]
+    - key: "karpenter.sh/capacity-type" # If not included, the webhook for the AWS cloud provider will default to on-demand
+      operator: In
+      values: ["on-demand"]
+  providerRef:
+    name: default
+---
+apiVersion: karpenter.k8s.aws/v1alpha1
+kind: AWSNodeTemplate
+metadata:
+  name: default
+spec:
+  subnetSelector:
+    karpenter.sh/discovery: "prod"
+  securityGroupSelector:
+    karpenter.sh/discovery: "prod"
