@@ -16,7 +16,6 @@ patchesStrategicMerge:
     "aws.clusterEndpoint": "${CLUSTER_ENDPOINT}"
     "aws.clusterName": "${CLUSTER_NAME}"
 
-### Patch to add irsa annotations
 - |-
   apiVersion: v1
   kind: ServiceAccount
@@ -27,3 +26,24 @@ patchesStrategicMerge:
       purpose: karpenter-provisioner
       ${KARPENTER_ROLE_ANNOTATION_KEY_VALUE}
 
+- |-
+  apiVersion: karpenter.k8s.aws/v1alpha1
+  kind: AWSNodeTemplate
+  metadata:
+    name: default
+  spec:
+    securityGroupSelector:
+      karpenter.sh/discovery: "${CLUSTER_NAME}"
+    subnetSelector:
+      karpenter.sh/discovery: "${CLUSTER_NAME}"
+
+- |-
+  apiVersion: karpenter.k8s.aws/v1alpha1
+  kind: AWSNodeTemplate
+  metadata:
+    name: pd-only
+  spec:
+    securityGroupSelector:
+      karpenter.sh/discovery: "${CLUSTER_NAME}"
+    subnetSelector:
+      karpenter.sh/discovery: "${CLUSTER_NAME}"
