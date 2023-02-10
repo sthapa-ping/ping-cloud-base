@@ -12,7 +12,7 @@ patchesStrategicMerge:
   metadata:
     name: karpenter-global-settings
     namespace: karpenter
-  data:  
+  data:
     "aws.clusterEndpoint": "${CLUSTER_ENDPOINT}"
     "aws.clusterName": "${CLUSTER_NAME}"
 
