@@ -27,12 +27,51 @@ spec:
   providerRef:
     name: default
 ---
+apiVersion: karpenter.sh/v1alpha5
+kind: Provisioner
+metadata:
+  name: pd-only
+spec:
+  # Resource limits constrain the total size of the cluster.
+  # Limits prevent Karpenter from creating new instances once the limit is exceeded.
+  limits:
+    resources:
+      cpu: "1000"
+      memory: 1000Gi
+
+  requirements:
+    - key: "kubernetes.io/arch"
+      operator: In
+      values: ["amd64"]
+    - key: "karpenter.sh/capacity-type" # If not included, the webhook for the AWS cloud provider will default to on-demand
+      operator: In
+      values: ["on-demand"]
+  taints:
+  - effect: NoSchedule
+    key: pd-only
+  providerRef:
+    name: pd-only
+---
 apiVersion: karpenter.k8s.aws/v1alpha1
 kind: AWSNodeTemplate
 metadata:
   name: default
 spec:
+  tags:
+    KarpenerProvisionerName: "default"
   subnetSelector:
-    karpenter.sh/discovery: "prod"
+    karpenter.sh/discovery: "dev"
   securityGroupSelector:
-    karpenter.sh/discovery: "prod"
+    karpenter.sh/discovery: "dev"
+---
+apiVersion: karpenter.k8s.aws/v1alpha1
+kind: AWSNodeTemplate
+metadata:
+  name: pd-only
+spec:
+  tags:
+    KarpenerProvisionerName: "pd-only"
+  subnetSelector:
+    karpenter.sh/discovery: "dev"
+  securityGroupSelector:
+    karpenter.sh/discovery: "dev"
