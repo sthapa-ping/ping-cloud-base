@@ -83,7 +83,7 @@ metadata:
     app.kubernetes.io/name: karpenter
     app.kubernetes.io/instance: karpenter
     app.kubernetes.io/version: "0.24.0"
-data:  
+data:
     "aws.defaultInstanceProfile": "KarpenterInstanceProfile"
     "aws.enableENILimitedPodDensity": "true"
     "aws.enablePodENI": "false"

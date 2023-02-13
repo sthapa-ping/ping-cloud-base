@@ -59,10 +59,6 @@ metadata:
 spec:
   tags:
     KarpenerProvisionerName: "default"
-  subnetSelector:
-    karpenter.sh/discovery: "dev"
-  securityGroupSelector:
-    karpenter.sh/discovery: "dev"
 ---
 apiVersion: karpenter.k8s.aws/v1alpha1
 kind: AWSNodeTemplate
@@ -71,7 +67,3 @@ metadata:
 spec:
   tags:
     KarpenerProvisionerName: "pd-only"
-  subnetSelector:
-    karpenter.sh/discovery: "dev"
-  securityGroupSelector:
-    karpenter.sh/discovery: "dev"
