@@ -1,0 +1,58 @@
+########################################################################################################################
+# Customer region-specific parameters that are shared by multiple apps
+########################################################################################################################
+# region is the AWS region name
+region: "us-east-2"
+regionNickname: "us-east-2"
+
+# The name of the tenant
+tenantName: "mulloway1"
+
+# tenantDomain is the domain suffix for customer for region
+tenantDomain: "mulloway1.us1.ping-preview.cloud"
+
+# environmentPrefix is the prefix used to distinguish between worker apps for different CDEs in P14C
+# and to form the Signal Science Agent name as displayed in SigSci Dashboard.
+environmentPrefix: "mulloway1-${REGION_ENV}-us-east-2"
+
+# TODO: we can only substitute env vars region->base PDO-3957 to fix
+regionEnv: "stage"
+
+# artifactRepoUrl is the Customer-specific artifacts URL for region
+artifactRepoUrl: "s3://bootstrap-customer-hub-mulloway1-pingbinarybucket-zel2gu5i1l9x"
+
+# dnsZone is the Customer-specific region DNS zone
+dnsZone: "mulloway1.us1.ping-preview.cloud"
+
+# irsaPingAnnotationKeyValue is the IAM roles for service accounts
+irsaPingAnnotationKeyValue: "eks.amazonaws.com/role-arn: arn:aws:iam::567489334023:role/pcpt/irsa-roles/irsa-ping"
+
+
+
+
+########################################################################################################################
+#TODO: Are these needed anymore now that we're using values files?
+# If they are needed uncomment & move to the 1st section
+# If they are still commented out when we get to PDO-4842, they will be deleted
+########################################################################################################################
+# TODO: we can only substitute env vars region->base PDO-3957 to fix
+#regionEnv: stage
+
+
+########################################################################################################################
+#TODO: Move these to app values.yaml files as apps migrate
+# If they are needed by more than 1 app, move to the 1st section
+########################################################################################################################
+# irsaAnnotationKeyValue is the IAM roles for service accounts
+irsaPaAnnotationKeyValue: "eks.amazonaws.com/role-arn: arn:aws:iam::567489334023:role/pcpt/irsa-roles/irsa-pingaccess"
+irsaPdAnnotationKeyValue: "eks.amazonaws.com/role-arn: arn:aws:iam::567489334023:role/pcpt/irsa-roles/irsa-pingdirectory"
+irsaPfAnnotationKeyValue: "eks.amazonaws.com/role-arn: arn:aws:iam::567489334023:role/pcpt/irsa-roles/irsa-pingfederate"
+
+# nlbNgxPublicAnnotationKeyValue is the annotation used by ingress-nginx service in ingress-nginx-public namespace
+nlbNgxPublicAnnotationKeyValue: "service.beta.kubernetes.io/aws-load-balancer-eip-allocations: eipalloc-021f4dd78a24012dd,eipalloc-06a5e09b388e51ab0,eipalloc-0bb73e6975104c836"
+
+# newRelicEnvironmentName is the name of the environment as it will appear on the NewRelic console.
+newRelicEnvironmentName: "mulloway1_${REGION_ENV}_us-east-2_k8s-cluster"
+
+# clusterStateRepoPath is the customer-specific region name
+clusterStateRepoPath: "us-east-2"

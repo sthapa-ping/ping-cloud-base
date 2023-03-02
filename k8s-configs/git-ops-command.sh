@@ -137,6 +137,7 @@ cleanup() {
 }
 
 # Main script
+
 TARGET_DIR="${1:-.}"
 cd "${TARGET_DIR}" >/dev/null 2>&1
 

@@ -68,7 +68,7 @@ patchesStrategicMerge:
   metadata:
     name: pingdirectory-serviceaccount
     annotations:
-      purpose: service-account-for-ping-cloud-stack
+      purpose: service-account-for-ping-directory
       ${IRSA_PD_ANNOTATION_KEY_VALUE}
 
 ### Ping federate service account ###
@@ -78,7 +78,7 @@ patchesStrategicMerge:
   metadata:
     name: pingfederate-serviceaccount
     annotations:
-      purpose: service-account-for-ping-cloud-stack
+      purpose: service-account-for-ping-federate
       ${IRSA_PF_ANNOTATION_KEY_VALUE}
 
 ### P14C Bootstrap service account ###
