@@ -29,7 +29,7 @@ ARTIFACT_REPO_URL=s3://bootstrap-customer-hub-mulloway1-pingbinarybucket-zel2gu5
 CLUSTER_STATE_REPO_PATH=us-east-2
 
 # Customer-specific region DNS zone
-DNS_ZONE=${REGION_ENV}-mulloway1.us1.ping-preview.cloud
+DNS_ZONE=mulloway1.us1.ping-preview.cloud
 
 ############################################################
 # IRSA - IAM role for service accounts

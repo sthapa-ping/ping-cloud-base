@@ -51,7 +51,8 @@ PLATFORM_EVENT_QUEUE_POLL_BATCH_SIZE=1
 PLATFORM_EVENT_QUEUE_POLL_INTERVAL_SECONDS=2
 ORCH_API_SSM_PATH_PREFIX=/pcpt/orch-api
 SERVICE_SSM_PATH_PREFIX=/pcpt/service
-ARGOCD_CDE_ROLE_SSM_TEMPLATE='/pcpt/config/k8s-config/accounts/{env}/argo/role/arn'
+ARGOCD_CDE_ROLE_SSM_TEMPLATE=/pcpt/config/k8s-config/accounts/{env}/argo/role/arn
+ARGOCD_CDE_URL_SSM_TEMPLATE=/pcpt/config/k8s-config/accounts/{env}/argo/role/arn
 
 ############################################################
 # Cluster state repo details
@@ -73,7 +74,7 @@ APP_RESYNC_SECONDS=60
 PING_CLOUD_NAMESPACE=ping-cloud
 
 # The ping-cloud-base git URL and branch for base Kubernetes manifests
-K8S_GIT_URL=https://github.com/sura8257/ping-cloud-base
+K8S_GIT_URL=https://github.com/pingidentity/ping-cloud-base
 K8S_GIT_BRANCH=pdo-4009-sc-gp3
 
 # The name of the Docker image registry
@@ -82,7 +83,7 @@ ECR_REGISTRY_NAME=public.ecr.aws/r2h3l6e4
 ############################################################
 # Server profile variables
 ############################################################
-SERVER_PROFILE_URL=ssh://APKA4DN2MCAYRVELBLUF@git-codecommit.us-east-2.amazonaws.com/v1/repos/profile-repo
+SERVER_PROFILE_URL=https://github.com/sura8257/profile-repo
 SERVER_PROFILE_BRANCH=stage
 
 ############################################################
@@ -93,14 +94,11 @@ ENVIRONMENT_TYPE=stage
 
 # A space-delimited list of the environments a customer is paying for
 # This will lengthen or shorten should a customer add or remove environments
-ENVIRONMENTS="v1.18-release-branch-stage"
+ENVIRONMENTS="pdo-4009-sc-gp3-stage"
 
 # Used by Kubernetes manifests
 ENV=stage
 KUSTOMIZE_BASE=prod/small
-
-# Current app logs destination (True = CW, False = ELK)
-LEGACY_LOGGING=False
 
 ############################################################
 # Lets Encrypt server
@@ -254,7 +252,7 @@ PROMETHEUS_PING_NAMESPACE=ping-cloud
 PF_PROVISIONING_ENABLED=false
 
 RADIUS_PROXY_ENABLED=false
-
+EXTERNAL_INGRESS_ENABLED=true
 ARGOCD_BOOTSTRAP_ENABLED=false
 ########################################################################################################################
 
@@ -268,7 +266,7 @@ PROM_NOTIFICATION_ENABLED=true
 PROM_SLACK_CHANNEL=nowhere
 
 # Variables used by argocd-image-updater to automatically update the container images managed by ArgoCD
-IMAGE_TAG_PREFIX=v1
+IMAGE_TAG_PREFIX=pdo-4009-sc-gp3
 IMAGE_LIST="apps=public.ecr.aws/r2h3l6e4/pingcloud-apps/pingfederate,apps=public.ecr.aws/r2h3l6e4/pingcloud-apps/pingaccess,apps=public.ecr.aws/r2h3l6e4/pingcloud-apps/pingaccess-was"
 
 # Dashboards repo variables

@@ -51,6 +51,7 @@ PLATFORM_EVENT_QUEUE_POLL_BATCH_SIZE=1
 PLATFORM_EVENT_QUEUE_POLL_INTERVAL_SECONDS=2
 ORCH_API_SSM_PATH_PREFIX=/pcpt/orch-api
 SERVICE_SSM_PATH_PREFIX=/pcpt/service
+ARGOCD_CDE_ROLE_SSM_TEMPLATE='/pcpt/config/k8s-config/accounts/{env}/argo/role/arn'
 
 ############################################################
 # Cluster state repo details
@@ -72,26 +73,27 @@ APP_RESYNC_SECONDS=60
 PING_CLOUD_NAMESPACE=ping-cloud
 
 # The ping-cloud-base git URL and branch for base Kubernetes manifests
-K8S_GIT_URL=https://github.com/pingidentity/ping-cloud-base
-K8S_GIT_BRANCH=v1.17-release-branch 
+K8S_GIT_URL=https://github.com/sura8257/ping-cloud-base
+K8S_GIT_BRANCH=pdo-4009-sc-gp3
 
 # The name of the Docker image registry
 ECR_REGISTRY_NAME=public.ecr.aws/r2h3l6e4
 
-# The tenant or customer name
-TENANT_NAME=mulloway1
-
 ############################################################
 # Server profile variables
 ############################################################
-SERVER_PROFILE_URL=https://github.com/sura8257/profile-repo
-SERVER_PROFILE_BRANCH=pdo-4543-irsa
+SERVER_PROFILE_URL=ssh://APKA4DN2MCAYRVELBLUF@git-codecommit.us-east-2.amazonaws.com/v1/repos/profile-repo
+SERVER_PROFILE_BRANCH=stage
 
 ############################################################
 # Environment-specific variables
 ############################################################
 # Used by server profile hooks
 ENVIRONMENT_TYPE=stage
+
+# A space-delimited list of the environments a customer is paying for
+# This will lengthen or shorten should a customer add or remove environments
+ENVIRONMENTS="v1.18-release-branch-stage"
 
 # Used by Kubernetes manifests
 ENV=stage
@@ -109,6 +111,19 @@ LETS_ENCRYPT_SERVER=https://acme-staging-v02.api.letsencrypt.org/directory
 # PingCommon environment variables
 ############################################################
 USER_BASE_DN=dc=example,dc=com
+
+# Multiple Backend IDs Base DNs
+USER_BASE_DN_2=
+USER_BASE_DN_3=
+USER_BASE_DN_4=
+USER_BASE_DN_5=
+
+# Multiple Backend IDs
+USER_BACKEND_ID_2=userRoot_2
+USER_BACKEND_ID_3=userRoot_3
+USER_BACKEND_ID_4=userRoot_4
+USER_BACKEND_ID_5=userRoot_5
+
 ECR_ENV=/dev
 
 ############################################################
@@ -151,22 +166,22 @@ PING_IDENTITY_DEVOPS_KEY=ssm://pcpt/devops-license/key
 ############################################################
 # Ping application image tags
 ############################################################
-PINGACCESS_IMAGE_TAG=v1.17-release-branch-latest
-PINGACCESS_WAS_IMAGE_TAG=v1.17-release-branch-latest
-PINGFEDERATE_IMAGE_TAG=v1.17-release-branch-latest
-PINGDIRECTORY_IMAGE_TAG=v1.17-release-branch-latest
-PINGDELEGATOR_IMAGE_TAG=v1.17-release-branch-latest
-PINGCENTRAL_IMAGE_TAG=v1.17-release-branch-latest
-PINGDATASYNC_IMAGE_TAG=v1.17-release-branch-latest
+PINGACCESS_IMAGE_TAG=v1.18-release-branch-latest
+PINGACCESS_WAS_IMAGE_TAG=v1.18-release-branch-latest
+PINGFEDERATE_IMAGE_TAG=v1.18-release-branch-latest
+PINGDIRECTORY_IMAGE_TAG=v1.18-release-branch-latest
+PINGDELEGATOR_IMAGE_TAG=v1.18-release-branch-latest
+PINGCENTRAL_IMAGE_TAG=v1.18-release-branch-latest
+PINGDATASYNC_IMAGE_TAG=v1.18-release-branch-latest
 
 ############################################################
 # Ping solution image tags
 ############################################################
-METADATA_IMAGE_TAG=v1.17-release-branch-latest
-BOOTSTRAP_IMAGE_TAG=v1.17-release-branch-latest
-HEALTHCHECK_IMAGE_TAG=v1.17-release-branch-latest
-P14C_INTEGRATION_IMAGE_TAG=v1.17-release-branch-latest
-ANSIBLE_BELUGA_IMAGE_TAG=v1.17-release-branch-latest
+METADATA_IMAGE_TAG=v1.18-release-branch-latest
+BOOTSTRAP_IMAGE_TAG=v1.18-release-branch-latest
+HEALTHCHECK_IMAGE_TAG=v1.18-release-branch-latest
+P14C_INTEGRATION_IMAGE_TAG=v1.18-release-branch-latest
+ANSIBLE_BELUGA_IMAGE_TAG=v1.18-release-branch-latest
 
 ############################################################
 # Cluster name variables
@@ -212,6 +227,7 @@ KIBANA_PUBLIC_HOSTNAME=logs.${TENANT_DOMAIN}
 ARGOCD_PUBLIC_HOSTNAME=argocd.${TENANT_DOMAIN}
 
 HEALTHCHECK_HTTPBIN_PA_WAS_PUBLIC_HOSTNAME=healthcheck-httpbin-pa-was.${TENANT_DOMAIN}
+HEALTHCHECK_HTTPBIN_PA_PUBLIC_HOSTNAME=healthcheck-httpbin-pa.${TENANT_DOMAIN}
 
 # Retention time for Prometheus. Could be set in years(y), weeks(w), days(d), hours(h), minutes(m) or seconds(s)
 PROMETHEUS_RETENTION_TIME=15d
@@ -238,6 +254,8 @@ PROMETHEUS_PING_NAMESPACE=ping-cloud
 PF_PROVISIONING_ENABLED=false
 
 RADIUS_PROXY_ENABLED=false
+
+ARGOCD_BOOTSTRAP_ENABLED=false
 ########################################################################################################################
 
 # Default argo-events notification configuration
@@ -250,10 +268,18 @@ PROM_NOTIFICATION_ENABLED=true
 PROM_SLACK_CHANNEL=nowhere
 
 # Variables used by argocd-image-updater to automatically update the container images managed by ArgoCD
-IMAGE_TAG_PREFIX=pdo-4543-irsa
+IMAGE_TAG_PREFIX=v1
 IMAGE_LIST="apps=public.ecr.aws/r2h3l6e4/pingcloud-apps/pingfederate,apps=public.ecr.aws/r2h3l6e4/pingcloud-apps/pingaccess,apps=public.ecr.aws/r2h3l6e4/pingcloud-apps/pingaccess-was"
 
 # Dashboards repo variables
 DASH_REPO_URL=https://github.com/pingidentity/ping-cloud-dashboards
-DASH_REPO_BRANCH=v1.17-dev-branch
+DASH_REPO_BRANCH=v1.18-dev-branch
+
+# Healthcheck variables
+CLUSTER_HEALTHCHECK_SCHEDULE="* * * * *"
+PINGACCESS_HEALTHCHECK_SCHEDULE="* * * * *"
+PINGACCESS_WAS_HEALTHCHECK_SCHEDULE="* * * * *"
+PINGDIRECTORY_HEALTHCHECK_SCHEDULE="* * * * *"
+PINGFEDERATE_HEALTHCHECK_SCHEDULE="* * * * *"
+
 IS_BELUGA_ENV=true

@@ -63,7 +63,7 @@ pingCloudNamespace: "ping-cloud"
 k8sGitUrl: "https://github.com/pingidentity/ping-cloud-base"
 
 # k8sGitBranch is the ping-cloud-base git branch for base Kubernetes manifests
-k8sGitBranch: "v1.18-release-branch"
+k8sGitBranch: "pdo-4009-sc-gp3"
 
 # ecrRegistryName is the name of the Docker image registry
 ecrRegistryName: "public.ecr.aws/r2h3l6e4"
@@ -174,6 +174,8 @@ healthcheckHttpbinPaPublicHostname: "healthcheck-httpbin-pa.${TENANT_DOMAIN}"
 pfProvisioningEnabled: false
 
 radiusProxyEnabled: false
+
+external_ingress_enabled: true
 ########################################################################################################################
 
 
@@ -288,7 +290,7 @@ promNotificationEnabled: true
 promSlackChannel: "nowhere"
 
 # Variables used by argocd-image-updater to automatically update the container images managed by ArgoCD
-imageTagPrefix: "v1"
+imageTagPrefix: "pdo-4009-sc-gp3"
 imageList: "apps: public.ecr.aws/r2h3l6e4/pingcloud-apps/pingfederate,apps: public.ecr.aws/r2h3l6e4/pingcloud-apps/pingaccess,apps: public.ecr.aws/r2h3l6e4/pingcloud-apps/pingaccess-was"
 
 # Dashboards repo variables
