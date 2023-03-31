@@ -90,9 +90,8 @@ patchesJson6902:
       path: /spec/rules/6/host
       value: healthcheck-httpbin-pa-was.${DNS_ZONE}
 
-    # Remove Argo CD from CDE 
+    # Remove Argo CD from PA-WAS in CDE 
     - op: remove
       path: /spec/tls/0/hosts/7
     - op: remove
       path: /spec/rules/7/host
-

@@ -97,4 +97,3 @@ patchesJson6902:
     - op: replace
       path: /spec/rules/7/host
       value: argocd.${DNS_ZONE}
-
