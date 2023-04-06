@@ -262,7 +262,7 @@ PROM_SLACK_CHANNEL=${PROM_SLACK_CHANNEL}
 
 # Variables used by argocd-image-updater to automatically update the container images managed by ArgoCD
 IMAGE_TAG_PREFIX=${IMAGE_TAG_PREFIX}
-IMAGE_LIST=${IMAGE_LIST}
+IMAGE_LIST='${IMAGE_LIST}'
 
 # Dashboards repo variables
 DASH_REPO_URL=https://github.com/pingidentity/ping-cloud-dashboards

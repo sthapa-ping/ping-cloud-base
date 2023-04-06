@@ -823,7 +823,8 @@ DEFAULT_IMAGE_LIST='
 export IMAGE_LIST="${IMAGE_LIST:-${DEFAULT_IMAGE_LIST}}"
 
 # Test the json, exit if invalid
-{ echo ${IMAGE_LIST} | jq; } || { echo "ERROR: invalid json for 'IMAGE_LIST' env var, please fix and re-run" && exit 1; }
+# TODO: change to function?
+{ echo "${IMAGE_LIST}" | jq > /dev/null; } || { echo "ERROR: invalid json for 'IMAGE_LIST' env var, please fix and re-run" && exit 1; }
 
 ALL_ENVIRONMENTS='dev test stage prod customer-hub'
 SUPPORTED_ENVIRONMENT_TYPES="${SUPPORTED_ENVIRONMENT_TYPES:-${ALL_ENVIRONMENTS}}"
