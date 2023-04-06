@@ -1,0 +1,21 @@
+########################################################################################################################
+# ArgoCD Bootstrap ConfigMap variables
+########################################################################################################################
+ARGOCD_BOOTSTRAP_ENABLED="${ARGOCD_BOOTSTRAP_ENABLED}"
+ARGOCD_CDE_ROLE_SSM_TEMPLATE="${ARGOCD_CDE_ROLE_SSM_TEMPLATE}"
+ARGOCD_CDE_URL_SSM_TEMPLATE="${ARGOCD_CDE_URL_SSM_TEMPLATE}"
+ARGOCD_ENVIRONMENTS="${ARGOCD_ENVIRONMENTS}"
+CLUSTER_STATE_REPO_BRANCH="${CLUSTER_STATE_REPO_BRANCH}"
+REGION="${REGION}"
+########################################################################################################################
+
+########################################################################################################################
+# Per-CDE environment variables
+# Add CUSTOMER_HUB_/DEV_/TEST_/STAGE/PROD_ prefixes as necessary to override IMAGE_LIST, IMAGE_PREFIX, or SLACK_CHANNEL
+# See ADD_CONFLUENCE_PAGE for more info
+########################################################################################################################
+DEFAULT_IMAGE_LIST=${IMAGE_LIST}
+DEFAULT_IMAGE_PREFIX="${K8S_GIT_BRANCH%.*}"
+DEFAULT_SLACK_CHANNEL="${SLACK_CHANNEL}"
+PROD_SLACK_CHANNEL="p1as-blah"
+########################################################################################################################

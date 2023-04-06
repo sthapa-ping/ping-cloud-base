@@ -17,3 +17,11 @@ patchesJson6902:
     name: argocd-cm
     namespace: argocd
   path: argocd-cm-patch.yaml
+
+configMapGenerator:
+
+### Regional env vars for ELK
+- name: argocd-bootstrap
+  behavior: merge
+  envs:
+    - env_vars
