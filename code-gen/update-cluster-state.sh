@@ -978,7 +978,8 @@ for ENV in ${SUPPORTED_ENVIRONMENT_TYPES}; do # ENV loop
              ORIG_ENV_VARS_FILE="${K8S_CONFIGS_DIR}/${REGION_DIR}/${PARENT_DIR_NAME}/${DIR_NAME}/${ENV_VARS_FILE_NAME}"
           # TODO: add a line for argo here??? worth it??
           elif test "${DIR_NAME}" = 'git-ops'; then
-             ORIG_ENV_VARS_FILE="${TEMPLATE_ENV_VARS_FILE}"
+            # TODO: change to parent dir/dir name I guess 
+            ORIG_ENV_VARS_FILE="${K8S_CONFIGS_DIR}/${BASE_DIR}/cluster-tools/git-ops/${ENV_VARS_FILE_NAME}"
           else
             log "Not an app-specific env_vars file: ${TEMPLATE_ENV_VARS_FILE}"
             # skip to next iteration.
