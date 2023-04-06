@@ -1001,7 +1001,7 @@ for ENV in ${SUPPORTED_ENVIRONMENT_TYPES}; do # ENV loop
         # If there are no differences between env_vars and env_vars.old, delete the old one.
         if diff -qbB "${TEMPLATE_ENV_VARS_FILE}" "${OLD_ENV_VARS_FILE}"; then
           log "No difference found between ${TEMPLATE_ENV_VARS_FILE} and ${OLD_ENV_VARS_FILE} - removing the old one"
-          rm -f "${OLD_ENV_VARS_FILE}"
+          #rm -f "${OLD_ENV_VARS_FILE}"
         else
           log "Difference found between ${TEMPLATE_ENV_VARS_FILE} and ${OLD_ENV_VARS_FILE} - keeping the old one"
         fi
