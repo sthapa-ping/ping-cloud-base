@@ -418,7 +418,8 @@ ${SLACK_CHANNEL}
 ${PROM_SLACK_CHANNEL}
 ${DASH_REPO_URL}
 ${DASH_REPO_BRANCH}
-${APP_RESYNC_SECONDS}'
+${APP_RESYNC_SECONDS}
+${IMAGE_LIST}'
 
 # Variables to replace within the generated cluster state code
 REPO_VARS="${REPO_VARS:-${DEFAULT_VARS}}"
@@ -699,6 +700,8 @@ echo "Initial SLACK_CHANNEL: ${SLACK_CHANNEL}"
 echo "Initial NON_GA_SLACK_CHANNEL: ${NON_GA_SLACK_CHANNEL}"
 echo "Initial PROM_SLACK_CHANNEL: ${PROM_SLACK_CHANNEL}"
 
+echo "Initial IMAGE_LIST: ${IMAGE_LIST}"
+
 echo "Initial APP_RESYNC_SECONDS: ${APP_RESYNC_SECONDS}"
 echo ---
 
@@ -811,6 +814,16 @@ export PING_CLOUD_NAMESPACE='ping-cloud'
 export MYSQL_DATABASE='pingcentral'
 export ARGOCD_CDE_ROLE_SSM_TEMPLATE="${ARGOCD_CDE_ROLE_SSM_TEMPLATE:-"/pcpt/config/k8s-config/accounts/{env}/argo/role/arn"}"
 export ARGOCD_CDE_URL_SSM_TEMPLATE="${ARGOCD_CDE_URL_SSM_TEMPLATE:-"/pcpt/config/k8s-config/accounts/{env}/cluster/private-link/cname"}"
+
+DEFAULT_IMAGE_LIST='
+{
+    "default": "'"apps=${ECR_REGISTRY_NAME}/pingcloud-apps/pingfederate,apps=${ECR_REGISTRY_NAME}/pingcloud-apps/pingaccess,apps=${ECR_REGISTRY_NAME}/pingcloud-apps/pingaccess-was"'",
+    "test":    "'"apps=${ECR_REGISTRY_NAME}/pingcloud-apps/pingfederate,apps=${ECR_REGISTRY_NAME}/pingcloud-apps/pingaccess,apps=${ECR_REGISTRY_NAME}/pingcloud-apps/pingaccess-was"'"
+}'
+export IMAGE_LIST="${IMAGE_LIST:-${DEFAULT_IMAGE_LIST}}"
+
+# Test the json, exit if invalid
+{ echo ${IMAGE_LIST} | jq; } || { echo "ERROR: invalid json for 'IMAGE_LIST' env var, please fix and re-run" && exit 1; }
 
 ALL_ENVIRONMENTS='dev test stage prod customer-hub'
 SUPPORTED_ENVIRONMENT_TYPES="${SUPPORTED_ENVIRONMENT_TYPES:-${ALL_ENVIRONMENTS}}"
@@ -969,6 +982,8 @@ echo "Using PROM_SLACK_CHANNEL: ${PROM_SLACK_CHANNEL}"
 echo "Using APP_RESYNC_SECONDS: ${APP_RESYNC_SECONDS}"
 
 echo "Using USER_BASE_DN: ${USER_BASE_DN}"
+
+echo "Using IMAGE_LIST: ${IMAGE_LIST}"
 echo ---
 
 
