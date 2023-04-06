@@ -959,10 +959,14 @@ for ENV in ${SUPPORTED_ENVIRONMENT_TYPES}; do # ENV loop
         DIR_NAME="${DIR_NAME##*/}"
         PARENT_DIR_NAME="${PARENT_DIR_NAME##*/}"
 
+        set -x
         if test "${DIR_NAME}" = "${BASE_DIR}"; then
           # Capture original env_var for primary or customer-hub region only.
           if "${IS_PRIMARY}" = "true" || "${IS_CUSTOMER_HUB}" = "true"; then
             ORIG_ENV_VARS_FILE="${BASE_ENV_VARS}"
+          # # TODO: add a line for argo here??? worth it??
+          # elif test "${DIR_NAME}" = 'git-ops'; then
+          #    ORIG_ENV_VARS_FILE="${TEMPLATE_ENV_VARS_FILE}"
           else
             # skip to next iteration when its secondary-region.
             continue
@@ -975,9 +979,6 @@ for ENV in ${SUPPORTED_ENVIRONMENT_TYPES}; do # ENV loop
              ORIG_ENV_VARS_FILE="${K8S_CONFIGS_DIR}/${REGION_DIR}/${DIR_NAME}/${ENV_VARS_FILE_NAME}"
           elif test "${DIR_NAME}" = 'admin' || test "${DIR_NAME}" = 'engine'; then
              ORIG_ENV_VARS_FILE="${K8S_CONFIGS_DIR}/${REGION_DIR}/${PARENT_DIR_NAME}/${DIR_NAME}/${ENV_VARS_FILE_NAME}"
-          # TODO: add a line for argo here??? worth it??
-          elif test "${DIR_NAME}" = 'git-ops'; then
-             ORIG_ENV_VARS_FILE="${TEMPLATE_ENV_VARS_FILE}"
           else
             log "Not an app-specific env_vars file: ${TEMPLATE_ENV_VARS_FILE}"
             # skip to next iteration.
@@ -994,6 +995,8 @@ for ENV in ${SUPPORTED_ENVIRONMENT_TYPES}; do # ENV loop
         tmp_file=$(mktemp)
         envsubst "${ENV_VARS_TO_SUBST}" < "${TEMPLATE_ENV_VARS_FILE}" > "${tmp_file}"
         mv "${tmp_file}" "${TEMPLATE_ENV_VARS_FILE}"
+
+        set +x
 
         # If there are no differences between env_vars and env_vars.old, delete the old one.
         if diff -qbB "${TEMPLATE_ENV_VARS_FILE}" "${OLD_ENV_VARS_FILE}"; then
