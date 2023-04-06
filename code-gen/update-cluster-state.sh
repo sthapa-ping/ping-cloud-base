@@ -959,7 +959,6 @@ for ENV in ${SUPPORTED_ENVIRONMENT_TYPES}; do # ENV loop
         DIR_NAME="${DIR_NAME##*/}"
         PARENT_DIR_NAME="${PARENT_DIR_NAME##*/}"
 
-        set -x
         if test "${DIR_NAME}" = "${BASE_DIR}"; then
           # Capture original env_var for primary or customer-hub region only.
           if "${IS_PRIMARY}" = "true" || "${IS_CUSTOMER_HUB}" = "true"; then
@@ -997,12 +996,10 @@ for ENV in ${SUPPORTED_ENVIRONMENT_TYPES}; do # ENV loop
         envsubst "${ENV_VARS_TO_SUBST}" < "${TEMPLATE_ENV_VARS_FILE}" > "${tmp_file}"
         mv "${tmp_file}" "${TEMPLATE_ENV_VARS_FILE}"
 
-        set +x
-
         # If there are no differences between env_vars and env_vars.old, delete the old one.
         if diff -qbB "${TEMPLATE_ENV_VARS_FILE}" "${OLD_ENV_VARS_FILE}"; then
           log "No difference found between ${TEMPLATE_ENV_VARS_FILE} and ${OLD_ENV_VARS_FILE} - removing the old one"
-          #rm -f "${OLD_ENV_VARS_FILE}"
+          rm -f "${OLD_ENV_VARS_FILE}"
         else
           log "Difference found between ${TEMPLATE_ENV_VARS_FILE} and ${OLD_ENV_VARS_FILE} - keeping the old one"
         fi
