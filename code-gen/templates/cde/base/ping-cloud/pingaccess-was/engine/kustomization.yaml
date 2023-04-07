@@ -94,4 +94,4 @@ patchesJson6902:
     - op: remove
       path: /spec/tls/0/hosts/7
     - op: remove
-      path: /spec/rules/7/host
+      path: /spec/rules/7
