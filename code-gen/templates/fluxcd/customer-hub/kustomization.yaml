@@ -50,7 +50,7 @@ patchesJson6902:
 configMapGenerator:
   - name: argocd-bootstrap
     namespace: argocd
-    behavior: replace
+    behavior: merge
     envs:
       - env_vars
     options:
