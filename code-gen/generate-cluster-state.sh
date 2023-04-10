@@ -1192,7 +1192,7 @@ for ENV_OR_BRANCH in ${SUPPORTED_ENVIRONMENT_TYPES}; do
   if [[ "${ENV}" == "${CUSTOMER_HUB}" || "${IS_BELUGA_ENV}" == "true" ]]; then
     cp "${TEMPLATES_HOME}/${BOOTSTRAP_SHORT_DIR}"/customer-hub/* "${ENV_BOOTSTRAP_DIR}"
     # Copy all files from customer-hub code-gen, except kustomization.yaml to re-use the yaml there and prevent duplication
-    find "${CHUB_TEMPLATES_DIR}/base/cluster-tools/git-ops" -type f -name "*.yaml" -name env_vars ! -name kustomization.yaml | xargs -I {} cp {} "${ENV_BOOTSTRAP_DIR}"
+    find "${CHUB_TEMPLATES_DIR}/base/cluster-tools/git-ops" -type f ! -name kustomization.yaml | xargs -I {} cp {} "${ENV_BOOTSTRAP_DIR}"
   else
     cp "${TEMPLATES_HOME}/${BOOTSTRAP_SHORT_DIR}"/cde/* "${ENV_BOOTSTRAP_DIR}"
   fi
