@@ -15,7 +15,6 @@ REGION="${REGION}"
 # See ADD_CONFLUENCE_PAGE for more info
 ########################################################################################################################
 DEFAULT_IMAGE_LIST=${IMAGE_LIST}
-DEFAULT_IMAGE_PREFIX="${K8S_GIT_BRANCH%.*}"
+DEFAULT_IMAGE_PREFIX="${IMAGE_PREFIX}"
 DEFAULT_SLACK_CHANNEL="${SLACK_CHANNEL}"
-PROD_SLACK_CHANNEL="p1as-blah"
 ########################################################################################################################

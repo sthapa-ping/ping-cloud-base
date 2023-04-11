@@ -93,7 +93,7 @@ beluga_owned_k8s_files="@.flux.yaml \
 @ext-ingresses.yaml \
 @seal.sh"
 
-# The list of variables to substitute in env_vars.old files.
+# The list of variables to substitute in upgraded env_vars files.
 # shellcheck disable=SC2016
 # Note: ENV_VARS_TO_SUBST is a subset of DEFAULT_VARS within generate-cluster-state.sh. These variables should be kept
 # in sync with the following exceptions: LAST_UPDATE_REASON and NEW_RELIC_LICENSE_KEY_BASE64 should only be found
@@ -199,7 +199,10 @@ ${SLACK_CHANNEL}
 ${PROM_SLACK_CHANNEL}
 ${DASH_REPO_URL}
 ${DASH_REPO_BRANCH}
-${APP_RESYNC_SECONDS}'
+${APP_RESYNC_SECONDS}
+${IMAGE_LIST}'
+
+# TODO: add IMAGE_PREFIX above after testing....
 
 ########################################################################################################################
 # Export some derived environment variables.
