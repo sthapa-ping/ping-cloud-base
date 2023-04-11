@@ -996,8 +996,17 @@ for ENV in ${SUPPORTED_ENVIRONMENT_TYPES}; do # ENV loop
 
         # Substitute variables into new imported env_vars.
         tmp_file=$(mktemp)
+        log "Substituting variables in '${TEMPLATE_ENV_VARS_FILE}'..."
+
+        orig_file=$(mktemp)
+        log "Original file located at ${orig_file}"
+        cp "${TEMPLATE_ENV_VARS_FILE}" "${orig_file}"
+
         envsubst "${ENV_VARS_TO_SUBST}" < "${TEMPLATE_ENV_VARS_FILE}" > "${tmp_file}"
-        mv "${tmp_file}" "${TEMPLATE_ENV_VARS_FILE}"
+        log "New file located at ${tmp_file}"
+        # TODO: change back
+        #mv "${tmp_file}" "${TEMPLATE_ENV_VARS_FILE}"
+        cp "${tmp_file}" "${TEMPLATE_ENV_VARS_FILE}"
 
         # If there are no differences between env_vars and env_vars.old, delete the old one.
         if diff -qbB "${TEMPLATE_ENV_VARS_FILE}" "${OLD_ENV_VARS_FILE}"; then

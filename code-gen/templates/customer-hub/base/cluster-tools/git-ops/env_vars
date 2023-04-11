@@ -14,7 +14,7 @@ REGION="${REGION}"
 # Add CUSTOMER_HUB_/DEV_/TEST_/STAGE_/PROD_ prefixes as necessary to override IMAGE_LIST, IMAGE_TAG_PREFIX, or SLACK_CHANNEL
 # See ADD_CONFLUENCE_PAGE for more info
 ########################################################################################################################
-DEFAULT_IMAGE_LIST=${IMAGE_LIST}
+DEFAULT_IMAGE_LIST="${IMAGE_LIST}"
 DEFAULT_IMAGE_TAG_PREFIX="${IMAGE_TAG_PREFIX}"
 DEFAULT_SLACK_CHANNEL="${SLACK_CHANNEL}"
 ########################################################################################################################
