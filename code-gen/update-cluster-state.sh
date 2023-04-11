@@ -917,6 +917,7 @@ for ENV in ${SUPPORTED_ENVIRONMENT_TYPES}; do # ENV loop
 
         # Last but not least, set the PING_IDENTITY_DEVOPS_USER/KEY to empty so they are fetched from SSM going forward.
         # Also set the MYSQL_USER/PASSWORD to empty so they are fetched from AWS Secrets Manager going forward.
+        log "Generating cluster state in ${TARGET_DIR}......"
         set -x
         QUIET=true \
             UPGRADE="true" \
