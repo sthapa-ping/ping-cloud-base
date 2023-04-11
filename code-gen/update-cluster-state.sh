@@ -978,10 +978,8 @@ for ENV in ${SUPPORTED_ENVIRONMENT_TYPES}; do # ENV loop
              ORIG_ENV_VARS_FILE="${K8S_CONFIGS_DIR}/${REGION_DIR}/${DIR_NAME}/${ENV_VARS_FILE_NAME}"
           elif test "${DIR_NAME}" = 'admin' || test "${DIR_NAME}" = 'engine'; then
              ORIG_ENV_VARS_FILE="${K8S_CONFIGS_DIR}/${REGION_DIR}/${PARENT_DIR_NAME}/${DIR_NAME}/${ENV_VARS_FILE_NAME}"
-          # TODO: add a line for argo here??? worth it??
           elif test "${DIR_NAME}" = 'git-ops'; then
-            # TODO: change to parent dir/dir name I guess 
-            ORIG_ENV_VARS_FILE="${K8S_CONFIGS_DIR}/${BASE_DIR}/cluster-tools/git-ops/${ENV_VARS_FILE_NAME}"
+            ORIG_ENV_VARS_FILE="${K8S_CONFIGS_DIR}/${BASE_DIR}/${PARENT_DIR_NAME}/${DIR_NAME}/${ENV_VARS_FILE_NAME}"
           else
             log "Not an app-specific env_vars file: ${TEMPLATE_ENV_VARS_FILE}"
             # skip to next iteration.
@@ -1002,6 +1000,10 @@ for ENV in ${SUPPORTED_ENVIRONMENT_TYPES}; do # ENV loop
         log "Original file located at ${orig_file}"
         cp "${TEMPLATE_ENV_VARS_FILE}" "${orig_file}"
 
+        if diff -qbB "${tmp_file}" "${orig_file}"; then
+          log "DIFFERENCE FOUND!!!!"
+        fi
+
         envsubst "${ENV_VARS_TO_SUBST}" < "${TEMPLATE_ENV_VARS_FILE}" > "${tmp_file}"
         log "New file located at ${tmp_file}"
         # TODO: change back
@@ -1009,6 +1011,7 @@ for ENV in ${SUPPORTED_ENVIRONMENT_TYPES}; do # ENV loop
         cp "${tmp_file}" "${TEMPLATE_ENV_VARS_FILE}"
 
         # If there are no differences between env_vars and env_vars.old, delete the old one.
+        # quiet, brief, ignore whitespace
         if diff -qbB "${TEMPLATE_ENV_VARS_FILE}" "${OLD_ENV_VARS_FILE}"; then
           log "No difference found between ${TEMPLATE_ENV_VARS_FILE} and ${OLD_ENV_VARS_FILE} - removing the old one"
           rm -f "${OLD_ENV_VARS_FILE}"
