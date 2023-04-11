@@ -1001,11 +1001,12 @@ for ENV in ${SUPPORTED_ENVIRONMENT_TYPES}; do # ENV loop
         log "Original file located at ${orig_file}"
         cp "${TEMPLATE_ENV_VARS_FILE}" "${orig_file}"
 
+        envsubst "${ENV_VARS_TO_SUBST}" < "${TEMPLATE_ENV_VARS_FILE}" > "${tmp_file}"
+
         if diff -qbB "${tmp_file}" "${orig_file}"; then
           log "DIFFERENCE FOUND!!!!"
         fi
 
-        envsubst "${ENV_VARS_TO_SUBST}" < "${TEMPLATE_ENV_VARS_FILE}" > "${tmp_file}"
         log "New file located at ${tmp_file}"
         # TODO: change back
         #mv "${tmp_file}" "${TEMPLATE_ENV_VARS_FILE}"
