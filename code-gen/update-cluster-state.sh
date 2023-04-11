@@ -202,7 +202,7 @@ ${DASH_REPO_BRANCH}
 ${APP_RESYNC_SECONDS}
 ${IMAGE_LIST}'
 
-# TODO: add IMAGE_PREFIX above after testing....
+# TODO: add IMAGE_TAG_PREFIX above after testing....
 
 ########################################################################################################################
 # Export some derived environment variables.
