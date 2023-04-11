@@ -1003,7 +1003,7 @@ for ENV in ${SUPPORTED_ENVIRONMENT_TYPES}; do # ENV loop
 
         envsubst "${ENV_VARS_TO_SUBST}" < "${TEMPLATE_ENV_VARS_FILE}" > "${tmp_file}"
 
-        if diff -qbB "${tmp_file}" "${orig_file}"; then
+        if ! diff -qbB "${tmp_file}" "${orig_file}"; then
           log "DIFFERENCE FOUND!!!!"
         fi
 
