@@ -199,10 +199,7 @@ ${SLACK_CHANNEL}
 ${PROM_SLACK_CHANNEL}
 ${DASH_REPO_URL}
 ${DASH_REPO_BRANCH}
-${APP_RESYNC_SECONDS}
-${IMAGE_LIST}'
-
-# TODO: add IMAGE_TAG_PREFIX above after testing....
+${APP_RESYNC_SECONDS}'
 
 ########################################################################################################################
 # Export some derived environment variables.
@@ -917,7 +914,6 @@ for ENV in ${SUPPORTED_ENVIRONMENT_TYPES}; do # ENV loop
 
         # Last but not least, set the PING_IDENTITY_DEVOPS_USER/KEY to empty so they are fetched from SSM going forward.
         # Also set the MYSQL_USER/PASSWORD to empty so they are fetched from AWS Secrets Manager going forward.
-        log "Generating cluster state in ${TARGET_DIR}......"
         set -x
         QUIET=true \
             UPGRADE="true" \
@@ -995,25 +991,10 @@ for ENV in ${SUPPORTED_ENVIRONMENT_TYPES}; do # ENV loop
 
         # Substitute variables into new imported env_vars.
         tmp_file=$(mktemp)
-        log "Substituting variables in '${TEMPLATE_ENV_VARS_FILE}'..."
-
-        orig_file=$(mktemp)
-        log "Original file located at ${orig_file}"
-        cp "${TEMPLATE_ENV_VARS_FILE}" "${orig_file}"
-
         envsubst "${ENV_VARS_TO_SUBST}" < "${TEMPLATE_ENV_VARS_FILE}" > "${tmp_file}"
-
-        if ! diff -qbB "${tmp_file}" "${orig_file}"; then
-          log "DIFFERENCE FOUND!!!!"
-        fi
-
-        log "New file located at ${tmp_file}"
-        # TODO: change back
-        #mv "${tmp_file}" "${TEMPLATE_ENV_VARS_FILE}"
-        cp "${tmp_file}" "${TEMPLATE_ENV_VARS_FILE}"
+        mv "${tmp_file}" "${TEMPLATE_ENV_VARS_FILE}"
 
         # If there are no differences between env_vars and env_vars.old, delete the old one.
-        # quiet, brief, ignore whitespace
         if diff -qbB "${TEMPLATE_ENV_VARS_FILE}" "${OLD_ENV_VARS_FILE}"; then
           log "No difference found between ${TEMPLATE_ENV_VARS_FILE} and ${OLD_ENV_VARS_FILE} - removing the old one"
           rm -f "${OLD_ENV_VARS_FILE}"
