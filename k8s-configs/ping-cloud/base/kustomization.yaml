@@ -1,0 +1,22 @@
+kind: Kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+
+generatorOptions:
+  disableNameSuffixHash: true
+
+configMapGenerator:
+- name: pingcommon-init
+  files:
+  - scripts/copy-dependencies.sh
+  - scripts/wait-for-services.sh
+  - scripts/utils.lib.sh
+
+- name: server-profile
+  files:
+  - scripts/02-get-remote-server-profile.sh.pre
+
+resources:
+- namespace.yaml
+- rbac.yaml
+- secret.yaml
+- configmap.yaml

@@ -1,0 +1,15 @@
+#!/usr/bin/env sh
+set -x
+
+echo "Running test"
+ls -la /repo
+
+echo "SERVER_PROFILE_PATH: ${SERVER_PROFILE_PATH}"
+echo "STAGING_DIR: ${STAGING_DIR}"
+
+
+cp -af /repo/${SERVER_PROFILE_PATH}/. "${STAGING_DIR}"
+
+#cp -af /repo/profiles/pingaccess/. "/opt/staging"
+
+ls -al "${STAGING_DIR}"

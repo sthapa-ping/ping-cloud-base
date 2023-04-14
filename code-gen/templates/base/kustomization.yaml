@@ -1,0 +1,14 @@
+kind: Kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+
+resources:
+- cluster-tools
+- ping-cloud
+
+# This may be removed if secrets are obtained from an external secrets management system such as vault or AWS SSM
+- sealed-secrets.yaml
+
+patchesStrategicMerge:
+
+### Reference to all secrets ###
+- secrets.yaml
