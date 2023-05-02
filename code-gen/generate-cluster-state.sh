@@ -101,8 +101,9 @@
 # ENVIRONMENTS                     | The environments the customer is entitled to. This | dev test stage prod customer-hub
 #                                  | will be a subset of SUPPORTED_ENVIRONMENT_TYPES    |
 #                                  |                                                    |
-# EXTERNAL_INGRESS_ENABLED         | List of ping apps for which external ingress       | No defaults
-#                                  | need to be removed                                 |
+# EXTERNAL_INGRESS_ENABLED         | List of ping apps(pinagaccess,pingaccess-was,      | No defaults
+#                                  | pingdirectory,pingdelegator,pingfederate) for      |
+#                                  | which you can enable external ingress              |
 #                                  |                                                    |
 # GLOBAL_TENANT_DOMAIN             | Region-independent URL used for DNS failover/      | Replaces the first segment of
 #                                  | routing.                                           | the TENANT_DOMAIN value with the
