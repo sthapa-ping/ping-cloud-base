@@ -104,7 +104,7 @@ feature_flags() {
   done
 }
 ########################################################################################################################
-# Uncomments the remove external ingress patch for ping appsfrom k8s-configs kustomization.yaml files.
+# Uncomments the remove external ingress patch for ping apps from k8s-configs kustomization.yaml files.
 #
 ########################################################################################################################
 enable_external_ingress() {
