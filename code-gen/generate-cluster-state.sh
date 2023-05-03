@@ -103,7 +103,9 @@
 #                                  |                                                    |
 # EXTERNAL_INGRESS_ENABLED         | List of ping apps(pinagaccess,pingaccess-was,      | No defaults
 #                                  | pingdirectory,pingdelegator,pingfederate) for      |
-#                                  | which you can enable external ingress              |
+#                                  | which you can enable external ingress(the values   |
+#                                  | are ping app names )                               |
+#                                  | Examplelist:(pingaccess pingdirectory pingfederate)|
 #                                  |                                                    |
 # GLOBAL_TENANT_DOMAIN             | Region-independent URL used for DNS failover/      | Replaces the first segment of
 #                                  | routing.                                           | the TENANT_DOMAIN value with the
