@@ -24,8 +24,6 @@ metadata:
     app.kubernetes.io/instance: karpenter
     app.kubernetes.io/version: "0.27.5"
     app.kubernetes.io/managed-by: Helm
-  annotations:
-    eks.amazonaws.com/role-arn: IAM_ROLE_KarpenterControllerRole
 ---
 # Source: karpenter/templates/secret-webhook-cert.yaml
 apiVersion: v1
