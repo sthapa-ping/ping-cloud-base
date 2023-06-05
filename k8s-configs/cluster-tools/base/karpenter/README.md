@@ -1,7 +1,7 @@
-# Karpenter v0.24.0
+# Karpenter v0.27.5
 
 ## Compatibility
-Karpenter v0.24.0 is tested with Kubernetes v1.20-v1.24.
+Karpenter v0.27.5 is tested with Kubernetes v1.21-v1.25.
 
 ## WorkerNode
 The new AWS NodeGroup name `core` is available to host karpenter, and some critical resources and tolerance have been added for key `CriticalAddonsOnly` 
