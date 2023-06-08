@@ -20,6 +20,8 @@ spec:
       values: ["spot", "on-demand"]
   providerRef:
     name: default
+  labels:
+    provisionerType: default
 ---
 apiVersion: karpenter.sh/v1alpha5
 kind: Provisioner

@@ -47,3 +47,14 @@ patchesStrategicMerge:
       karpenter.sh/discovery: "${KARPENTER_CLUSTER_NAME}"
     subnetSelector:
       karpenter.sh/discovery: "${KARPENTER_CLUSTER_NAME}"
+
+- |-
+  apiVersion: karpenter.k8s.aws/v1alpha1
+  kind: AWSNodeTemplate
+  metadata:
+    name: pgo-only
+  spec:
+    securityGroupSelector:
+      karpenter.sh/discovery: "${KARPENTER_CLUSTER_NAME}"
+    subnetSelector:
+      karpenter.sh/discovery: "${KARPENTER_CLUSTER_NAME}"
