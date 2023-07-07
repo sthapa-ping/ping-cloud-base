@@ -7,10 +7,8 @@ spec:
     enabled: true
   limits:
     resources:
-      cpu: "1000"
-      memory: 1000Gi
-  ttlSecondsAfterEmpty: 30
-  ttlSecondsUntilExpired: 2592000
+      cpu: "400"
+      memory: 400Gi
   requirements:
     - key: "kubernetes.io/arch"
       operator: In
@@ -32,8 +30,8 @@ spec:
     karpenter.sh/do-not-consolidate: "true"
   limits:
     resources:
-      cpu: "1000"
-      memory: 1000Gi
+      cpu: "24"
+      memory: 50Gi
   requirements:
     - key: "kubernetes.io/arch"
       operator: In
@@ -56,8 +54,8 @@ spec:
     karpenter.sh/do-not-consolidate: "true"
   limits:
     resources:
-      cpu: "1000"
-      memory: 1000Gi
+      cpu: "64"
+      memory: 500Gi
   requirements:
     - key: "kubernetes.io/arch"
       operator: In
@@ -65,9 +63,14 @@ spec:
     - key: "karpenter.sh/capacity-type"
       operator: In
       values: ["on-demand"]
+    - key: kubernetes.io/os
+      operator: In
+      values:
+        - linux
   taints:
     - effect: NoSchedule
-      key: pd-only
+      key: pingidentity.com/pd-only
+      value: "true"
   providerRef:
     name: pd-only
 ---
@@ -76,6 +79,12 @@ kind: AWSNodeTemplate
 metadata:
   name: default
 spec:
+  blockDeviceMappings:
+    - deviceName: /dev/xvda
+      ebs:
+        volumeSize: 120Gi
+        volumeType: gp3
+        encrypted: true
   tags:
     KarpenerProvisionerName: "default"
 ---
@@ -84,6 +93,12 @@ kind: AWSNodeTemplate
 metadata:
   name: pd-only
 spec:
+  blockDeviceMappings:
+    - deviceName: /dev/xvda
+      ebs:
+        volumeSize: 120Gi
+        volumeType: gp3
+        encrypted: true
   tags:
     KarpenerProvisionerName: "pd-only"
 ---
@@ -92,5 +107,11 @@ kind: AWSNodeTemplate
 metadata:
   name: pgo-only
 spec:
+  blockDeviceMappings:
+    - deviceName: /dev/xvda
+      ebs:
+        volumeSize: 120Gi
+        volumeType: gp3
+        encrypted: true
   tags:
     KarpenerProvisionerName: "pgo-only"
