@@ -97,7 +97,7 @@ metadata:
     app.kubernetes.io/instance: karpenter
     app.kubernetes.io/version: "0.28.1"
     app.kubernetes.io/managed-by: Helm
-data:  
+data:
     "aws.defaultInstanceProfile": "KarpenterInstanceProfile"
     "aws.enableENILimitedPodDensity": "true"
     "aws.enablePodENI": "false"
@@ -420,7 +420,7 @@ spec:
       dnsPolicy: Default
       containers:
         - name: controller
-          image: public.ecr.aws/karpenter/controller:v0.28.1@sha256:66227007f8ebadd16da3095a4c966ab9cf56a90a9f71238f341404bbafb1acea
+          image: public.ecr.aws/r2h3l6e4/pingcloud-clustertools/karpenter/controller:v0.28.1
           imagePullPolicy: IfNotPresent
           env:
             - name: KUBERNETES_MIN_VERSION
