@@ -1,0 +1,42 @@
+# Note: The CDE bootstrap process referance this file to deploy the base resources of karpenter in advance.
+kind: Kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+
+namespace: karpenter
+
+# Setting priority to the deployment of karpenter resources over other manifests in the ArgoCD deployment order.
+commonAnnotations:
+  argocd.argoproj.io/sync-wave: "-1"
+
+resources:
+- ../base
+- namespace.yaml
+
+# Adjusting the log level to minimize unwanted default log noise.
+patches:
+  - path: logging-configmap-patch.yaml
+
+# Point to the ping-cluster-tools repo equivalents pushed to ECR
+images:
+  - name: public.ecr.aws/karpenter/controller
+    newName: public.ecr.aws/r2h3l6e4/pingcloud-clustertools/karpenter/controller
+    newTag: v0.29.2
+
+patchesStrategicMerge:
+# Adjusting the replica count during the bootstrap stage, as the necessary config for karpenter is not yet available.
+# During the ArgoCD deployment, the karpenter manifests will be configured to have a replica count of 2 again.
+- |-
+  apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    name: karpenter
+    namespace: karpenter
+  spec:
+    replicas: 0
+    template:
+      spec:
+        tolerations:
+          - key: CriticalAddonsOnly
+            operator: Equal
+            value: core
+            effect: NoSchedule

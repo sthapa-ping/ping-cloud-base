@@ -84,6 +84,11 @@ kind: AWSNodeTemplate
 metadata:
   name: default
 spec:
+  metadataOptions:
+    httpEndpoint: enabled
+    httpProtocolIPv6: disabled
+    httpPutResponseHopLimit: 2
+    httpTokens: required
   blockDeviceMappings:
     - deviceName: /dev/xvda
       ebs:
@@ -98,6 +103,11 @@ kind: AWSNodeTemplate
 metadata:
   name: pd-only
 spec:
+  metadataOptions:
+    httpEndpoint: enabled
+    httpProtocolIPv6: disabled
+    httpPutResponseHopLimit: 2
+    httpTokens: required
   blockDeviceMappings:
     - deviceName: /dev/xvda
       ebs:
@@ -112,6 +122,11 @@ kind: AWSNodeTemplate
 metadata:
   name: pgo-only
 spec:
+  metadataOptions:
+    httpEndpoint: enabled
+    httpProtocolIPv6: disabled
+    httpPutResponseHopLimit: 2
+    httpTokens: required
   blockDeviceMappings:
     - deviceName: /dev/xvda
       ebs:

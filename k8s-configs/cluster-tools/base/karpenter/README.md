@@ -1,7 +1,7 @@
-# Karpenter v0.28.1
+# Karpenter v0.29.2
 
 ## Compatibility
-Karpenter is tested with Kubernetes v1.21-v1.27
+Karpenter is tested with Kubernetes v1.21+
 
 
 ## WorkerNode
@@ -122,12 +122,13 @@ Pods can be opted out of eviction by setting the annotation karpenter.sh/do-not-
 ## Generate Karpenter manifest
 
 ```sh
-helm template karpenter oci://public.ecr.aws/karpenter/karpenter --version ${KARPENTER_VERSION} --namespace karpenter \
-    --set settings.aws.defaultInstanceProfile=KarpenterInstanceProfile \
-    --set settings.aws.clusterEndpoint="${CLUSTER_ENDPOINT}" \
-    --set settings.aws.clusterName=${CLUSTER_NAME} \
-    --set serviceAccount.annotations."eks\.amazonaws\.com/role-arn"="arn:aws:iam::${AWS_ACCOUNT_ID}:role/KarpenterControllerRole-${CLUSTER_NAME}" \
-    --version ${KARPENTER_VERSION} > karpenter.yaml
+./update-karpenter.sh <KARPENTER_VERSION>
+```
+
+Note: If you face `failed to download` error you may need to logout from public.ecr.aws,
+
+```sh
+docker logout public.ecr.aws
 ```
 
 
