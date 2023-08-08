@@ -562,3 +562,16 @@ metadata:
   namespace: karpenter
   spec:
     replicas: 2
+
+
+---
+### Scale down the number of replicas for the cluster-autoscaler to zero.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cluster-autoscaler
+  namespace: kube-system
+spec:
+  replicas: 0
+
+---

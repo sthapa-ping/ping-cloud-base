@@ -35,6 +35,15 @@ patchesStrategicMerge:
     replicas: 0
     template:
       spec:
+        resources:
+            # The resource requirements vary based on the size of the cluster, and during consolidation, they are extensively utilized.
+            # As the cluster size increases, it becomes necessary to reassess these limits.
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+            requests:
+              cpu: "500m"
+              memory: "512Mi"
         tolerations:
           - key: CriticalAddonsOnly
             operator: Equal
