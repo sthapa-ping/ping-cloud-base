@@ -552,20 +552,8 @@ metadata:
 ################################################
 #                Karpenter
 ################################################
-
-### We will disable karpenter until we complete the migration of all customers from the legacy worker nodes.
-### To enable karpenter to take over the deployment of nodes, apply this patch.
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: karpenter
-  namespace: karpenter
-  spec:
-    replicas: 2
-
-
----
-### Scale down the number of replicas for the cluster-autoscaler to zero.
+### The karpenter will stay disabled until all customers have been upgraded.
+### Scale down cluster-autoscaler replicas to zero 
 apiVersion: apps/v1
 kind: Deployment
 metadata:

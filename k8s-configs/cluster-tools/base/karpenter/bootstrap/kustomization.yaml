@@ -23,8 +23,6 @@ images:
     newTag: v0.29.2
 
 patchesStrategicMerge:
-# Adjusting the replica count during the bootstrap stage, as the necessary config for karpenter is not yet available.
-# During the ArgoCD deployment, the karpenter manifests will be configured to have a replica count of 2 again.
 - |-
   apiVersion: apps/v1
   kind: Deployment
@@ -32,18 +30,19 @@ patchesStrategicMerge:
     name: karpenter
     namespace: karpenter
   spec:
-    replicas: 0
     template:
       spec:
-        resources:
-            # The resource requirements vary based on the size of the cluster, and during consolidation, they are extensively utilized.
-            # As the cluster size increases, it becomes necessary to reassess these limits.
-            limits:
-              cpu: "500m"
-              memory: "512Mi"
-            requests:
-              cpu: "500m"
-              memory: "512Mi"
+        containers:
+          - name: controller
+            resources:
+              # The resource requirements vary based on the size of the cluster, and during consolidation, they are extensively utilized.
+              # As the cluster size increases, it becomes necessary to reassess these limits.
+              limits:
+                cpu: "500m"
+                memory: "512Mi"
+              requests:
+                cpu: "500m"
+                memory: "512Mi"
         tolerations:
           - key: CriticalAddonsOnly
             operator: Equal

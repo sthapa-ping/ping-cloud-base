@@ -4,6 +4,32 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 resources:
 - ${K8S_GIT_URL}/k8s-configs/cluster-tools/${KUSTOMIZE_BASE}/karpenter?ref=${K8S_GIT_BRANCH}
 
+patchesJson6902:
+
+# Adjust the volume size for instances that will be provisioned by Karpenter.
+patches:
+  - target:
+      kind: AWSNodeTemplate
+      name: default
+    patch: |-
+      - op: replace
+        path: /spec/blockDeviceMappings/0/ebs/volumeSize
+        value: '${ROOT_VOLUME_SIZE}'
+  - target:
+      kind: AWSNodeTemplate
+      name: pd-only
+    patch: |-
+      - op: replace
+        path: /spec/blockDeviceMappings/0/ebs/volumeSize
+        value: '${ROOT_VOLUME_SIZE}'
+  - target:
+      kind: AWSNodeTemplate
+      name: pgo-only
+    patch: |-
+      - op: replace
+        path: /spec/blockDeviceMappings/0/ebs/volumeSize
+        value: '${ROOT_VOLUME_SIZE}'
+
 patchesStrategicMerge:
 
 # Patch karpenter configuration by incorporating specific details related to CDE
@@ -15,7 +41,7 @@ patchesStrategicMerge:
     namespace: karpenter
   data:
     "aws.clusterEndpoint": "${CLUSTER_ENDPOINT}"
-    "aws.clusterName": "${TENANT_NAME}"
+    "aws.clusterName": "${REGION_ENV}"
 
 - |-
   apiVersion: v1
@@ -34,9 +60,9 @@ patchesStrategicMerge:
     name: default
   spec:
     securityGroupSelector:
-      karpenter.sh/discovery: "${TENANT_NAME}"
+      karpenter.sh/discovery: "${REGION_ENV}"
     subnetSelector:
-      karpenter.sh/discovery: "${TENANT_NAME}"
+      karpenter.sh/discovery: "${REGION_ENV}"
 
 - |-
   apiVersion: karpenter.k8s.aws/v1alpha1
@@ -45,9 +71,9 @@ patchesStrategicMerge:
     name: pd-only
   spec:
     securityGroupSelector:
-      karpenter.sh/discovery: "${TENANT_NAME}"
+      karpenter.sh/discovery: "${REGION_ENV}"
     subnetSelector:
-      karpenter.sh/discovery: "${TENANT_NAME}"
+      karpenter.sh/discovery: "${REGION_ENV}"
 
 - |-
   apiVersion: karpenter.k8s.aws/v1alpha1
@@ -56,6 +82,11 @@ patchesStrategicMerge:
     name: pgo-only
   spec:
     securityGroupSelector:
-      karpenter.sh/discovery: "${TENANT_NAME}"
+      karpenter.sh/discovery: "${REGION_ENV}"
     subnetSelector:
-      karpenter.sh/discovery: "${TENANT_NAME}"
+      karpenter.sh/discovery: "${REGION_ENV}"
+
+# Initially, by default we will disable Karpenter from taking over node deployment. As customers migrate, we will gradually enable this feature.
+# Once all of our customers have finished migrating, we will enable Karpenter by default.
+# To enable Karpenter, you need to comment out the line below.
+- disable-karpenter.yaml
