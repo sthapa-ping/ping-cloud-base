@@ -12,9 +12,16 @@ patchesStrategicMerge:
     name: default
   spec:
     requirements:
+      - key: "karpenter.k8s.aws/instance-category"
+        operator: In
+        values: ["c", "m", "r", "t"]
+      - key: "kubernetes.io/arch"
+        operator: In
+        values: ["amd64"]
       - key: "karpenter.sh/capacity-type"
         operator: In
         values: ["on-demand"]
+
 - |-
   apiVersion: karpenter.sh/v1alpha5
   kind: Provisioner
@@ -22,9 +29,20 @@ patchesStrategicMerge:
     name: pd-only
   spec:
     requirements:
+      - key: "karpenter.k8s.aws/instance-category"
+        operator: In
+        values: ["c", "m", "r", "t"]
+      - key: "kubernetes.io/arch"
+        operator: In
+        values: ["amd64"]
       - key: "karpenter.sh/capacity-type"
         operator: In
         values: ["on-demand"]
+      - key: kubernetes.io/os
+        operator: In
+        values:
+        - linux
+
 - |-
   apiVersion: karpenter.sh/v1alpha5
   kind: Provisioner
@@ -32,6 +50,16 @@ patchesStrategicMerge:
     name: pgo-only
   spec:
     requirements:
+      - key: "karpenter.k8s.aws/instance-category"
+        operator: In
+        values: ["c", "m", "r", "t"]
+      - key: "kubernetes.io/arch"
+        operator: In
+        values: ["amd64"]
       - key: "karpenter.sh/capacity-type"
         operator: In
         values: ["on-demand"]
+      - key: kubernetes.io/os
+        operator: In
+        values:
+          - linux
