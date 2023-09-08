@@ -22,7 +22,7 @@ spec:
   providerRef:
     name: default
   labels:
-    provisionerType: default
+    provisionerType: fleet
 ---
 apiVersion: karpenter.sh/v1alpha5
 kind: Provisioner
@@ -55,6 +55,9 @@ spec:
       value: "true"
   providerRef:
     name: pgo-only
+  labels:
+    provisionerType: postgres-operator
+    pingidentity.com/pgo: "true"
 ---
 apiVersion: karpenter.sh/v1alpha5
 kind: Provisioner
@@ -87,6 +90,9 @@ spec:
       value: "true"
   providerRef:
     name: pd-only
+  labels:
+    provisionerType: pingdirectory
+    pingidentity.com/pd: "true"
 ---
 apiVersion: karpenter.k8s.aws/v1alpha1
 kind: AWSNodeTemplate
