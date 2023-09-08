@@ -906,9 +906,10 @@ fi
 get_is_ga_variable '/pcpt/stage/is-ga'
 
 # The Kustomize path to determine configuration to use, either ga or non-ga, Default non-ga
-KUSTOMIZE_IS_GA='non-ga'
 if [[ "${IS_GA}" == "true" ]]; then
-  KUSTOMIZE_IS_GA='ga'
+  export KUSTOMIZE_IS_GA='ga'
+else
+  export KUSTOMIZE_IS_GA='non-ga'
 fi
 
 export NON_GA_SLACK_CHANNEL="${NON_GA_SLACK_CHANNEL:-nowhere}"
