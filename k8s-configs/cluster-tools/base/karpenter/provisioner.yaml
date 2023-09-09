@@ -107,7 +107,7 @@ spec:
   blockDeviceMappings:
     - deviceName: /dev/xvda
       ebs:
-        volumeSize: 120Gi
+        volumeSize: 40Gi
         volumeType: gp3
         encrypted: true
   tags:
@@ -127,7 +127,7 @@ spec:
   blockDeviceMappings:
     - deviceName: /dev/xvda
       ebs:
-        volumeSize: 120Gi
+        volumeSize: 40Gi
         volumeType: gp3
         encrypted: true
   tags:
@@ -147,7 +147,7 @@ spec:
   blockDeviceMappings:
     - deviceName: /dev/xvda
       ebs:
-        volumeSize: 120Gi
+        volumeSize: 40Gi
         volumeType: gp3
         encrypted: true
   tags:

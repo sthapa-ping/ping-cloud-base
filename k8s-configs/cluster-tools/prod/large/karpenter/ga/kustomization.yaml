@@ -2,7 +2,33 @@ kind: Kustomization
 apiVersion: kustomize.config.k8s.io/v1beta1
 
 resources:
-- ../../../base/karpenter
+- ../../../../base/karpenter
+
+patchesJson6902:
+
+# Adjust the volume size for instances that will be provisioned by Karpenter.
+patches:
+  - target:
+      kind: AWSNodeTemplate
+      name: default
+    patch: |-
+      - op: replace
+        path: /spec/blockDeviceMappings/0/ebs/volumeSize
+        value: '120Gi'
+  - target:
+      kind: AWSNodeTemplate
+      name: pd-only
+    patch: |-
+      - op: replace
+        path: /spec/blockDeviceMappings/0/ebs/volumeSize
+        value: '120Gi'
+  - target:
+      kind: AWSNodeTemplate
+      name: pgo-only
+    patch: |-
+      - op: replace
+        path: /spec/blockDeviceMappings/0/ebs/volumeSize
+        value: '120Gi'
 
 patchesStrategicMerge:
 - |-

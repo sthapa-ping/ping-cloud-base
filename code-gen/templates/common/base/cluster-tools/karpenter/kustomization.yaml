@@ -4,32 +4,6 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 resources:
 - ${K8S_GIT_URL}/k8s-configs/cluster-tools/${KUSTOMIZE_BASE}/karpenter/${KUSTOMIZE_IS_GA}?ref=${K8S_GIT_BRANCH}
 
-patchesJson6902:
-
-# Adjust the volume size for instances that will be provisioned by Karpenter.
-patches:
-  - target:
-      kind: AWSNodeTemplate
-      name: default
-    patch: |-
-      - op: replace
-        path: /spec/blockDeviceMappings/0/ebs/volumeSize
-        value: '${ROOT_VOLUME_SIZE}'
-  - target:
-      kind: AWSNodeTemplate
-      name: pd-only
-    patch: |-
-      - op: replace
-        path: /spec/blockDeviceMappings/0/ebs/volumeSize
-        value: '${ROOT_VOLUME_SIZE}'
-  - target:
-      kind: AWSNodeTemplate
-      name: pgo-only
-    patch: |-
-      - op: replace
-        path: /spec/blockDeviceMappings/0/ebs/volumeSize
-        value: '${ROOT_VOLUME_SIZE}'
-
 patchesStrategicMerge:
 
 # Patch karpenter configuration by incorporating specific details related to CDE
