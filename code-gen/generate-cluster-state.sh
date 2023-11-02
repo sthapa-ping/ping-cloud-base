@@ -1253,6 +1253,15 @@ for ENV_OR_BRANCH in ${SUPPORTED_ENVIRONMENT_TYPES}; do
   set_var "IRSA_PF_ANNOTATION_KEY_VALUE" "" "${ACCOUNT_BASE_PATH}" "${ENV}" "${IRSA_TEMPLATE}/irsa-pingfederate"
   set_var "IRSA_CWAGENT_ANNOTATION_KEY_VALUE" "" "${ACCOUNT_BASE_PATH}" "${ENV}" "${IRSA_TEMPLATE}/irsa-cloudwatch-agent"
 
+  #Reseeting to empty string , once versent is done https://pingidentity.atlassian.net/browse/PP-5719 and pdo is done we will remove this code part
+  if "${IS_BELUGA_ENV}"; then
+    export IRSA_PING_ANNOTATION_KEY_VALUE=""
+    export IRSA_PA_ANNOTATION_KEY_VALUE=""
+    export IRSA_PD_ANNOTATION_KEY_VALUE=""
+    export IRSA_PF_ANNOTATION_KEY_VALUE=""
+    export IRSA_CWAGENT_ANNOTATION_KEY_VALUE=""
+  fi
+
   # shellcheck disable=SC2016
   IRSA_TEMPLATE='eks.amazonaws.com/role-arn: ${ssm_value}'
   set_var "IRSA_ARGOCD_ANNOTATION_KEY_VALUE" "" "${IRSA_BASE_PATH}" "irsa-argocd/arn" "${IRSA_TEMPLATE}"
