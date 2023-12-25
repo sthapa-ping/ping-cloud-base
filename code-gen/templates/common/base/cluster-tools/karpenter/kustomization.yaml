@@ -41,10 +41,10 @@ patchesStrategicMerge:
     name: default
   spec:
     securityGroupSelectorTerms:
-        tags:
+      - tags:
           karpenter.sh/discovery: "${CLUSTER_NAME}"
     subnetSelectorTerms:
-        tags:
+      - tags:
           karpenter.sh/discovery: "${CLUSTER_NAME}"
 
 - |-
@@ -54,10 +54,10 @@ patchesStrategicMerge:
     name: pd-only
   spec:
     securityGroupSelectorTerms:
-        tags:
+      - tags:
           karpenter.sh/discovery: "${CLUSTER_NAME}"
     subnetSelectorTerms:
-        tags:
+      - tags:
           karpenter.sh/discovery: "${CLUSTER_NAME}"
 
 - |-
@@ -67,10 +67,10 @@ patchesStrategicMerge:
     name: pgo-only
   spec:
     securityGroupSelectorTerms:
-        tags:
+      - tags:
           karpenter.sh/discovery: "${CLUSTER_NAME}"
     subnetSelectorTerms:
-        tags:
+      - tags:
           karpenter.sh/discovery: "${CLUSTER_NAME}"
 
 # Initially, by default we will disable Karpenter from taking over node deployment. As customers migrate, we will gradually enable this feature.

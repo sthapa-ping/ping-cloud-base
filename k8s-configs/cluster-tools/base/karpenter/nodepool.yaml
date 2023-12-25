@@ -2,97 +2,100 @@ apiVersion: karpenter.sh/v1beta1
 kind: NodePool
 metadata:
   name: default
-template:
-  spec:
-    labels:
-      nodeType: fleet
-    limits:
-      resources:
-        cpu: 300
-        memory: 750Gi
-    nodeClassRef:
-      name: default
-    requirements:
-      - key: "karpenter.k8s.aws/instance-category"
-        operator: In
-        values: ["c", "m", "r", "t"]
-      - key: "kubernetes.io/arch"
-        operator: In
-        values: ["amd64"]
-      - key: "karpenter.sh/capacity-type"
-        operator: In
-        values: ["spot", "on-demand"]
-    ttlSecondsAfterEmpty: 30
+spec:
+  template:
+    spec:
+      labels:
+        nodeType: fleet
+      limits:
+        resources:
+          cpu: 300
+          memory: 750Gi
+      nodeClassRef:
+        name: default
+      requirements:
+        - key: "karpenter.k8s.aws/instance-category"
+          operator: In
+          values: ["c", "m", "r", "t"]
+        - key: "kubernetes.io/arch"
+          operator: In
+          values: ["amd64"]
+        - key: "karpenter.sh/capacity-type"
+          operator: In
+          values: ["spot", "on-demand"]
+      ttlSecondsAfterEmpty: 30
 ---
 apiVersion: karpenter.sh/v1beta1
 kind: NodePool
 metadata:
   name: pgo-only
-template:
-  spec:
-    labels:
-      nodeType: postgres-operator
-      pingidentity.com/pgo: "true"
-    limits:
-      resources:
-        cpu: 24
-        memory: 50Gi
-    nodeClassRef:
-      name: pgo-only
-    requirements:
-      - key: "karpenter.k8s.aws/instance-category"
-        operator: In
-        values: ["c", "m", "r", "t"]
-      - key: "kubernetes.io/arch"
-        operator: In
-        values: ["amd64"]
-      - key: "karpenter.sh/capacity-type"
-        operator: In
-        values: ["spot", "on-demand"]
-      - key: kubernetes.io/os
-        operator: In
-        values:
-          - linux
-    taints:
-      - effect: NoSchedule
-        key: pingidentity.com/pgo-only
-        value: "true"
-    ttlSecondsAfterEmpty: 30
+spec:
+  template:
+    spec:
+      labels:
+        nodeType: postgres-operator
+        pingidentity.com/pgo: "true"
+      limits:
+        resources:
+          cpu: 24
+          memory: 50Gi
+      nodeClassRef:
+        name: pgo-only
+      requirements:
+        - key: "karpenter.k8s.aws/instance-category"
+          operator: In
+          values: ["c", "m", "r", "t"]
+        - key: "kubernetes.io/arch"
+          operator: In
+          values: ["amd64"]
+        - key: "karpenter.sh/capacity-type"
+          operator: In
+          values: ["spot", "on-demand"]
+        - key: kubernetes.io/os
+          operator: In
+          values:
+            - linux
+      taints:
+        - effect: NoSchedule
+          key: pingidentity.com/pgo-only
+          value: "true"
+      ttlSecondsAfterEmpty: 30
 ---
 apiVersion: karpenter.sh/v1beta1
 kind: NodePool
 metadata:
   name: pd-only
-template:
-  spec:
-    labels:
-      provisionerType: pingdirectory
-      pingidentity.com/pd: "true"
-    limits:
-      resources:
-        cpu: 60
-        memory: 500Gi
-    nodeClassRef:
-      name: pd-only
-    requirements:
-      - key: "karpenter.k8s.aws/instance-category"
-        operator: In
-        values: ["c", "m", "r", "t"]
-      - key: "kubernetes.io/arch"
-        operator: In
-        values: ["amd64"]
-      - key: "karpenter.sh/capacity-type"
-        operator: In
-        values: ["spot", "on-demand"]
-      - key: kubernetes.io/os
-        operator: In
-        values:
-          - linux
-    taints:
-      - effect: NoSchedule
-        key: pingidentity.com/pd-only
-        value: "true"
-    ttlSecondsAfterEmpty: 30
+spec:
+  template:
+    spec:
+      labels:
+        provisionerType: pingdirectory
+        pingidentity.com/pd: "true"
+      limits:
+        resources:
+          cpu: 60
+          memory: 500Gi
+      nodeClassRef:
+        name: pd-only
+      requirements:
+        - key: "karpenter.k8s.aws/instance-category"
+          operator: In
+          values: ["c", "m", "r", "t"]
+        - key: "kubernetes.io/arch"
+          operator: In
+          values: ["amd64"]
+        - key: "karpenter.sh/capacity-type"
+          operator: In
+          values: ["spot", "on-demand"]
+        - key: kubernetes.io/os
+          operator: In
+          values:
+            - linux
+      taints:
+        - effect: NoSchedule
+          key: pingidentity.com/pd-only
+          value: "true"
+      ttlSecondsAfterEmpty: 30
 ---
 apiVersion: karpenter.k8s.aws/v1beta1
 kind: EC2NodeClass
