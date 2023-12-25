@@ -9,6 +9,22 @@ patchesStrategicMerge:
 # Patch karpenter configuration by incorporating specific details related to CDE
 
 - |-
+ apiVersion: apps/v1
+ kind: Deployment
+ metadata:
+   name: karpenter
+   namespace: kube-system
+ spec:
+   template:
+     spec:
+       containers:
+         - name: controller
+           env:
+            - name: CLUSTER_NAME
+              value: "${CLUSTER_NAME}""
+            - name: CLUSTER_ENDPOINT
+              value: "${CLUSTER_ENDPOINT}""
+- |-
   apiVersion: v1
   kind: ServiceAccount
   metadata:
