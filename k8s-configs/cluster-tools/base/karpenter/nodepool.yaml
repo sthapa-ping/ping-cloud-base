@@ -61,9 +61,9 @@ template:
 ---
 apiVersion: karpenter.sh/v1beta1
 kind: NodePool
+metadata:
+  name: pd-only
 template:
-  metadata:
-    name: pd-only
   spec:
     labels:
       provisionerType: pingdirectory
