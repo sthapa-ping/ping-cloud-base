@@ -46,6 +46,7 @@ patchesStrategicMerge:
     subnetSelectorTerms:
       - tags:
           karpenter.sh/discovery: "${CLUSTER_NAME}"
+    role: "${KARPENTER_INSTANCE_PROFILE}"
 
 - |-
   apiVersion: karpenter.k8s.aws/v1beta1
@@ -59,6 +60,7 @@ patchesStrategicMerge:
     subnetSelectorTerms:
       - tags:
           karpenter.sh/discovery: "${CLUSTER_NAME}"
+    role: "${KARPENTER_INSTANCE_PROFILE}"
 
 - |-
   apiVersion: karpenter.k8s.aws/v1beta1
@@ -72,6 +74,7 @@ patchesStrategicMerge:
     subnetSelectorTerms:
       - tags:
           karpenter.sh/discovery: "${CLUSTER_NAME}"
+    role: "${KARPENTER_INSTANCE_PROFILE}"
 
 # Initially, by default we will disable Karpenter from taking over node deployment. As customers migrate, we will gradually enable this feature.
 # Once all of our customers have finished migrating, we will enable Karpenter by default.

@@ -4,13 +4,13 @@ metadata:
   name: default
 spec:
   template:
-    spec:
-      labels:
+    metadata:
+        labels:
         nodeType: fleet
-      limits:
-        resources:
-          cpu: 300
-          memory: 750Gi
+  limits:
+    cpu: 300
+    memory: 750Gi
+    spec:
       nodeClassRef:
         name: default
       requirements:
@@ -31,14 +31,14 @@ metadata:
   name: pgo-only
 spec:
   template:
-    spec:
+    metadata:
       labels:
         nodeType: postgres-operator
         pingidentity.com/pgo: "true"
-      limits:
-        resources:
-          cpu: 24
-          memory: 50Gi
+  limits:
+    cpu: 24
+    memory: 50Gi
+    spec:
       nodeClassRef:
         name: pgo-only
       requirements:
@@ -67,14 +67,14 @@ metadata:
   name: pd-only
 spec:
   template:
-    spec:
+    metadata:
       labels:
         provisionerType: pingdirectory
         pingidentity.com/pd: "true"
-      limits:
-        resources:
-          cpu: 60
-          memory: 500Gi
+  limits:
+    cpu: 60
+    memory: 500Gi
+    spec:
       nodeClassRef:
         name: pd-only
       requirements:
