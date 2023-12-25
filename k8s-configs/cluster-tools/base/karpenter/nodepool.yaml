@@ -57,8 +57,7 @@ spec:
           values: ["spot", "on-demand"]
         - key: kubernetes.io/os
           operator: In
-          values:
-            - linux
+          values: ["linux"]
   limits:
     cpu: 24
     memory: 50Gi
@@ -95,8 +94,7 @@ spec:
           values: ["spot", "on-demand"]
         - key: kubernetes.io/os
           operator: In
-          values:
-            - linux
+          values: ["linux"]
           value: "true"
   limits:
     cpu: 60
