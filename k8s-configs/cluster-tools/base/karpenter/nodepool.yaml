@@ -82,6 +82,7 @@ spec:
       taints:
         - effect: NoSchedule
           key: pingidentity.com/pd-only
+          value: "true"
       requirements:
         - key: "karpenter.k8s.aws/instance-category"
           operator: In
@@ -95,7 +96,6 @@ spec:
         - key: kubernetes.io/os
           operator: In
           values: ["linux"]
-          value: "true"
   limits:
     cpu: 60
     memory: 500Gi
