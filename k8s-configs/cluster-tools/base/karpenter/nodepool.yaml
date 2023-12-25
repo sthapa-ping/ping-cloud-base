@@ -10,9 +10,6 @@ spec:
     spec:
       nodeClassRef:
         name: default
-  limits:
-    cpu: 300
-    memory: 750Gi
       requirements:
         - key: "karpenter.k8s.aws/instance-category"
           operator: In
@@ -23,6 +20,9 @@ spec:
         - key: "karpenter.sh/capacity-type"
           operator: In
           values: ["spot", "on-demand"]
+  limits:
+    cpu: 300
+    memory: 750Gi
   disruption:
     consolidationPolicy: WhenEmpty
     consolidateAfter: 30s
@@ -45,9 +45,6 @@ spec:
         - effect: NoSchedule
           key: pingidentity.com/pgo-only
           value: "true"
-  limits:
-    cpu: 24
-    memory: 50Gi
       requirements:
         - key: "karpenter.k8s.aws/instance-category"
           operator: In
@@ -62,6 +59,9 @@ spec:
           operator: In
           values:
             - linux
+  limits:
+    cpu: 24
+    memory: 50Gi
   disruption:
     consolidationPolicy: WhenEmpty
     consolidateAfter: 30s
@@ -83,9 +83,6 @@ spec:
       taints:
         - effect: NoSchedule
           key: pingidentity.com/pd-only
-  limits:
-    cpu: 60
-    memory: 500Gi
       requirements:
         - key: "karpenter.k8s.aws/instance-category"
           operator: In
@@ -101,6 +98,9 @@ spec:
           values:
             - linux
           value: "true"
+  limits:
+    cpu: 60
+    memory: 500Gi
   disruption:
     consolidationPolicy: WhenEmpty
     consolidateAfter: 30s
