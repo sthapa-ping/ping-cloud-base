@@ -10,7 +10,7 @@ Karpenter is tested with Kubernetes v1.21+
 - Note: We encountered an issue with AWS Fargate during our Proof of Concept (POC). However, as part of our improvement plan, we will retire the current worker node and begin implementing AWS Farget to host critical pods.
 
 
-## AWSNodeTemplate
+## EC2NodeClass
 - We define a custom resource within the provider definition, where we can input AWS-specific details that we want Karpenter to use when it launches nodes
   * subnetSelector, discovers tagged subnets to attach to instances.
     karpenter.sh/discovery: <CLUSTER_NAME>
