@@ -393,6 +393,10 @@ spec:
               value: "0.075"
             - name: RESERVED_ENIS
               value: "0"
+            - name: CLUSTER_NAME
+              value: ${CLUSTER_NAME}
+            - name: CLUSTER_ENDPOINT
+              value: ${CLUSTER_ENDPOINT}
           ports:
             - name: http-metrics
               containerPort: 8000
