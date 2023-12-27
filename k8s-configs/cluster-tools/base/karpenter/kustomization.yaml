@@ -1,15 +1,15 @@
 kind: Kustomization
 apiVersion: kustomize.config.k8s.io/v1beta1
 
+resources:
+- base
+- nodepool.yaml
+
 namespace: kube-system
 
 # Setting priority to the deployment of karpenter resources over other manifests in the ArgoCD deployment order.
 commonAnnotations:
   argocd.argoproj.io/sync-wave: "-5"
-
-resources:
-- base
-- nodepool.yaml
 
 # Point to the ping-cluster-tools repo equivalents pushed to ECR
 images:
