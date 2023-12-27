@@ -5,11 +5,11 @@ resources:
 - base
 - nodepool.yaml
 
-namespace: kube-system
+#namespace: kube-system
 
 # Setting priority to the deployment of karpenter resources over other manifests in the ArgoCD deployment order.
-commonAnnotations:
-  argocd.argoproj.io/sync-wave: "-5"
+# commonAnnotations:
+#   argocd.argoproj.io/sync-wave: "-5"
 
 # Point to the ping-cluster-tools repo equivalents pushed to ECR
 images:
