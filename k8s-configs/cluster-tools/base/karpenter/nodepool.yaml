@@ -13,15 +13,18 @@ spec:
       requirements:
         - key: "karpenter.k8s.aws/instance-category"
           operator: In
-          values: ["c", "m", "r"]
+          values: ["c", "m", "r", "t"]
         - key: "kubernetes.io/arch"
           operator: In
           values: ["amd64"]
         - key: "karpenter.sh/capacity-type"
           operator: In
           values: ["spot", "on-demand"]
+        - key: kubernetes.io/os
+          operator: In
+          values: ["linux"]
   limits:
-    cpu: 300
+    cpu: "300"
     memory: 750Gi
   disruption:
     consolidationPolicy: WhenEmpty
@@ -48,7 +51,7 @@ spec:
       requirements:
         - key: "karpenter.k8s.aws/instance-category"
           operator: In
-          values: ["c", "m", "r"]
+          values: ["c", "m", "r", "t"]
         - key: "kubernetes.io/arch"
           operator: In
           values: ["amd64"]
@@ -59,7 +62,7 @@ spec:
           operator: In
           values: ["linux"]
   limits:
-    cpu: 24
+    cpu: "24"
     memory: 50Gi
   disruption:
     consolidationPolicy: WhenEmpty
@@ -86,7 +89,7 @@ spec:
       requirements:
         - key: "karpenter.k8s.aws/instance-category"
           operator: In
-          values: ["c", "m", "r"]
+          values: ["c", "m", "r", "t"]
         - key: "kubernetes.io/arch"
           operator: In
           values: ["amd64"]
@@ -97,7 +100,7 @@ spec:
           operator: In
           values: ["linux"]
   limits:
-    cpu: 60
+    cpu: "60"
     memory: 500Gi
   disruption:
     consolidationPolicy: WhenEmpty
