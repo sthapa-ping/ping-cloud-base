@@ -24,31 +24,3 @@ patchesStrategicMerge:
     namespace: kube-system
   spec:
     replicas: 0
-
-- |-
-  $patch: delete
-  apiVersion: admissionregistration.k8s.io/v1
-  kind: ValidatingWebhookConfiguration
-  metadata:
-    name: validation.webhook.karpenter.sh
-
-- |-
-  $patch: delete
-  apiVersion: admissionregistration.k8s.io/v1
-  kind: ValidatingWebhookConfiguration
-  metadata:
-    name: validation.webhook.karpenter.k8s.aws
-
-- |-
-  $patch: delete
-  apiVersion: admissionregistration.k8s.io/v1
-  kind: ValidatingWebhookConfiguration
-  metadata:
-    name: validation.webhook.config.karpenter.sh
-
-- |-
-  $patch: delete
-  apiVersion: admissionregistration.k8s.io/v1
-  kind: MutatingWebhookConfiguration
-  metadata:
-    name: defaulting.webhook.karpenter.k8s.aws
