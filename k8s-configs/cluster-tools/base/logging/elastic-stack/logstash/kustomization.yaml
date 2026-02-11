@@ -10,6 +10,6 @@ resources:
 - pdb.yaml
 - customer_pipelines
 
-patches:
-  # Toggling commenting of this patch is controlled by git-ops-command.sh 
-  #- path: patch-opensearch-bootstrap-pf-impossible-login.yaml
+patchesStrategicMerge:
+# Toggling commenting of this patch is controlled by git-ops-command.sh 
+#- patch-opensearch-bootstrap-pf-impossible-login.yaml
