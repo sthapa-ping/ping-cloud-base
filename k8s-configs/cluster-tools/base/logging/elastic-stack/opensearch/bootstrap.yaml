@@ -62,7 +62,8 @@ spec:
           - name: os-dashboards-pd
             mountPath: /usr/share/opensearch/data/dashboards/pd
           - name: os-dashboards-pf
-            mountPath: /usr/share/opensearch/data/dashboards/pf
+            mountPath: /usr/share/opensearch/data/dashboards/pf/os-dashboard-pf.ndjson
+            subPath: os-dashboard-pf.ndjson
           - name: os-dashboards-pf-threat
             mountPath: /usr/share/opensearch/data/dashboards/pf-threat
           - name: os-dashboards-pa
